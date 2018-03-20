@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 import com.teamnotfoundexception.impetus.fragments.MyEventsFragment;
@@ -85,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(EventItem item) {
 
     }
 

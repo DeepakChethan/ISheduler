@@ -10,10 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.adapters.MyItemRecyclerViewAdapter;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
+
 
 public class EventsFragment extends Fragment {
 
@@ -23,16 +24,6 @@ public class EventsFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
 
     public EventsFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static EventsFragment newInstance(int columnCount) {
-        EventsFragment fragment = new EventsFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -58,7 +49,7 @@ public class EventsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(EventsManager.get(context).getEventItemsList(), mListener));
         }
         return view;
     }
@@ -81,18 +72,9 @@ public class EventsFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+
+        void onListFragmentInteraction(EventItem item);
     }
 }
