@@ -1,4 +1,4 @@
-package com.teamnotfoundexception.impetus.LogSign;
+package com.teamnotfoundexception.impetus.Login;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -18,31 +18,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
 import com.teamnotfoundexception.impetus.R;
 
-public class LoginActivity extends AppCompatActivity  implements View.OnClickListener{
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
 
-
-    private EditText emailET,passET;
+    private EditText emailET,passET, phoneEt,collegeEt;
     private Button singIn,signUp;
     private FirebaseAuth mAuth;
     private String email,password;
     private ProgressBar progressBar;
+    private String clg,phn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
-        emailET = (EditText) findViewById(R.id.logEmail);
-        passET = (EditText) findViewById(R.id.logPass);
-        singIn = (Button) findViewById(R.id.logSignIn);
-        signUp = (Button) findViewById(R.id.logSignUp);
+        emailET = (EditText) findViewById(R.id.signEmail);
+        passET = (EditText) findViewById(R.id.signPass);
+        signUp = (Button) findViewById(R.id.signSignUp);
+        phoneEt = (EditText) findViewById(R.id.phone);
+        collegeEt = (EditText) findViewById(R.id.collegeName);
         progressBar = (ProgressBar) findViewById(R.id.progress);
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,SignupActivity.class));
-            }
-        });
-        singIn.setOnClickListener(this);
+
+        signUp.setOnClickListener(this);
 
     }
 
@@ -51,6 +48,9 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
         singIn.setEnabled(false);
         email = emailET.getText().toString();
         password = passET.getText().toString();
+        phn = phoneEt.getText().toString();
+        clg = collegeEt.getText().toString();
+
         progressBar.setVisibility(View.VISIBLE);
         if ( email.isEmpty() ) {
             emailET.setError("Email can't be empty");
@@ -60,13 +60,17 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
             passET.setError("Password cant be empty");
             return;
         }
+        if (phn.isEmpty() || clg.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Fill everything up",Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(!isNetworkAvailableAndConnected()) {
             progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(getApplicationContext(),"Network not available",Toast.LENGTH_SHORT).show();
             return ;
         }
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -80,7 +84,7 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
-                            Log.i("i", "logging in");
+                            Log.i("i", "Creating user");
                             progressBar.setVisibility(View.INVISIBLE);
                             finishActivity(900);
 
@@ -99,5 +103,4 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
         // Do your thing man TODO
         return true;
     }
-
 }
