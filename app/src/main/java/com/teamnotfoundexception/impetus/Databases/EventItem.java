@@ -16,7 +16,7 @@ public class EventItem implements Serializable {
     public String mImagePath;
     public String mStartTime;
     public String mEndTime;
-    
+    public String mColor;
     
 
 
@@ -34,9 +34,12 @@ public class EventItem implements Serializable {
         this.mImagePath = eventItem.getImagePath() ;
         this.mStartTime = eventItem.getStartTime();
         this.mEndTime = eventItem.getEndTime();
+        this.mColor = eventItem.getColor();
     }
 
-    public EventItem(int dishId, String dishName, String dishType, int price, String description, String imagePath, String startTime, String endTime) {
+    public EventItem(int dishId, String dishName, String dishType,
+                     int price, String description, String imagePath,
+                     String startTime, String endTime, String color) {
 
         this.mId = dishId;
         this.mName = dishName;
@@ -46,6 +49,15 @@ public class EventItem implements Serializable {
         this.mImagePath = imagePath ;
         this.mStartTime = startTime;
         this.mEndTime = endTime;
+        this.mColor = color;
+    }
+
+    public String getColor() {
+        return mColor;
+    }
+
+    public void setColor(String color) {
+        mColor = color;
     }
 
     public String getStartTime() {

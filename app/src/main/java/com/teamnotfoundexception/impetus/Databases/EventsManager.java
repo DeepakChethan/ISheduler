@@ -54,16 +54,16 @@ public class EventsManager {
         if(!isInsertedBefore) {
 
 
-            mDatabaseHelper.insertEventItem((new EventItem(1001,"Enigma", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1002,"Appathon", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1003,"NeutralOxide", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1004,"Cyborg", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1005,"Break or Mech", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1006,"RoboMania", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1007,"Eat me", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1008,"Breaking bad", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1009,"So you think it is over?", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
-            mDatabaseHelper.insertEventItem((new EventItem(1010,"TechCrunch", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M")));
+            mDatabaseHelper.insertEventItem((new EventItem(1001,"Enigma", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "pink")));
+            mDatabaseHelper.insertEventItem((new EventItem(1002,"Appathon", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "red")));
+            mDatabaseHelper.insertEventItem((new EventItem(1003,"NeutralOxide", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "blue")));
+            mDatabaseHelper.insertEventItem((new EventItem(1004,"Cyborg", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M","green")));
+            mDatabaseHelper.insertEventItem((new EventItem(1005,"Break or Mech", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "purple")));
+            mDatabaseHelper.insertEventItem((new EventItem(1006,"RoboMania", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "yellow")));
+            mDatabaseHelper.insertEventItem((new EventItem(1007,"Eat me", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "violet")));
+            mDatabaseHelper.insertEventItem((new EventItem(1008,"Breaking bad", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "indigo")));
+            mDatabaseHelper.insertEventItem((new EventItem(1009,"So you think it is over?", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M","white")));
+            mDatabaseHelper.insertEventItem((new EventItem(1010,"TechCrunch", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M","black")));
 
             SharedPreferences.Editor editor = mSharedPref.edit();
             editor.putString("inserted_before", "1");

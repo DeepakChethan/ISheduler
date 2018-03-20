@@ -29,7 +29,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EVENT_IMAGE_PATH = "image_path";
     private static final String COLUMN_EVENT_START_TIME = "start_time";
     private static final String COLUMN_EVENT_END_TIME = "end_time";
-
+    private static final String COLUMN_EVENT_COLOR = "color";
 
     public EventsDatabaseHelper(Context context) {
 
@@ -98,7 +98,9 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
         }
 
 
-        EventItem createNewEventItem(int eventId, String eventName, String eventType, String description, int entryPrice, String imagePath, String startTime, String endTime) {
+        EventItem createNewEventItem(int eventId, String eventName, String eventType,
+                                     String description, int entryPrice, String imagePath,
+                                     String startTime, String endTime, String color) {
 
 
             EventItem eventItem = new EventItem();
@@ -110,6 +112,8 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             eventItem.setImagePath(imagePath);
             eventItem.setStartTime(startTime);
             eventItem.setEndTime(endTime);
+            eventItem.setColor(color);
+
             return eventItem;
 
         }
@@ -125,8 +129,9 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             String imagePath = getString(getColumnIndex(COLUMN_EVENT_IMAGE_PATH));
             String startTime = getString(getColumnIndex((COLUMN_EVENT_START_TIME)));
             String endTime = getString(getColumnIndex((COLUMN_EVENT_END_TIME)));
+            String color = getString(getColumnIndex((COLUMN_EVENT_COLOR)));
 
-            EventItem eventItem = createNewEventItem(eventId, eventName, eventType, description, entryPrice, imagePath, startTime, endTime);
+            EventItem eventItem = createNewEventItem(eventId, eventName, eventType, description, entryPrice, imagePath, startTime, endTime, color);
             Log.i("i", "returning getDishItem");
             return eventItem;
 
