@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "441030158541",
+    "firebase_url": "https://ischeduler-190a8.firebaseio.com",
+    "project_id": "ischeduler-190a8",
+    "storage_bucket": "ischeduler-190a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441030158541:android:fb7a3a9c793bc24b",
+        "android_client_info": {
+          "package_name": "com.teamnotfoundexception.impetus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441030158541-fp7cg3hu5gqmk50snkpvcbta4ii6stvn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamnotfoundexception.impetus",
+            "certificate_hash": "6a4c22d7fbe6d5203fd0e7abc96d14b789634a8e"
+          }
+        },
+        {
+          "client_id": "441030158541-fd1dptg516go9nndbkfg3mt5q0f1hh61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEC5NRwG6ok2ka83yWt9t_Ey4ck88Ct7o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441030158541-fd1dptg516go9nndbkfg3mt5q0f1hh61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.teamnotfoundexception.impetus.MainActivity;
+import com.teamnotfoundexception.impetus.activities.MainActivity;
 import com.teamnotfoundexception.impetus.R;
 
 public class LoginActivity extends AppCompatActivity  implements View.OnClickListener{
