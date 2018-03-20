@@ -65,7 +65,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public EventItemCursor getAllDishItems() {
+    public EventItemCursor getAllEventItems() {
         Cursor wrapped = getReadableDatabase().query(TABLE_EVENTS, null, null, null, null, null, null);
         return new EventItemCursor(wrapped);
     }
@@ -98,7 +98,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
         }
 
 
-        EventItem createNewDishItem(int eventId, String eventName, String eventType, String description, int entryPrice, String imagePath, String startTime, String endTime) {
+        EventItem createNewEventItem(int eventId, String eventName, String eventType, String description, int entryPrice, String imagePath, String startTime, String endTime) {
 
 
             EventItem eventItem = new EventItem();
@@ -115,7 +115,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
         }
 
 
-        public EventItem getDishItem() {
+        public EventItem getEventItem() {
 
             int eventId = getInt(getColumnIndex((COLUMN_EVENT_UUID)));
             String eventName = getString(getColumnIndex(COLUMN_EVENT_NAME));
@@ -126,7 +126,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             String startTime = getString(getColumnIndex((COLUMN_EVENT_START_TIME)));
             String endTime = getString(getColumnIndex((COLUMN_EVENT_END_TIME)));
 
-            EventItem eventItem = createNewDishItem(eventId, eventName, eventType, description, entryPrice, imagePath, startTime, endTime);
+            EventItem eventItem = createNewEventItem(eventId, eventName, eventType, description, entryPrice, imagePath, startTime, endTime);
             Log.i("i", "returning getDishItem");
             return eventItem;
 
