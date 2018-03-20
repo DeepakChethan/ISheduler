@@ -1,4 +1,4 @@
-package com.teamnotfoundexception.impetus.fragments;
+package com.teamnotfoundexception.impetus.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.teamnotfoundexception.impetus.fragments.ItemFragment.OnListFragmentInteractionListener;
+import com.teamnotfoundexception.impetus.R;
+import com.teamnotfoundexception.impetus.fragments.EventsFragment.OnListFragmentInteractionListener;
 import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
