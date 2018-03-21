@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         StatusManager.get(getApplicationContext()).initializeRegisteredList();
 
-        StatusManager.get(getApplicationContext()).getStarredIdList();
+        StatusManager.get(getApplicationContext()).initializeStarredList();
 
 
         startActivity(new Intent(this, HomeActivity.class));
@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static void notifyMe() {
+
+
 
     }
 }
