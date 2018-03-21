@@ -277,7 +277,7 @@ public class FirebaseHelper {
 
    public static  class Participant {
 
-        public String name;
+      //  public String name;
         public String teamName;
         public String collegeName;
         public ArrayList<String> teamMembers;
@@ -289,7 +289,7 @@ public class FirebaseHelper {
 
         public Participant(String name, String collegeName, ArrayList<String> teamMembers) {
 
-            this.name = name;
+            this.teamName = name;
             this.collegeName = collegeName;
             this.teamMembers = teamMembers;
 

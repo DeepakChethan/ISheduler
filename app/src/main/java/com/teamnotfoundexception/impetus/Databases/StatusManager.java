@@ -115,7 +115,7 @@ public  class StatusManager {
     }
 
 
-    public void addToRegistered(EventItem item) {
+    public void addToRegistered(EventItem item, FirebaseHelper.Participant participant) {
 
         try {
 
