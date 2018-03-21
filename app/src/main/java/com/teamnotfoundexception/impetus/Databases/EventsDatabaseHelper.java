@@ -113,7 +113,6 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             eventItem.setStartTime(startTime);
             eventItem.setEndTime(endTime);
             eventItem.setColor(color);
-
             return eventItem;
 
         }

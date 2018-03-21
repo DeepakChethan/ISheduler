@@ -21,7 +21,7 @@ import com.teamnotfoundexception.impetus.R;
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText emailET,passET, phoneEt,collegeEt;
-    private Button singIn,signUp;
+    private Button signUp;
     private FirebaseAuth mAuth;
     private String email,password;
     private ProgressBar progressBar;
@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        singIn.setEnabled(false);
+        signUp.setEnabled(false);
         email = emailET.getText().toString();
         password = passET.getText().toString();
         phn = phoneEt.getText().toString();
@@ -54,14 +54,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         progressBar.setVisibility(View.VISIBLE);
         if ( email.isEmpty() ) {
             emailET.setError("Email can't be empty");
+            signUp.setEnabled(true);
             return;
         }
         if (password.isEmpty()){
             passET.setError("Password cant be empty");
+            signUp.setEnabled(true);
             return;
         }
         if (phn.isEmpty() || clg.isEmpty()){
             Toast.makeText(getApplicationContext(),"Fill everything up",Toast.LENGTH_SHORT).show();
+            signUp.setEnabled(true);
             return;
         }
         if(!isNetworkAvailableAndConnected()) {
