@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText emailET, passET;
     private Button signIn, signUp;
+    private Button oSignIn;
     private FirebaseAuth mAuth;
     private String email, password;
     private ProgressBar progressBar;
@@ -40,13 +41,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signIn = (Button) findViewById(R.id.logSignIn);
         signUp = (Button) findViewById(R.id.logSignUp);
         progressBar = (ProgressBar) findViewById(R.id.progress);
+        oSignIn = (Button) findViewById(R.id.logOrgSignIn);
+        oSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,OrganizerLoginActivity.class));
+            }
+        });
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
         signIn.setOnClickListener(this);
     }
 
-
-    public void onSignUpButtonClicked(View v) {
-        startActivity(new Intent(this, SignupActivity.class));
-    }
 
     @Override
     public void onClick(View v) {

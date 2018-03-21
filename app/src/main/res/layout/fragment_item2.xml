@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="70dp"
+    android:layout_margin="10dp"
+    android:padding="6dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/playTeamName"
+        android:textSize="19dp"
+        android:layout_alignParentTop="true"
+        android:text="Dope Team"
+        style="@style/textStyle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/playParticipants"
+        android:layout_marginTop="2dp"
+        android:textSize="14dp"
+        android:layout_above="@id/temper"
+        android:text="Sagar, DC, doper"/>
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/playCollege"
+        android:layout_above="@id/temper"
+        android:text="uvce"
+        android:textAlignment="viewEnd"
+        android:gravity="end"
+        android:layout_marginTop="6dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/playParticipants"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/temper"
+        android:layout_marginTop="6dp"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray"/>
 
 </RelativeLayout>

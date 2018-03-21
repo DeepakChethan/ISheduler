@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
-import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
-import com.teamnotfoundexception.impetus.adapters.MyItemRecyclerViewAdapter;
+import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
+import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,7 +52,7 @@ public class StarredFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
+            recyclerView.setAdapter(new StarredAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
 
         }
 
