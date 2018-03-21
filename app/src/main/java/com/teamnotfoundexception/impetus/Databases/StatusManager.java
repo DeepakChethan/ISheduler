@@ -98,6 +98,7 @@ public  class StatusManager {
 
     public void initializeRegisteredList() {
         try {
+            Log.i("ini", "initializng registred list");;
             mFirebaseHelper.fetchRegisteredList(mUser);
         } catch(Exception e) {
             Log.i("e", e.getMessage());

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         EventsManager.get(getApplicationContext()).insertAllEventItems();
         EventsManager.get(getApplicationContext()).initializeEventItemsList();
 
-        StatusManager.get(getApplicationContext()).getRegisteredIdList();
+        StatusManager.get(getApplicationContext()).initializeRegisteredList();
 
         StatusManager.get(getApplicationContext()).getStarredIdList();
 

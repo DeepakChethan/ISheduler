@@ -40,8 +40,8 @@ public class FirebaseHelper {
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase, int type) {
         mFirebaseDatabase = firebaseDatabase;
         if (firebaseDatabase != null)
-                mDatabaseReference1 = mFirebaseDatabase.getReference("users_private");
-                mDatabaseReference2 = mFirebaseDatabase.getReference("users_public");
+                mDatabaseReference1 = mFirebaseDatabase.getReference("users_private/");
+                mDatabaseReference2 = mFirebaseDatabase.getReference("users_public/");
                 mDatabaseReference3
                         = mFirebaseDatabase.getReference("events");
 
@@ -101,19 +101,24 @@ public class FirebaseHelper {
     public void fetchRegisteredList(FirebaseUser user) {
 
 
+        Log.i("ini", "fetch registeerd list called");
+
         String emailId = getEmailStripped(user.getEmail());
-        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child(emailId).child("registered").child("event_ids");
+        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child("registered").child("event_ids");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<List<Integer>> t = new GenericTypeIndicator<List<Integer>>() {
                 };
+                System.out.println(dataSnapshot.toString());
                 ArrayList<Integer> registeredListIds = (ArrayList<Integer>) dataSnapshot.getValue(t);
                 if (registeredListIds != null) {
                     StatusManager.get(mAppContext).setRegisteredIdList(new ArrayList<Integer>(registeredListIds));
-              //      System.out.println("size of favorite list " + com.teamnamenotfoundexception.lsheduler.Database.StatusManager.get(mAppContext).getFavoriteIdList().size());
-                    MainActivity.notifyMe();
+                    System.out.println("done, fetching, the size  of registered is " + registeredListIds.size());
+                 //   MainActivity.notifyMe();
+                } else {
+                    Log.i("ini", "not fetched registred lst");
                 }
 
             }
@@ -133,7 +138,7 @@ public class FirebaseHelper {
 
 
         String emailId = getEmailStripped(user.getEmail());
-        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child(emailId).child("starred").child("event_ids");
+        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child("starred").child("event_ids");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -143,8 +148,10 @@ public class FirebaseHelper {
                 ArrayList<Integer> starredListIds = (ArrayList<Integer>) dataSnapshot.getValue(t);
                 if (starredListIds != null) {
                  StatusManager.get(mAppContext).setStarredIdList(new ArrayList<Integer>(starredListIds));
-                    //System.out.println("size of favorite list " + com.teamnamenotfoundexception.lsheduler.Database.StatusManager.get(mAppContext).getFavoriteIdList().size());
-                    MainActivity.notifyMe();
+                    System.out.println("done, fetching, the size of starred is " + starredListIds.size());
+                  //  MainActivity.notifyMe();
+                } else {
+                    System.out.println("done, fetching, the size of starred is zero no starred");
                 }
 
             }
