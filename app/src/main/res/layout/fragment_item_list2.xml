@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,3 +17,29 @@
     app:layoutManager="LinearLayoutManager"
     tools:context="com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment"
     tools:listitem="@layout/fragment_item2" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_padding="30dp"
+        android:visibility="gone"
+        android:id="@+id/item_list2"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_whatshot_white_24dp"
+            android:id="@+id/logo"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="30dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:layout_below="@id/logo"
+            android:text="Looks like you have already signed up!"/>
+    </RelativeLayout>
+</RelativeLayout>
