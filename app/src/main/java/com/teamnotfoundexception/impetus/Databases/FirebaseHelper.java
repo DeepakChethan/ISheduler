@@ -36,11 +36,11 @@ public class FirebaseHelper {
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
         mFirebaseDatabase = firebaseDatabase;
         if (firebaseDatabase != null)
-            mDatabaseReference = mFirebaseDatabase.getReference("ParticipantsData/");
+            mDatabaseReference = mFirebaseDatabase.getReference("users");
     }
 
 
-    public void updateFavoriteList(ArrayList starredListItem, FirebaseUser user) {
+    public void updateStarredList(ArrayList<Integer> starredListItem, FirebaseUser user) {
 
         Log.i("favorite", "update favorite caleld");
 
@@ -63,11 +63,61 @@ public class FirebaseHelper {
     }
 
 
-    public String getEmailStripped(String emailId) {
-        String emailIdSplit[] = emailId.split("@");
-        String _emailId = emailIdSplit[0];
-        return _emailId;
+
+
+    public void updateRegisteredList(ArrayList<Integer> registeredListItem, FirebaseUser user) {
+
+        Log.i("favorite", "update favorite caleld");
+
+
+        Map<String, ArrayList<Integer>> registeredListMap = new HashMap<>();
+        registeredListMap.put("event_ids", registeredListItem);
+
+        try {
+
+            mDatabaseReference.child(user.getUid()).child("registered").setValue(registeredListMap);
+
+        } catch (Exception e) {
+
+            Log.i("favoriteError", "error in placing the order");
+
+        }
+
     }
+
+
+
+
+    public void fetchRegisteredList(FirebaseUser user) {
+
+
+        String emailId = getEmailStripped(user.getEmail());
+        DatabaseReference databaseReference = mDatabaseReference.child(user.getUid()).child(emailId).child("registered").child("event_ids");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<Integer>> t = new GenericTypeIndicator<List<Integer>>() {
+                };
+                ArrayList<Integer> registeredListIds = (ArrayList<Integer>) dataSnapshot.getValue(t);
+                if (registeredListIds != null) {
+                    StatusManager.get(mAppContext).setRegisteredIdList(new ArrayList<Integer>(registeredListIds));
+              //      System.out.println("size of favorite list " + com.teamnamenotfoundexception.lsheduler.Database.StatusManager.get(mAppContext).getFavoriteIdList().size());
+                    MainActivity.notifyMe();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+
+            }
+        });
+
+
+    }
+
 
     public void fetchStarredList(FirebaseUser user) {
 
@@ -98,6 +148,18 @@ public class FirebaseHelper {
 
 
     }
+
+
+
+
+
+    public String getEmailStripped(String emailId) {
+        String emailIdSplit[] = emailId.split("@");
+        String _emailId = emailIdSplit[0];
+        return _emailId;
+    }
+
+
 
     class FavoriteObject {
         public int itemId;

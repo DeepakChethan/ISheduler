@@ -51,7 +51,9 @@ public class StarredFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(getContext(), StatusManager.get(getContext()).getStarredEventsList(), mListener));
+
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
+
         }
 
         return view;

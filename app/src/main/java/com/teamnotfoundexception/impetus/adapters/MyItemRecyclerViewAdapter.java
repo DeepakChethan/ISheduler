@@ -21,12 +21,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     private final List<EventItem> mEventItems;
     private final OnListFragmentInteractionListener mListener;
-    private Context mContext;
 
-    public MyItemRecyclerViewAdapter(Context context,List<EventItem> items, OnListFragmentInteractionListener listener) {
+    public Context context;
+
+    public MyItemRecyclerViewAdapter(List<EventItem> items, OnListFragmentInteractionListener listener, Context c) {
         mEventItems = items;
         mListener = listener;
-        mContext = context;
+        context = c;
+
     }
 
     @Override
@@ -37,8 +39,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        final EventItem eventItem;
+
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        EventItem eventItem;
+
         holder.mItem = mEventItems.get(position);
         eventItem = holder.mItem;
         holder.mEventNameHolder.setText(eventItem.getName());
@@ -49,6 +53,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
+                    StatusManager.get(context).addToRegistered(mEventItems.get(position));
+
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
                 Intent intent = new Intent(mContext, DescriptionActivity.class);
@@ -85,9 +91,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
-
         }
-
 
     }
 }

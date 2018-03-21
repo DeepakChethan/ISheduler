@@ -1,11 +1,13 @@
 package com.teamnotfoundexception.impetus.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment.OnListFragmentInteractionListener;
 import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
@@ -13,14 +15,19 @@ import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
 import java.util.List;
 
 
-public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.ViewHolder> {
+
+public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
+    public Context context;
 
-    public PlayerListAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener, Context c) {
+
         mValues = items;
         mListener = listener;
+        context = c;
     }
 
     @Override
@@ -40,9 +47,9 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
+
             }
         });
     }

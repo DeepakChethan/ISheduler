@@ -51,7 +51,9 @@ public class MyEventsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(getContext(), StatusManager.get(context).getRegisteredEventsList(), mListener));
+
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
+
         }
 
         return view;

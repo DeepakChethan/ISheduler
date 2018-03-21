@@ -94,7 +94,7 @@ public  class StatusManager {
 
     public void initializeRegisteredList() {
         try {
-           // mFirebaseHelper.fetchRegisteredList(mUser);
+            mFirebaseHelper.fetchRegisteredList(mUser);
         } catch(Exception e) {
             Log.i("e", e.getMessage());
         }
@@ -104,7 +104,7 @@ public  class StatusManager {
 
         try {
             StatusManager.get(mAppContext).getStarredIdList().add(item.getId());
-            mFirebaseHelper.updateFavoriteList(mStarredEventsIds, mUser);
+            mFirebaseHelper.updateStarredList(mStarredEventsIds, mUser);
             MainActivity.notifyMe();
         } catch(Exception e) {
             Log.i("error", "cannot update favorite list");
@@ -115,11 +115,15 @@ public  class StatusManager {
     public void addToRegistered(EventItem item) {
 
         try {
+
             StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
-            mFirebaseHelper.updateFavoriteList(mRegisteredEventsList, mUser);
+            mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser);
             MainActivity.notifyMe();
+
         } catch(Exception e) {
+
             Log.i("error", "cannot update favorite list");
+
         }
     }
 
@@ -127,7 +131,7 @@ public  class StatusManager {
 
         try {
             StatusManager.get(mAppContext).getStarredIdList().remove(new Integer(item.getId()));
-            mFirebaseHelper.updateFavoriteList(mStarredEventsIds, mUser);
+            mFirebaseHelper.updateStarredList(mStarredEventsIds, mUser);
             System.out.println("removing fav" + item.getName());
           //  MainActivity.notifyMe();
         } catch(Exception e) {

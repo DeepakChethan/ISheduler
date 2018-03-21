@@ -69,7 +69,9 @@ public class OrgoPlayerFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new PlayerListAdapter(DummyContent.ITEMS, mListener));
+
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
+
         }
         return view;
     }

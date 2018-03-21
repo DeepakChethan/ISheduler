@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"
-    tools:context="com.teamnotfoundexception.impetus.Login.LoginActivity">
+    tools:context="com.teamnotfoundexception.impetus.LogSign.LoginActivity">
 
     <LinearLayout
         android:id="@+id/temp"
@@ -68,17 +68,19 @@
             android:padding="12dp"
             android:text="Login"/>
         />
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/logSignUp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:text="Don't have an account, sign up"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:textSize="22sp"/>
+            android:onClick="onSignUpButtonClicked"
+            android:text="Don't have an account, sign up"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
         <ProgressBar
             android:layout_width="wrap_content"
