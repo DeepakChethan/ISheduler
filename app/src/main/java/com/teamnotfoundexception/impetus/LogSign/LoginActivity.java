@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
 
@@ -81,15 +83,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             progressBar.setVisibility(View.INVISIBLE);
                             signIn.setEnabled(true);
                         } else {
+                            FirebaseMessaging.getInstance().subscribeToTopic("ENIGMA");
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             Log.i("i", "logging in");
                             progressBar.setVisibility(View.INVISIBLE);
                             finishActivity(900);
+                            System.out.println("token is " + FirebaseInstanceId.getInstance().getToken());
                         }
                     }
                 });
+
     }
 
 
