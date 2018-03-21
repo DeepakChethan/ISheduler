@@ -18,7 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.DescriptionFragment;
 import com.teamnotfoundexception.impetus.fragments.RegisterFragment;
@@ -38,7 +40,19 @@ public class DescriptionActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        EventItem eventItem = (EventItem) getIntent().getSerializableExtra("msg");
+        if (eventItem == null)
+        {
+            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),eventItem);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -83,20 +97,30 @@ public class DescriptionActivity extends AppCompatActivity {
     }
 
 
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         ArrayList<Fragment> fragments;
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(FragmentManager fm,EventItem eventItem) {
             super(fm);
+            Bundle bundle = new Bundle();
+            TimerFragment timerFragment = new TimerFragment();
+            bundle.putSerializable("dope",eventItem);
+            timerFragment.setArguments(bundle);
+
+            bundle = new Bundle();
+            DescriptionFragment descriptionFragment= new DescriptionFragment();
+            bundle.putSerializable("dope",eventItem);
+            descriptionFragment.setArguments(bundle);
+
+            bundle = new Bundle();
+            RegisterFragment registerFragment = new RegisterFragment();
+            bundle.putSerializable("dope",eventItem);
+            registerFragment.setArguments(bundle);
+
             fragments = new ArrayList<>();
-            fragments.add(new TimerFragment());
-            fragments.add(new DescriptionFragment());
-            fragments.add(new RegisterFragment());
+            fragments.add(timerFragment);
+            fragments.add(descriptionFragment);
+            fragments.add(registerFragment);
         }
 
         @Override

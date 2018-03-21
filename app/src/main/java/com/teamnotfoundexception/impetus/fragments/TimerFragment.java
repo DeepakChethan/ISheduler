@@ -6,7 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.R;
 
 /**
@@ -14,6 +17,7 @@ import com.teamnotfoundexception.impetus.R;
  */
 public class TimerFragment extends Fragment {
 
+    private TextView mTimeContainer,mTeamCount,mEventLocation,mEventTeamMax,mEventPrice,mEventType;
 
     public TimerFragment() {
         // Required empty public constructor
@@ -24,7 +28,27 @@ public class TimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_timer, container, false);
+        View view = inflater.inflate(R.layout.fragment_timer, container, false);
+
+        mTimeContainer = (TextView) view.findViewById(R.id.foClock);
+        mTeamCount = (TextView) view.findViewById(R.id.teamCountHolder);
+        mEventType = (TextView) view.findViewById(R.id.eventTypeContainer);
+        mEventTeamMax = (TextView) view.findViewById(R.id.maxTeamMemberContainer);
+        mEventPrice = (TextView) view.findViewById(R.id.ticketCostContainer);
+        mEventLocation = (TextView) view.findViewById(R.id.eventLocationContainer);
+        Bundle bundle = getArguments();
+        if (bundle==null) {
+            Toast.makeText(getContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+            return view;
+        }
+        EventItem item = (EventItem) bundle.getSerializable("dope");
+        mTeamCount.setText("Change Me");
+        mTeamCount.setText("Change me too");
+        mEventType.setText(item.getType());
+        mEventTeamMax.setText("change Me");
+        mEventPrice.setText(item.getPrice()+"");
+        mEventLocation.setText("change me");
+        return view;
     }
 
 }
