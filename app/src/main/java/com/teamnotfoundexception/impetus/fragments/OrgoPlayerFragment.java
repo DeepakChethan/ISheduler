@@ -9,20 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
-
 public class OrgoPlayerFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    
     public OrgoPlayerFragment() {
     }
 
@@ -52,8 +48,7 @@ public class OrgoPlayerFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            // TODO GET THE LIST OF PLAYERS FOR THAT EVENT
-            recyclerView.setAdapter(new PlayerListAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
+            //recyclerView.setAdapter(new PlayerListAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
 
         }
         return view;
@@ -80,6 +75,6 @@ public class OrgoPlayerFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
 
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(FirebaseHelper.Participant item);
     }
 }
