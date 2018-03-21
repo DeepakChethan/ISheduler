@@ -6,6 +6,52 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_description">DescriptionActivity</string>
 
+    <string name="so_you_think_its_over">So you think you can answer the tricky questions? So you think you can recall your memory faster and arrange the puzzle? So you think you are fast enough to run all around the campus and unravel the mystery? Think again!</string>
+    <string name="steal_jobs">This is a tailor made event for anyone who would like to taste the process of graduate stepping into the corporate world.
+What are the companies looking in an eligible candidate? Find out for yourself in this simulation of a college placement drive</string>
+    <string name="tech_mark">Have a knowledge about products in the market or want to learn about them ? Have any products in mind to showcase?  Grab your socks and pull up to  have much fun !! </string>
+    <string name="vaksamara">You think you have all the skills to beat down your opponent with an argument?!Then what are you waiting for...Here\'s the great opportunity to explore your speaking skills!So do not wait...say it straight in VAKSAMARA</string>
+    <string name="codestorm">It\'s time to give food to your brain? Time to showcase all those sleepless nights you spent coding. Boot up to participate in the Codestorm to prove that u r best in the business.</string>
+    <string name="lasertag">You think you have the skills to be a part of a futuristic laser gun weilding army? If you do, put those skills to the test by participating in Laser Tag, your one stop destination to tremendous fun and army worthy skill development.</string>
+    <string name="sumowar">Are you a robotics fanatic?
+Waiting for a chance to showcase your talent in the same?!
+ If so, prepare yourself!Build your bot to compete in one-on-one battles against your opponent in a traditional sumo war style!
+    </string>
+    <string name="tech_charades">Played a lot of Bollywood dumb charades?Let\'s see if you can do the same with technology.....
+Speak technology Not words
+A mash of crossword,tech quiz and tech charades.
+Buckle up tech savvies for Tech Charades.</string>
+    
+    <string name="sepktrom">Someone said god hides things by putting them all around us!!!
+Sometimes we forget to observe the things that are inevitable in our daily lives... Wat are dey r made of?? Wat shapes dey have?! Scratch ur head to get answers nd have an opportunity to discover the things hidden in our clg!</string>
+
+    <string name="neutraloxide">What do you think Gandhiji\'s 3 wise monkeys are doing? Well, they are busy finding the 4th monkey to solve the puzzle.Puzzle\'s solved.
+To be the change they wanna see in the world, now they are JAMing their voices.
+Wait! What? Did you say, you are one among them?</string>
+
+    <string name="robosoccer">The game consists of two teams having two wireless robots each playing soccer against each other. The game consists of two halves, 5 minutes each. A ball will be placed at the centre of the arena at the beginning of the match. At the end of the game the team with highest score will be awarded.</string>
+    <string name="ucypher">Are you a gamer? Adrenaline pumping inside you? Then come  confront opposite teams and try to win with the games like NFS most wanted, Counter Strike and FIFA and steal away the cash prize</string>
+    <string name="mech_or_break">HELLO PPL!!!
+What happens during the perfect pitstop?
+To all guys interested in Automobile and Motor sport out there......Impetus 18.0 is back with the most skillful event to improve student  skills. Mech or Break event which helps student to increase their industrial knowledge and make them excel at field work. How fast can you kill and give life back to a vehicle???
+This is the right place to know...</string>
+    <string name="cyborg">Wanna be a celebrity for some time?
+ Do you think people will fall head over heels to listen to you? How calm can you be in a situation?
+What are you waiting for?! Come and participate!</string>
+    <string name="automania">Are you a petrolhead fanatic?
+Does the roar of automobiles send chills down your spine?
+Can you fight to be the best out of the fleet?
+Then witness the best auto-freak event of UVCE this IMPETUS..!</string>
+    <string name="electrophila">Do you think you can decode a expression or rig up a circuit with your known skills.
+Then here is a opportunity to experience it in coming Impetus.
+Not only this there is something else to activate your brain cells.</string>
+    <string name="summit">SUMMIT, is a flagship event of IMPETUS 18.0. It is a student parliament where a team can present their ideas and views, on the given problem statement,to the audience and judges.
+A perfect platform for you to showcase your creative ideas and presentation skill!</string>
+    <string name="itwiz">From Steve Jobs to Hacking everything you need to know about booming IT industry, come participate in the Information Technology quiz -IT Wiz 2.0 and hone your Tech knowledge. Be ready, Be Smart!</string>
+    <string name="appathon">Given a problem statement, develop an android application. It is as simple as that.</string>
+    <string name="marvel_man">We ask questions you answer, and do some things that we ask you to! Big money!!</string>
+    <string name="robo_soccer">We give you robots, you  make them play soccer and win the game to get a prize</string>
+    <string name="enigma">Do you think you know more about UVCE than anyone else ? Then get ready to untangle some of the enigmatic puzzles about your college when you sign up for this app based treasure hunt where you will use your smartphone with our app to  locate answers for the tasks.</string>
     <array name="event_list">
         <item>Steal Jobs</item>
         <item>It Wiz</item>
@@ -28,9 +74,6 @@
         <item>Robo Soccer</item>
         <item>Mech or Break</item>
         <item>Laser Tag</item>
-        <item>Automania</item>
-        <item>Steal Jobs</item>
-        <item>Gaming</item>
     </array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
