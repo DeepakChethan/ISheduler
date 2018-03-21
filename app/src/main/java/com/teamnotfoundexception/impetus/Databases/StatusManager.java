@@ -94,7 +94,7 @@ public  class StatusManager {
 
     public void initializeRegisteredList() {
         try {
-           // mFirebaseHelper.fetchRegisteredList(mUser);
+            mFirebaseHelper.fetchRegisteredList(mUser);
         } catch(Exception e) {
             Log.i("e", e.getMessage());
         }
@@ -116,7 +116,7 @@ public  class StatusManager {
 
         try {
             StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
-            mFirebaseHelper.updateFavoriteList(mRegisteredEventsList, mUser);
+            mFirebaseHelper.updateFavoriteList(mRegisteredEventsIds, mUser);
             MainActivity.notifyMe();
         } catch(Exception e) {
             Log.i("error", "cannot update favorite list");

@@ -40,7 +40,7 @@ public class FirebaseHelper {
     }
 
 
-    public void updateFavoriteList(ArrayList starredListItem, FirebaseUser user) {
+    public void updateFavoriteList(ArrayList<Integer> starredListItem, FirebaseUser user) {
 
         Log.i("favorite", "update favorite caleld");
 
@@ -68,6 +68,38 @@ public class FirebaseHelper {
         String _emailId = emailIdSplit[0];
         return _emailId;
     }
+
+
+    public void fetchRegisteredList(FirebaseUser user) {
+
+
+        String emailId = getEmailStripped(user.getEmail());
+        DatabaseReference databaseReference = mDatabaseReference.child(user.getUid()).child(emailId).child("registered").child("event_ids");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<Integer>> t = new GenericTypeIndicator<List<Integer>>() {
+                };
+                ArrayList<Integer> registeredListIds = (ArrayList<Integer>) dataSnapshot.getValue(t);
+                if (registeredListIds != null) {
+                    StatusManager.get(mAppContext).setRegisteredIdList(new ArrayList<Integer>(registeredListIds));
+              //      System.out.println("size of favorite list " + com.teamnamenotfoundexception.lsheduler.Database.StatusManager.get(mAppContext).getFavoriteIdList().size());
+                    MainActivity.notifyMe();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+
+            }
+        });
+
+
+    }
+
 
     public void fetchStarredList(FirebaseUser user) {
 

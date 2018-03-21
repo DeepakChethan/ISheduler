@@ -17,6 +17,9 @@ public class EventItem implements Serializable {
     public String mStartTime;
     public String mEndTime;
     public String mColor;
+
+    public int isRegistered  = 0;
+    public int isStarred  = 0;
     
 
 
@@ -35,11 +38,12 @@ public class EventItem implements Serializable {
         this.mStartTime = eventItem.getStartTime();
         this.mEndTime = eventItem.getEndTime();
         this.mColor = eventItem.getColor();
+
     }
 
     public EventItem(int dishId, String dishName, String dishType,
                      int price, String description, String imagePath,
-                     String startTime, String endTime, String color) {
+                     String startTime, String endTime, String color, int isRegistered, int isStarred) {
 
         this.mId = dishId;
         this.mName = dishName;
@@ -50,6 +54,24 @@ public class EventItem implements Serializable {
         this.mStartTime = startTime;
         this.mEndTime = endTime;
         this.mColor = color;
+        this.isRegistered = isRegistered;
+        this.isStarred = isStarred;
+    }
+
+    public int isRegistered() {
+        return isRegistered;
+    }
+
+    public int isStarred() {
+        return isStarred;
+    }
+
+    public void setRegistered(int registered) {
+        isRegistered = registered;
+    }
+
+    public void setStarred(int starred) {
+        isStarred = starred;
     }
 
     public String getColor() {

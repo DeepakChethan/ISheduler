@@ -28,6 +28,9 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EVENT_START_TIME = "start_time";
     private static final String COLUMN_EVENT_END_TIME = "end_time";
     private static final String COLUMN_EVENT_COLOR = "color";
+    private static final String COLUMN_EVENT_IS_REGISTERED = "is_registered";
+    private static final String COLUMN_EVENT_IS_STARRED= "is_starred";
+
 
     public EventsDatabaseHelper(Context context) {
 
@@ -46,7 +49,9 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
                 "entry_price int," +
                 " image_path varchar(2000), " +
                 "start_time varchar(2000), " +
-                "end_time varchar(2000), color varchar(2000))");
+                "end_time varchar(2000), color varchar(2000)," +
+                "is_registered int, is_starred int)");
+
     }
 
     @Override
@@ -97,7 +102,8 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
 
         EventItem createNewEventItem(int eventId, String eventName, String eventType,
                                      String description, int entryPrice, String imagePath,
-                                     String startTime, String endTime, String color) {
+                                     String startTime, String endTime, String color,
+                                     int isRegistered, int isStarred) {
 
 
             EventItem eventItem = new EventItem();
@@ -110,7 +116,8 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             eventItem.setStartTime(startTime);
             eventItem.setEndTime(endTime);
             eventItem.setColor(color);
-
+            eventItem.setRegistered(isRegistered);
+            eventItem.setStarred(isStarred);
             return eventItem;
 
         }
@@ -127,8 +134,12 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             String startTime = getString(getColumnIndex((COLUMN_EVENT_START_TIME)));
             String endTime = getString(getColumnIndex((COLUMN_EVENT_END_TIME)));
             String color = getString(getColumnIndex((COLUMN_EVENT_COLOR)));
+            int isRegistered = getInt(getColumnIndex(COLUMN_EVENT_IS_REGISTERED));
+            int isStarred = getInt(getColumnIndex(COLUMN_EVENT_IS_STARRED));
 
-            EventItem eventItem = createNewEventItem(eventId, eventName, eventType, description, entryPrice, imagePath, startTime, endTime, color);
+            EventItem eventItem = createNewEventItem(eventId, eventName, eventType,
+                                                    description, entryPrice, imagePath, startTime, endTime,
+                                                    color, isRegistered, isStarred);
             Log.i("i", "returning getDishItem");
             return eventItem;
 
