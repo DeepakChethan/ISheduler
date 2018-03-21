@@ -16,8 +16,8 @@ public class EventItem implements Serializable {
     public String mImagePath;
     public String mStartTime;
     public String mEndTime;
-    public String mColor;
-
+    public String mLocation;
+    public int mMaxTeamSize;
     public int isRegistered  = 0;
     public int isStarred  = 0;
     
@@ -37,13 +37,15 @@ public class EventItem implements Serializable {
         this.mImagePath = eventItem.getImagePath() ;
         this.mStartTime = eventItem.getStartTime();
         this.mEndTime = eventItem.getEndTime();
-        this.mColor = eventItem.getColor();
+        this.mLocation = eventItem.getLocation();
+        this.mMaxTeamSize = eventItem.getMaxTeamSize();
+
 
     }
 
     public EventItem(int dishId, String dishName, String dishType,
                      int price, String description, String imagePath,
-                     String startTime, String endTime, String color, int isRegistered, int isStarred) {
+                     String startTime, String endTime, String color, int maxTeam, int isRegistered,int isStarred) {
 
         this.mId = dishId;
         this.mName = dishName;
@@ -53,10 +55,14 @@ public class EventItem implements Serializable {
         this.mImagePath = imagePath ;
         this.mStartTime = startTime;
         this.mEndTime = endTime;
-        this.mColor = color;
+        this.mLocation = color;
         this.isRegistered = isRegistered;
         this.isStarred = isStarred;
+        this.mMaxTeamSize = maxTeam;
     }
+    public int getMaxTeamSize() { return mMaxTeamSize; }
+
+    public void setMaxTeamSize(int maxTeam) {mMaxTeamSize = maxTeam;}
 
     public int isRegistered() {
         return isRegistered;
@@ -74,12 +80,12 @@ public class EventItem implements Serializable {
         isStarred = starred;
     }
 
-    public String getColor() {
-        return mColor;
+    public String getLocation() {
+        return mLocation;
     }
 
-    public void setColor(String color) {
-        mColor = color;
+    public void setLocation(String color) {
+        mLocation = color;
     }
 
     public String getStartTime() {

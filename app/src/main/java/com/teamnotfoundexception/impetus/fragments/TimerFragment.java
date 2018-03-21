@@ -43,11 +43,10 @@ public class TimerFragment extends Fragment {
         }
         EventItem item = (EventItem) bundle.getSerializable("dope");
         mTeamCount.setText("Change Me");
-        mTeamCount.setText("Change me too");
         mEventType.setText(item.getType());
-        mEventTeamMax.setText("change Me");
+        mEventTeamMax.setText(item.getMaxTeamSize()+"");
         mEventPrice.setText(item.getPrice()+"");
-        mEventLocation.setText("change me");
+        mEventLocation.setText(item.getLocation());
         return view;
     }
 

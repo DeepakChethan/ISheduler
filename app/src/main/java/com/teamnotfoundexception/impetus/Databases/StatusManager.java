@@ -43,6 +43,7 @@ public  class StatusManager {
 
     private ArrayList<EventItem> mRegisteredEventsList;
     private ArrayList<EventItem> mStarredEventsList;
+    private EventItem nextEvent;
 
 
     private Context mAppContext;
@@ -85,6 +86,7 @@ public  class StatusManager {
         }
         return mStatusManager;
     }
+
 
 
 
