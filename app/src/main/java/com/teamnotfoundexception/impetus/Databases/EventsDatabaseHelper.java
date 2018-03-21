@@ -13,8 +13,6 @@ import android.util.Log;
 
 
 
-
-
 public class EventsDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "impetus.sqlite";
@@ -48,8 +46,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
                 "entry_price int," +
                 " image_path varchar(2000), " +
                 "start_time varchar(2000), " +
-                "end_time varchar(2000))"
-        );
+                "end_time varchar(2000), color varchar(2000))");
     }
 
     @Override

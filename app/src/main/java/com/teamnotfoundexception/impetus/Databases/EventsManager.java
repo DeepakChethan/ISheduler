@@ -42,7 +42,7 @@ public class EventsManager {
         mEventsManager = dishRepository;
     }
 
-    public void insertAllDishItems() {
+    public void insertAllEventItems() {
 
         Log.i("i", "in inserting function");
 

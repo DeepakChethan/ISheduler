@@ -20,11 +20,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 import com.teamnotfoundexception.impetus.fragments.MyEventsFragment;
 import com.teamnotfoundexception.impetus.fragments.StarredFragment;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent;
+//import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent;
 
 import java.util.ArrayList;
 
@@ -47,9 +48,11 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        EventsManager.get(getApplicationContext()).insertAllEventItems();
+        EventsManager.get(getApplicationContext()).initializeEventItemsList();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three

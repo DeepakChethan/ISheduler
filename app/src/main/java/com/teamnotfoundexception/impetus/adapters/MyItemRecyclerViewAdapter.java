@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment.OnListFragmentInteractionListener;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
+//import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
