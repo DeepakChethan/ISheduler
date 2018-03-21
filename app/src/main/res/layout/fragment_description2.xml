@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.teamnotfoundexception.impetus.fragments.DescriptionFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="25dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/temp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAlignment="center"
+            android:text="What to expect ?"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/eventDescription"
+            android:layout_below="@id/temp"
+            android:layout_marginTop="30dp"
+            style="@style/textStyle"
+            android:text="Our event is done, you must be in it mate! It is so dope that even dope is dope doper!"
+            />
+    </RelativeLayout>
+
+</FrameLayout>
+

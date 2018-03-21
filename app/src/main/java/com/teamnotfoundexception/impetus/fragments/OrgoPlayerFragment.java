@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnotfoundexception.impetus.R;
+import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
 import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent;
 import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
-
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -70,7 +69,10 @@ public class OrgoPlayerFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
+
+            // TODO GET THE LIST OF PLAYERS FOR THAT EVENT
+            recyclerView.setAdapter(new PlayerListAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
+
         }
         return view;
     }

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teamnotfoundexception.impetus">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,11 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".LogSign.SignupActivity" />
-        <activity android:name=".activities.HomeActivity"/>
-
+        <activity android:name=".activities.HomeActivity" />
         <activity
             android:name=".LogSign.LoginActivity"
             android:label="@string/title_activity_home"
@@ -25,12 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DescriptionActivity"
-            android:label="@string/title_activity_description"
-
-            android:theme="@style/AppTheme" />
-
-        <activity
             android:name=".activities.OrgoActivity"
             android:label="@string/title_activity_orgo"
             android:parentActivityName=".activities.HomeActivity"
@@ -39,7 +32,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.teamnotfoundexception.impetus.activities.HomeActivity" />
         </activity>
-
+        <activity
+            android:name=".activities.DescriptionActivity"
+            android:label="@string/title_activity_description"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
