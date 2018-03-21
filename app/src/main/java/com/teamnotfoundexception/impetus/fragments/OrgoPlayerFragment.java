@@ -70,7 +70,8 @@ public class OrgoPlayerFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
+            // TODO GET THE LIST OF PLAYERS FOR THAT EVENT
+            recyclerView.setAdapter(new PlayerListAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
 
         }
         return view;

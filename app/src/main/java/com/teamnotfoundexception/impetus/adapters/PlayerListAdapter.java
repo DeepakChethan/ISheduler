@@ -16,14 +16,14 @@ import java.util.List;
 
 
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.ViewHolder> {
 
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
     public Context context;
 
-    public MyItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener, Context c) {
+    public PlayerListAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener, Context c) {
 
         mValues = items;
         mListener = listener;

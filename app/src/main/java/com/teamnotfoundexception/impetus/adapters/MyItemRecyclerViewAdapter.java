@@ -41,10 +41,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
 
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        EventItem eventItem;
+
 
         holder.mItem = mEventItems.get(position);
-        eventItem = holder.mItem;
+        final EventItem eventItem = holder.mItem;
         holder.mEventNameHolder.setText(eventItem.getName());
         holder.mEventTypeHolder.setText(eventItem.getType());
         holder.mEventCostHolder.setText(eventItem.getPrice()+"");
@@ -57,16 +57,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
-                Intent intent = new Intent(mContext, DescriptionActivity.class);
+                Intent intent = new Intent(context, DescriptionActivity.class);
                 intent.putExtra("msg",eventItem);
-                mContext.startActivity(intent);
+                context.startActivity(intent);
 
             }
         });
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                StatusManager.get(mContext).addEventToStarred(eventItem);
+                StatusManager.get(context).addEventToStarred(eventItem);
                 return true;
             }
         });
