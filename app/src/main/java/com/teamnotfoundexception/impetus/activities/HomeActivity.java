@@ -44,8 +44,6 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        EventsManager.get(getApplicationContext()).insertAllEventItems();
-        EventsManager.get(getApplicationContext()).initializeEventItemsList();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

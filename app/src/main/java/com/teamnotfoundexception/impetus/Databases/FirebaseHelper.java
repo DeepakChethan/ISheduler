@@ -36,11 +36,11 @@ public class FirebaseHelper {
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
         mFirebaseDatabase = firebaseDatabase;
         if (firebaseDatabase != null)
-            mDatabaseReference = mFirebaseDatabase.getReference("ParticipantsData/");
+            mDatabaseReference = mFirebaseDatabase.getReference("users");
     }
 
 
-    public void updateFavoriteList(ArrayList<Integer> starredListItem, FirebaseUser user) {
+    public void updateStarredList(ArrayList<Integer> starredListItem, FirebaseUser user) {
 
         Log.i("favorite", "update favorite caleld");
 
@@ -63,11 +63,29 @@ public class FirebaseHelper {
     }
 
 
-    public String getEmailStripped(String emailId) {
-        String emailIdSplit[] = emailId.split("@");
-        String _emailId = emailIdSplit[0];
-        return _emailId;
+
+
+    public void updateRegisteredList(ArrayList<Integer> registeredListItem, FirebaseUser user) {
+
+        Log.i("favorite", "update favorite caleld");
+
+
+        Map<String, ArrayList<Integer>> registeredListMap = new HashMap<>();
+        registeredListMap.put("event_ids", registeredListItem);
+
+        try {
+
+            mDatabaseReference.child(user.getUid()).child("registered").setValue(registeredListMap);
+
+        } catch (Exception e) {
+
+            Log.i("favoriteError", "error in placing the order");
+
+        }
+
     }
+
+
 
 
     public void fetchRegisteredList(FirebaseUser user) {
@@ -130,6 +148,18 @@ public class FirebaseHelper {
 
 
     }
+
+
+
+
+
+    public String getEmailStripped(String emailId) {
+        String emailIdSplit[] = emailId.split("@");
+        String _emailId = emailIdSplit[0];
+        return _emailId;
+    }
+
+
 
     class FavoriteObject {
         public int itemId;

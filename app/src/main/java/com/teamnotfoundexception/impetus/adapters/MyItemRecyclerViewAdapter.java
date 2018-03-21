@@ -1,5 +1,6 @@
 package com.teamnotfoundexception.impetus.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment.OnListFragmentInteractionListener;
 
@@ -17,10 +19,12 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     private final List<EventItem> mEventItems;
     private final OnListFragmentInteractionListener mListener;
+    public Context context;
 
-    public MyItemRecyclerViewAdapter(List<EventItem> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(List<EventItem> items, OnListFragmentInteractionListener listener, Context c) {
         mEventItems = items;
         mListener = listener;
+        context = c;
     }
 
     @Override
@@ -31,7 +35,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         EventItem eventItem;
         holder.mItem = mEventItems.get(position);
         eventItem = holder.mItem;
@@ -45,6 +49,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
+
+                    StatusManager.get(context).addToRegistered(mEventItems.get(position));
+
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
@@ -70,9 +77,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
-
         }
-
 
     }
 }

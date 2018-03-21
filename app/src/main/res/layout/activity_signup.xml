@@ -27,31 +27,31 @@
 
             <EditText
                 android:id="@+id/signEmail"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                />
+                android:text="sagarc"
+                android:textColor="@color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:textColorHint="@color/white"
-            android:layout_marginBottom = "8dp" >
+            android:textColorHint="@color/white">
 
             <EditText
                 android:id="@+id/signPass"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="password"
                 android:inputType="textPassword"
-                />
+                android:text="123456"
+                android:textColor="@color/white" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -62,17 +62,18 @@
             android:layout_marginTop="8dp"
             android:textColorHint="@color/white"
             android:layout_marginBottom = "8dp" >
+
             <EditText
                 android:id="@+id/collegeName"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logEmail"
+                android:backgroundTint="@color/white"
                 android:hint="College "
                 android:inputType="text"
-                android:textColorHint="@color/white"
-                />
+                android:text="uvce"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -81,17 +82,18 @@
             android:layout_marginTop="8dp"
             android:textColorHint="@color/white"
             android:layout_marginBottom = "8dp" >
+
             <EditText
                 android:id="@+id/phone"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logEmail"
+                android:backgroundTint="@color/white"
                 android:hint="Phone"
                 android:inputType="number"
-                android:textColorHint="@color/white"
-                />
+                android:text="9738120617"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -101,28 +103,38 @@
             android:layout_marginTop="8dp"
             android:textColorHint="@color/white"
             android:layout_marginBottom = "8dp" >
+
             <EditText
                 android:id="@+id/dept"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logEmail"
+                android:backgroundTint="@color/white"
                 android:hint="Department"
                 android:inputType="text"
-                android:textColorHint="@color/white"
-                />
+                android:text="cse"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/signSignUp"
+            style="@style/BtnStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            style="@style/BtnStyle"
             android:layout_marginBottom="24dp"
-            android:textColor="@color/white"
+            android:layout_marginTop="24dp"
+            android:onClick="onSignUpButtonClicked"
             android:padding="12dp"
-            android:text="Sign up"/>
+            android:text="Sign up"
+            android:textColor="@color/white" />
         />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:id="@+id/progress"/>
     </LinearLayout>
 </ScrollView>
