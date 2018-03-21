@@ -48,6 +48,7 @@ public  class StatusManager {
 
     private static StatusManager mStatusManager = null;
 
+
     private StatusManager(Context context) {
 
         mAppContext = context;
@@ -84,6 +85,8 @@ public  class StatusManager {
         return mStatusManager;
     }
 
+
+
     public void initializeStarredList() {
         try {
             mFirebaseHelper.fetchStarredList(mUser);
@@ -112,12 +115,12 @@ public  class StatusManager {
     }
 
 
-    public void addToRegistered(EventItem item) {
+    public void addToRegistered(EventItem item, FirebaseHelper.Participant participant) {
 
         try {
 
             StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
-            mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser);
+            mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item);
             MainActivity.notifyMe();
 
         } catch(Exception e) {
@@ -188,9 +191,7 @@ public  class StatusManager {
         this.mUser = user;
     }
 
-    public void setStatusManagerToNull() {
-        mStatusManager = null;
-    }
+
 
     public void setAuth(FirebaseAuth auth) {
         this.mAuth = auth;
@@ -199,7 +200,7 @@ public  class StatusManager {
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
 
         this.mFirebaseDatabase = firebaseDatabase;
-        mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase);
+        mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase, 0);
 
     }
 

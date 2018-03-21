@@ -21,8 +21,10 @@ public class MainActivity extends AppCompatActivity {
         StatusManager.get(getApplicationContext()).setAuth(FirebaseAuth.getInstance());
         StatusManager.get(getApplicationContext()).setUser(FirebaseAuth.getInstance().getCurrentUser());
         StatusManager.get(getApplicationContext()).setFirebaseDatabase(FirebaseDatabase.getInstance());
+
         EventsManager.get(getApplicationContext()).insertAllEventItems();
         EventsManager.get(getApplicationContext()).initializeEventItemsList();
+
 
         startActivity(new Intent(this, HomeActivity.class));
     }

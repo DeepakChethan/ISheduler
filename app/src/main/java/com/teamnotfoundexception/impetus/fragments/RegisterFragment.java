@@ -11,7 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,6 +54,17 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //Register the event and the event is in eventItem
+
+        String teamName = mTeam.getText().toString();
+        String[] teamMembers= mTeamMembers.getText().toString().split(",");
+        ArrayList<String> teamMembersList = new ArrayList<>();
+        for(int i = 0; i < teamMembers.length; i++) {
+            teamMembersList.add(teamMembers[0]);
+        }
+        String collegeName = mCollege.getText().toString();
+
+        FirebaseHelper.Participant participant = new FirebaseHelper.Participant(teamName, collegeName, teamMembersList);
+
+        StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
     }
 }

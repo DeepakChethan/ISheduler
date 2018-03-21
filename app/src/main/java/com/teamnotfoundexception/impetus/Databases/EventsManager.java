@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 public class EventsManager {
@@ -49,21 +50,22 @@ public class EventsManager {
         if(!isInsertedBefore) {
 
 
-            mDatabaseHelper.insertEventItem((new EventItem(1001,"Enigma", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "pink",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1002,"Appathon", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "red",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1003,"NeutralOxide", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "blue",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1004,"Cyborg", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M","green",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1005,"Break or Mech", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "purple",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1006,"RoboMania", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "yellow",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1007,"Eat me", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "violet",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1008,"Breaking bad", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M", "indigo",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1009,"So you think it is over?", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M","white",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1010,"TechCrunch", "TreasureHunt",30,  "scan qr codes at different places","", "24/03/18 3 P.M","24/03/18 4:15 P.M","black",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1001,"Enigma", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "pink",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1002,"Appathon", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "red",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1003,"NeutralOxide", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "blue",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1004,"Cyborg", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","green",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1005,"Break or Mech", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "purple",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1006,"RoboMania", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "yellow",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1007,"Eat me", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "violet",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1008,"Breaking bad", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "indigo",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1009,"So you think it is over?", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","white",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1010,"TechCrunch", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","black",0,0)));
 
             SharedPreferences.Editor editor = mSharedPref.edit();
             editor.putString("inserted_before", "1");
             editor.apply();
             editor.commit();
+
         }
         else {
             Log.i("i", "it was inserted already");
@@ -104,6 +106,16 @@ public class EventsManager {
 
     public ArrayList<EventItem> getEventItemsList() {
         return mEventItemsList;
+    }
+
+
+    public Time convertSecondsToTime(long seconds) {
+        int day = (int) TimeUnit.SECONDS.toDays(seconds);
+        long hours = TimeUnit.SECONDS.toHours(seconds) - (day *24);
+        long minute = TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds)* 60);
+        long second = TimeUnit.SECONDS.toSeconds(seconds) - (TimeUnit.SECONDS.toMinutes(seconds) *60);
+        Time time = new Time(hours, minute, second);
+        return time;
     }
 
 }

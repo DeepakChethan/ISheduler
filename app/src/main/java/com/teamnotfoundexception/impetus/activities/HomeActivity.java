@@ -48,8 +48,6 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
         setSupportActionBar(toolbar);
 
         mSectionsPagerAdapterUser = new SectionsPagerAdapterUser(getSupportFragmentManager());
-//        EventsManager.get(HomeActivity.this).insertAllDishItems();
-//        EventsManager.get(HomeActivity.this).initializeEventItemsList();
         Log.i(TAG, "onCreate: "+EventsManager.get(getApplicationContext()).getEventItemsList().size());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapterUser);
