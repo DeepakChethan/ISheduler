@@ -7,10 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.teamnotfoundexception.impetus.Databases.StatusManager;
+import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment.OnListFragmentInteractionListener;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
@@ -19,13 +18,13 @@ import java.util.List;
 public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.ViewHolder> {
 
 
-    private final List<DummyItem> mValues;
+    private final List<FirebaseHelper.Participant> mParticipants;
     private final OnListFragmentInteractionListener mListener;
     public Context context;
 
-    public PlayerListAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener, Context c) {
+    public PlayerListAdapter(List<FirebaseHelper.Participant> participants, OnListFragmentInteractionListener listener, Context c) {
 
-        mValues = items;
+        mParticipants = participants;
         mListener = listener;
         context = c;
     }
@@ -39,15 +38,16 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        //holder.mIdView.setText(mValues.get(position).id);
-        //holder.mContentView.setText(mValues.get(position).content);
+        holder.participant = mParticipants.get(position);
+        holder.mTeamName.setText(holder.participant.teamName);
+        //holder.mParticipants.setText(holder.participant.teamMembers);
+        holder.mCollege.setText(holder.participant.collegeName);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    mListener.onListFragmentInteraction(holder.mItem);
+
                 }
 
             }
@@ -56,25 +56,23 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mParticipants.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        //public final TextView mIdView;
-        //public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mTeamName;
+        public final TextView mParticipants;
+        public final TextView mCollege;
+        public FirebaseHelper.Participant participant;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            //mIdView = (TextView) view.findViewById(R.id.id);
-            //mContentView = (TextView) view.findViewById(R.id.content);
-        }
+            mTeamName = (TextView) view.findViewById(R.id.playTeamName);
+            mParticipants = (TextView) view.findViewById(R.id.playParticipants);
+            mCollege = (TextView) view.findViewById(R.id.playCollege);
+         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + "'";
-        }
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"
-    tools:context="com.teamnotfoundexception.impetus.LogSign.LoginActivity">
+    tools:context="com.teamnotfoundexception.impetus.LogSign.OrganizerLoginActivity">
 
     <LinearLayout
         android:id="@+id/temp"
@@ -26,7 +26,7 @@
             android:layout_marginBottom = "8dp" >
 
             <EditText
-                android:id="@+id/logEmail"
+                android:id="@+id/orgEmail"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
             android:textColorHint="@color/white"
             android:layout_marginBottom = "8dp" >
             <EditText
-                android:id="@+id/logPass"
+                android:id="@+id/orgPass"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
@@ -55,10 +55,17 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
-
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/orgEvent"
+            android:layout_marginTop="20dp"
+            android:isScrollContainer="true"
+            android:entries="@array/event_list"
+            ></Spinner>
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/logSignIn"
+            android:id="@+id/orgSignIn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -66,34 +73,8 @@
             android:layout_marginBottom="24dp"
             android:textColor="@color/white"
             android:padding="12dp"
-            android:text="Login"/>
+            android:text="Organizer Login"/>
         />
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:weightSum="2"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                style="@style/BtnStyle"
-                android:id="@+id/logSignUp"
-                android:text="SignUp"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:layout_width="0dp"
-                android:id="@+id/logOrgSignIn"
-                android:background="@color/white"
-                android:textColor="@color/colorPrimary"
-                android:text="Org Sign In"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
 
         <ProgressBar
             android:layout_width="wrap_content"
