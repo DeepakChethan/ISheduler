@@ -1,4 +1,4 @@
-package com.teamnotfoundexception.impetus.Login;
+package com.teamnotfoundexception.impetus.LogSign;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
