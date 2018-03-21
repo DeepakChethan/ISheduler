@@ -69,8 +69,8 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (R.id.organize == item.getItemId()){
-            startActivity(new Intent(HomeActivity.this,OrgoActivity.class));
+        if (R.id.search == item.getItemId()){
+            startActivity(new Intent(HomeActivity.this,SearchActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

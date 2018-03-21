@@ -15,20 +15,32 @@ import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
-    private final List<EventItem> mEventItems;
-    private final EventsFragment.OnListFragmentInteractionListener mListener;
+    private ArrayList<EventItem> mEventItems;
+    private  EventsFragment.OnListFragmentInteractionListener mListener;
 
     public Context context;
 
-    public EventsAdapter(List<EventItem> items, EventsFragment.OnListFragmentInteractionListener listener, Context c) {
+    public EventsAdapter(ArrayList<EventItem> items, EventsFragment.OnListFragmentInteractionListener listener, Context c) {
         mEventItems = items;
         mListener = listener;
         context = c;
 
+    }
+    public EventsAdapter(ArrayList<EventItem> items, Context c) {
+        mEventItems = items;
+        context = c;
+
+    }
+
+    public void dataChaged(ArrayList<EventItem> items){
+        mEventItems = new ArrayList<>();
+        mEventItems.addAll(items);
+        notifyDataSetChanged();
     }
 
     @Override

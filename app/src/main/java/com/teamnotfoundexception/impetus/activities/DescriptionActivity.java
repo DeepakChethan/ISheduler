@@ -1,5 +1,6 @@
 package com.teamnotfoundexception.impetus.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,7 +79,7 @@ public class DescriptionActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_description, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -89,7 +91,9 @@ public class DescriptionActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.search) {
+            Intent intent = new Intent(DescriptionActivity.this,SearchActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -133,5 +137,11 @@ public class DescriptionActivity extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
+
+
+    }
+
+    public static void notifyMe() {
+        Log.i("registered", "registerd from descr activity");
     }
 }

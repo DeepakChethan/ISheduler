@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
+
+import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
+
 public class OrgoPlayerFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -48,7 +51,9 @@ public class OrgoPlayerFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            //recyclerView.setAdapter(new PlayerListAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
+
+            recyclerView.setAdapter(new PlayerListAdapter(StatusManagerForOrganizer.get(getActivity().getApplicationContext()).mParticipants, mListener, getActivity().getApplicationContext()));
+
 
         }
         return view;
@@ -76,5 +81,6 @@ public class OrgoPlayerFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
 
         void onListFragmentInteraction(FirebaseHelper.Participant item);
+
     }
 }
