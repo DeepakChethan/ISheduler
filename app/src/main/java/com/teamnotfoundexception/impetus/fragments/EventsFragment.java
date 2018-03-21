@@ -49,7 +49,7 @@ public class EventsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(EventsManager.get(context).getEventItemsList(), mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(getContext(),EventsManager.get(context).getEventItemsList(), mListener));
         }
         return view;
     }
