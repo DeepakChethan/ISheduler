@@ -9,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
+
 import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
-
 
 public class OrgoPlayerFragment extends Fragment {
 
@@ -23,7 +22,6 @@ public class OrgoPlayerFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    
     public OrgoPlayerFragment() {
     }
 
@@ -53,8 +51,9 @@ public class OrgoPlayerFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            // TODO GET THE LIST OF PLAYERS FOR THAT EVENT
+
             recyclerView.setAdapter(new PlayerListAdapter(StatusManagerForOrganizer.get(getActivity().getApplicationContext()).mParticipants, mListener, getActivity().getApplicationContext()));
+
 
         }
         return view;

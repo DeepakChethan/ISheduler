@@ -37,7 +37,14 @@
             android:name=".activities.DescriptionActivity"
             android:label="@string/title_activity_description"
             android:theme="@style/AppTheme" />
-        <activity android:name=".LogSign.OrganizerLoginActivity"></activity>
+        <activity android:name=".LogSign.OrganizerLoginActivity" />
+
+        <service
+            android:name=".services.MyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activities.SearchActivity"></activity>
     </application>
 
 </manifest>

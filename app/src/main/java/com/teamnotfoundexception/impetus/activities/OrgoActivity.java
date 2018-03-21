@@ -1,6 +1,7 @@
 package com.teamnotfoundexception.impetus.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -92,7 +93,7 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_orgo, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -104,7 +105,8 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.search) {
+            startActivity(new Intent(OrgoActivity.this,SearchActivity.class));
             return true;
         }
 
