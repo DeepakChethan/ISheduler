@@ -82,7 +82,7 @@ public class FirebaseHelper {
                 };
                 ArrayList<Integer> starredListIds = (ArrayList<Integer>) dataSnapshot.getValue(t);
                 if (starredListIds != null) {
-                 //StatusManager.get(mAppContext).setStarredId(new ArrayList<Integer>(starredListIds));
+                 StatusManager.get(mAppContext).setStarredIdList(new ArrayList<Integer>(starredListIds));
                     //System.out.println("size of favorite list " + com.teamnamenotfoundexception.lsheduler.Database.StatusManager.get(mAppContext).getFavoriteIdList().size());
                     MainActivity.notifyMe();
                 }

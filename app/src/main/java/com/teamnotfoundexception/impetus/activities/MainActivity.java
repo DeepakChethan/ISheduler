@@ -13,8 +13,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EventsManager.get(getApplicationContext()).insertAllEventItems();
-        EventsManager.get(getApplicationContext()).initializeEventItemsList();
         startActivity(new Intent(this, HomeActivity.class));
 
     }
