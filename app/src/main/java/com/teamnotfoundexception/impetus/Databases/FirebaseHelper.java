@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class FirebaseHelper {
 
 
 
-    public void updateRegisteredList(ArrayList<Integer> registeredListItem, FirebaseUser user, EventItem currentRegisteredItem) {
+    public void updateRegisteredList(ArrayList<Integer> registeredListItem, FirebaseUser user, EventItem currentRegisteredItem, Participant participant) {
 
         Log.i("favorite", "update favorite caleld");
 
@@ -83,12 +84,8 @@ public class FirebaseHelper {
         try {
 
             mDatabaseReference1.child(user.getUid()).child("registered").setValue(registeredListMap);
-            ArrayList<String> m = new ArrayList<>();
-            m.add("sagar");
-            m.add("sachin");
-            m.add("vinay");
-            mDatabaseReference3.child(currentRegisteredItem.getName().toUpperCase()).child(emailId).setValue(new Participant(user.getEmail(), "bmsce", m));
-
+            mDatabaseReference3.child(currentRegisteredItem.getName().toUpperCase()).child(emailId).setValue(participant);
+            DescriptionActivity.notifyMe();
 
         } catch (Exception e) {
 
@@ -280,14 +277,14 @@ public class FirebaseHelper {
       //  public String name;
         public String teamName;
         public String collegeName;
-        public ArrayList<String> teamMembers;
+        public String teamMembers;
 
         public Participant() {
 
         }
 
 
-        public Participant(String name, String collegeName, ArrayList<String> teamMembers) {
+        public Participant(String name, String collegeName, String teamMembers) {
 
             this.teamName = name;
             this.collegeName = collegeName;

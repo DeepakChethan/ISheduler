@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -133,5 +134,11 @@ public class DescriptionActivity extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
+
+
+    }
+
+    public static void notifyMe() {
+        Log.i("registered", "registerd from descr activity");
     }
 }

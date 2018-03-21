@@ -3,6 +3,7 @@ package com.teamnotfoundexception.impetus.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  */
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
-
+    private static final String  TAG = "REGISTERFRAGMENT";
     EditText mTeamMembers,mCollege,mPhone,mTeam;
     Button btn;
     EventItem eventItem;
@@ -55,16 +56,37 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        String teamName = mTeam.getText().toString();
-        String[] teamMembers= mTeamMembers.getText().toString().split(",");
-        ArrayList<String> teamMembersList = new ArrayList<>();
-        for(int i = 0; i < teamMembers.length; i++) {
-            teamMembersList.add(teamMembers[0]);
+        btn.setEnabled(false);
+
+
+        if(mTeam.getText().toString().isEmpty() ||
+
+           mCollege.getText().toString().isEmpty() ||
+
+           mCollege.getText().toString().isEmpty() )  {
+
+            Toast.makeText(getActivity().getApplicationContext(), "fill up everything", Toast.LENGTH_SHORT).show();
+
+            btn.setEnabled(true);
+
+            return ;
         }
+
+
+
+        String teamName = mTeam.getText().toString();
+
+        String teamMembers= mTeamMembers.getText().toString();
+
         String collegeName = mCollege.getText().toString();
 
-        FirebaseHelper.Participant participant = new FirebaseHelper.Participant(teamName, collegeName, teamMembersList);
+        FirebaseHelper.Participant participant = new FirebaseHelper.Participant(teamName, collegeName, teamMembers);
 
         StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
+
+
     }
+
+
+
 }

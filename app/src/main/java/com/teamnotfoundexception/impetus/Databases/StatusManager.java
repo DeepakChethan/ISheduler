@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
+import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
 
 
@@ -120,8 +121,10 @@ public  class StatusManager {
         try {
 
             StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
-            mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item);
-            MainActivity.notifyMe();
+
+            mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
+
+            DescriptionActivity.notifyMe();
 
         } catch(Exception e) {
 

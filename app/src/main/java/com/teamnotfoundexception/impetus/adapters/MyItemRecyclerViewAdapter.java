@@ -53,7 +53,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    StatusManager.get(context).addToRegistered(mEventItems.get(position));
+                    //StatusManager.get(context).addToRegistered(mEventItems.get(position));
 
                     mListener.onListFragmentInteraction(holder.mItem);
                 }

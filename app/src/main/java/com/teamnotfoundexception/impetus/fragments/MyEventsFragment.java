@@ -19,8 +19,11 @@ import com.teamnotfoundexception.impetus.adapters.MyItemRecyclerViewAdapter;
 public class MyEventsFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
+
     private int mColumnCount = 2;
+
     private EventsFragment.OnListFragmentInteractionListener mListener;
+
     public MyEventsFragment() {
         // Required empty public constructor
     }

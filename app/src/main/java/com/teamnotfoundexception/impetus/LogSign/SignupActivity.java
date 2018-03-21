@@ -121,13 +121,19 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if(mUser != null) {
 
             DatabaseReference databaseReference = firebaseDatabase.getReference("users_private").child(mUser.getUid());
+
             Map<String, User> userMap = new HashMap<>();
+
             userMap.put("user_info", new User(mUser.getDisplayName()+"a", mUser.getEmail(),
                                         phoneEt.getText().toString(), collegeEt.getText().toString(), departmentEditText.getText().toString()
                     ));
+
             databaseReference.setValue(userMap);
+
             databaseReference = firebaseDatabase.getReference("users_public").child(mUser.getEmail().split("@")[0]);
+
             databaseReference.setValue(new Participant(mUser.getEmail(), collegeEt.getText().toString(), null));
+
         }
 
     }
