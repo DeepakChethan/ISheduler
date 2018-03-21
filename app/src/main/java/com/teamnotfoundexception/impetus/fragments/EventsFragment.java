@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.R;
-import com.teamnotfoundexception.impetus.adapters.MyItemRecyclerViewAdapter;
+import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
+import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
 
 
 public class EventsFragment extends Fragment {
@@ -50,7 +51,7 @@ public class EventsFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
+            recyclerView.setAdapter(new EventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
 
         }
         return view;

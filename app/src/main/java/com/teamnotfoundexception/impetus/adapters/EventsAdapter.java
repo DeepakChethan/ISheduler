@@ -13,18 +13,18 @@ import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
-import com.teamnotfoundexception.impetus.fragments.EventsFragment.OnListFragmentInteractionListener;
+import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 
 import java.util.List;
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     private final List<EventItem> mEventItems;
-    private final OnListFragmentInteractionListener mListener;
+    private final EventsFragment.OnListFragmentInteractionListener mListener;
 
     public Context context;
 
-    public MyItemRecyclerViewAdapter(List<EventItem> items, OnListFragmentInteractionListener listener, Context c) {
+    public EventsAdapter(List<EventItem> items, EventsFragment.OnListFragmentInteractionListener listener, Context c) {
         mEventItems = items;
         mListener = listener;
         context = c;
@@ -53,7 +53,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    StatusManager.get(context).addToRegistered(mEventItems.get(position));
+                    //StatusManager.get(context).addToRegistered(mEventItems.get(position));
 
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
