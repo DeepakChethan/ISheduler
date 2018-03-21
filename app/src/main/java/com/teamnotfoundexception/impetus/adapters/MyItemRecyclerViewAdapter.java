@@ -59,6 +59,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 }
                 Intent intent = new Intent(context, DescriptionActivity.class);
                 intent.putExtra("msg",eventItem);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
             }
