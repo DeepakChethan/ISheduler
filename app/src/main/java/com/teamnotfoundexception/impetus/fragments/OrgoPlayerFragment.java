@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
+import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent.DummyItem;
+
 
 public class OrgoPlayerFragment extends Fragment {
 
@@ -53,7 +54,7 @@ public class OrgoPlayerFragment extends Fragment {
             }
 
             // TODO GET THE LIST OF PLAYERS FOR THAT EVENT
-            recyclerView.setAdapter(new PlayerListAdapter(DummyContent.ITEMS, mListener, getActivity().getApplicationContext()));
+            recyclerView.setAdapter(new PlayerListAdapter(StatusManagerForOrganizer.get(getActivity().getApplicationContext()).mParticipants, mListener, getActivity().getApplicationContext()));
 
         }
         return view;
@@ -80,6 +81,7 @@ public class OrgoPlayerFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
 
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(FirebaseHelper.Participant item);
+
     }
 }

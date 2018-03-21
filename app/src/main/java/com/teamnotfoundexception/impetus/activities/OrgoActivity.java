@@ -23,10 +23,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.OrgoHomeFragment;
 import com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment;
-import com.teamnotfoundexception.impetus.fragments.dummy.DummyContent;
+
 
 import java.util.ArrayList;
 
@@ -111,7 +112,7 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(FirebaseHelper.Participant item) {
         
     }
 
