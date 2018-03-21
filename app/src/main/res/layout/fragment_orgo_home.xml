@@ -1,0 +1,97 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.teamnotfoundexception.impetus.fragments.OrgoHomeFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:layout_margin="7dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_gravity="top"
+        android:padding="20dp"
+        app:cardElevation="3dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="11dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EventName"
+                android:textAlignment="center"
+                android:id="@+id/fragOrgoHomeEventNameHolder"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="TIMER" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"
+                android:layout_height="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:weightSum="2"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Player Count"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textAlignment="viewEnd"
+                    android:layout_gravity="right"
+                    android:layout_height="match_parent"
+                    android:text="Some detail"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:text="20"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textAlignment="viewEnd"
+                    android:layout_gravity="right"
+                    android:layout_height="match_parent"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:text="some"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

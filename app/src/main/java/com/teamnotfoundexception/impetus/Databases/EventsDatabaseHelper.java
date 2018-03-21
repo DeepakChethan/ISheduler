@@ -118,6 +118,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             eventItem.setColor(color);
             eventItem.setRegistered(isRegistered);
             eventItem.setStarred(isStarred);
+
             return eventItem;
 
         }

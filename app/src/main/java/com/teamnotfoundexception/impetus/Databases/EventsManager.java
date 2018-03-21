@@ -6,11 +6,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by sagar on 3/21/18.
- */
-
-
 
 public class EventsManager {
 
