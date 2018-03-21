@@ -50,16 +50,16 @@ public class EventsManager {
         if(!isInsertedBefore) {
 
 
-            mDatabaseHelper.insertEventItem((new EventItem(1001,"Enigma", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "pink",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1002,"Appathon", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "red",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1003,"NeutralOxide", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "blue",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1004,"Cyborg", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","green",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1005,"Break or Mech", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "purple",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1006,"RoboMania", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "yellow",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1007,"Eat me", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "violet",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1008,"Breaking bad", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "indigo",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1009,"So you think it is over?", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","white",0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1010,"TechCrunch", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","black",0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1001,"Enigma", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "Entire Campus",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1002,"Appathon", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "red",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1003,"NeutralOxide", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "blue",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1004,"Cyborg", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","green",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1005,"Break or Mech", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "purple",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1006,"RoboMania", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "yellow",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1007,"Eat me", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "violet",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1008,"Breaking bad", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600", "indigo",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1009,"So you think it is over?", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","white",2,0,0)));
+            mDatabaseHelper.insertEventItem((new EventItem(1010,"TechCrunch", "TreasureHunt",30,  "scan qr codes at different places","", "1521876600","1521876600","black",2,0,0)));
 
             SharedPreferences.Editor editor = mSharedPref.edit();
             editor.putString("inserted_before", "1");

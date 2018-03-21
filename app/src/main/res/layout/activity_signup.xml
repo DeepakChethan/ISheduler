@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="password"
+                android:backgroundTint="@color/white"
                 android:inputType="textPassword"
                 android:text="123456"
                 android:textColor="@color/white" />

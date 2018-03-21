@@ -10,6 +10,13 @@
         android:icon="@drawable/ic_search_white_24dp"
         />
 
+    <item
+        app:showAsAction="always"
+        android:icon="@drawable/ic_whatshot_white_24dp"
+        android:title="organizer"
+        android:id="@+id/org"
+        />
+
 
 
 
