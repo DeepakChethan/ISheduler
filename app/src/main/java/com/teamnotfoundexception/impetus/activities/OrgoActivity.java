@@ -109,6 +109,9 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
             startActivity(new Intent(OrgoActivity.this,SearchActivity.class));
             return true;
         }
+        if (id == R.id.logout){
+            //TODO logout of the app
+        }
 
         return super.onOptionsItemSelected(item);
     }
