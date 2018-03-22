@@ -27,7 +27,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EVENT_IMAGE_PATH = "image_path";
     private static final String COLUMN_EVENT_START_TIME = "start_time";
     private static final String COLUMN_EVENT_END_TIME = "end_time";
-    private static final String COLUMN_EVENT_Location = "location";
+    private static final String COLUMN_EVENT_LOCATION = "location";
     private static final String COLUMN_EVENT_IS_REGISTERED = "is_registered";
     private static final String COLUMN_EVENT_IS_STARRED= "is_starred";
     private static final String COLUMN_EVENT_MAX_SIZE = "max_team_size";
@@ -83,7 +83,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_EVENT_IMAGE_PATH, eventItem.getImagePath());
         cv.put(COLUMN_EVENT_START_TIME, eventItem.getStartTime());
         cv.put(COLUMN_EVENT_END_TIME, eventItem.getEndTime());
-
+        cv.put(COLUMN_EVENT_LOCATION,eventItem.getLocation());
         Log.i("inserted", "inserted mate");
         return getReadableDatabase().insert(TABLE_EVENTS, null, cv);
 
@@ -135,7 +135,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             String imagePath = getString(getColumnIndex(COLUMN_EVENT_IMAGE_PATH));
             String startTime = getString(getColumnIndex((COLUMN_EVENT_START_TIME)));
             String endTime = getString(getColumnIndex((COLUMN_EVENT_END_TIME)));
-            String location = getString(getColumnIndex((COLUMN_EVENT_Location)));
+            String location = getString(getColumnIndex((COLUMN_EVENT_LOCATION)));
             int isRegistered = getInt(getColumnIndex(COLUMN_EVENT_IS_REGISTERED));
             int isStarred = getInt(getColumnIndex(COLUMN_EVENT_IS_STARRED));
             int maxTeamSize = getInt(getColumnIndex(COLUMN_EVENT_MAX_SIZE));
