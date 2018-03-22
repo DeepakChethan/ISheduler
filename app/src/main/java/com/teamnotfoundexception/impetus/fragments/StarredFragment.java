@@ -2,6 +2,7 @@ package com.teamnotfoundexception.impetus.fragments;
 
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
@@ -23,6 +25,7 @@ public class StarredFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 2;
+    public static StarredAdapter starredAdapter;
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
     public StarredFragment() {
@@ -43,16 +46,25 @@ public class StarredFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_starred, container, false);
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
 
-            recyclerView.setAdapter(new StarredAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
+        if (view instanceof RecyclerView) {
+
+            Context context = view.getContext();
+
+            RecyclerView recyclerView = (RecyclerView) view;
+
+            if (mColumnCount <= 1) {
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+            } else {
+
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+
+            }
+            starredAdapter = new StarredAdapter(StatusManager.get(context).getStarredEventsList(),mListener,getActivity().getApplicationContext());
+
+            recyclerView.setAdapter(starredAdapter);
 
         }
 
@@ -68,6 +80,13 @@ public class StarredFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
         }
+    }
+
+
+    public static void notifyMe() {
+
+        starredAdapter.notifyDataSetChanged();
+
     }
 
     @Override

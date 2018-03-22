@@ -175,12 +175,12 @@ public  class StatusManager {
         this.mStarredEventsIds = registeredIdList;
     }
 
-    public void setRegisteredEventsList(ArrayList<Integer> registeredEventsList) {
+    /*public void setRegisteredEventsList(ArrayList<Integer> registeredEventsList) {
         this.mStarredEventsIds = registeredEventsList;
     }
     public void setStarredEventsList(ArrayList<Integer> starredEventsList) {
         this.mStarredEventsIds = starredEventsList;
-    }
+    }*/
 
     public void addEventToStarred(EventItem item) {
         mStarredEventsList.add(item);

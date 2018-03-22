@@ -24,6 +24,7 @@ public class EventsFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
 
     public EventsFragment() {
+
     }
 
     @Override
@@ -47,8 +48,11 @@ public class EventsFragment extends Fragment {
             if (mColumnCount <= 1) {
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
             } else {
+
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+
             }
 
             recyclerView.setAdapter(new EventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
