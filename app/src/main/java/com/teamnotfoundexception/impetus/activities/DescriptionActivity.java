@@ -86,6 +86,9 @@ public class DescriptionActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if (id == R.id.logout){
+            //TODO logout of the app
+        }
 
         return super.onOptionsItemSelected(item);
     }

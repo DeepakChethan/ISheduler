@@ -76,6 +76,9 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
         if (R.id.org == item.getItemId()){
             startActivity(new Intent(HomeActivity.this,OrgoActivity.class));
         }
+        if (item.getItemId() == R.id.logout){
+            //TODO logout of the app
+        }
         return super.onOptionsItemSelected(item);
     }
 

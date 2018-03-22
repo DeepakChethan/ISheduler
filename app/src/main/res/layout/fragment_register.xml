@@ -2,21 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.teamnotfoundexception.impetus.fragments.RegisterFragment">
 
     <LinearLayout
         android:id="@+id/temp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         android:orientation="vertical"
         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="Register for "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/eventNameRegister"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="Event"/>
+
+        </LinearLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:textColorHint="@color/white"
             android:layout_marginTop="8dp"
             >
 
@@ -27,6 +50,10 @@
                 android:hint="Team Name"
                 android:inputType="text"
 
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
+
                 />
         </android.support.design.widget.TextInputLayout>
 
@@ -36,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:textColorHint="@color/white"
             >
             <EditText
                 android:id="@+id/regTeamMem"
@@ -43,6 +71,9 @@
                 android:layout_height="wrap_content"
                 android:hint="Team Members"
                 android:inputType="text"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 />
         </android.support.design.widget.TextInputLayout>
 
@@ -52,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-
+            android:textColorHint="@color/white"
             android:layout_marginBottom = "8dp" >
 
             <EditText
@@ -60,6 +91,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="College"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:inputType="text"
                  />
         </android.support.design.widget.TextInputLayout>
@@ -68,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-
+            android:textColorHint="@color/white"
             android:layout_marginBottom = "8dp" >
 
             <EditText
@@ -77,6 +111,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logEmail"
                 android:hint="Phone"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:inputType="number"
 
                 />

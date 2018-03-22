@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamnotfoundexception.impetus.Databases.EventItem;
@@ -30,6 +31,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     EditText mTeamMembers,mCollege,mPhone,mTeam;
     Button btn;
     EventItem eventItem;
+    TextView mEventNameRegister;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -54,6 +56,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         mCollege = (EditText) view.findViewById(R.id.regCollege);
         mPhone = (EditText) view.findViewById(R.id.regPhone);
         btn = (Button) view.findViewById(R.id.regRegister);
+        mEventNameRegister = (TextView) view.findViewById(R.id.eventNameRegister);
+        mEventNameRegister.setText(eventItem.getName());
         if(eventItem.isRegistered == 1) {
             btn.setEnabled(false);
             btn.setText("You have registered already");
