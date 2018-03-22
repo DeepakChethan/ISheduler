@@ -23,7 +23,8 @@ public class TimerFragment extends Fragment {
 
     private TextView mTimeContainer,mTeamCount,mEventLocation,mEventTeamMax,mEventPrice,mEventType, mEventName;
     private long timeToEvent;
-
+    private Handler handler;
+    private Runnable myRunnable;
     public TimerFragment() {
         // Required empty public constructor
     }
@@ -65,9 +66,9 @@ public class TimerFragment extends Fragment {
 
 
 
-            final Handler handler = new Handler();
+          handler = new Handler();
 
-            Runnable myRunnable = new Runnable() {
+            myRunnable = new Runnable() {
                 @Override
                 public void run() {
                     timeToEvent--;
@@ -75,6 +76,8 @@ public class TimerFragment extends Fragment {
                         Time time = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(timeToEvent);
                         mTimeContainer.setText("starts in " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() );
                         handler.postDelayed(this, 1000);
+                    } else {
+                        handler = null;
                     }
                 }
             };
@@ -90,5 +93,14 @@ public class TimerFragment extends Fragment {
         mEventLocation.setText(item.getLocation());
         return view;
     }
+
+
+    @Override
+    public void onDestroy() {
+        handler.removeCallbacks(myRunnable);
+        super.onDestroy();
+        
+    }
+
 
 }
