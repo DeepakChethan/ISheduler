@@ -44,7 +44,7 @@ public class MyEventsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_events, container, false);
         Context context = view.getContext();
-        RecyclerView recyclerView = (RecyclerView) view;
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listMyEvents);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.myEventsHidden);
         if (EventsManager.get(context).getEventItemsList().size() == 0){
             recyclerView.setVisibility(View.GONE);

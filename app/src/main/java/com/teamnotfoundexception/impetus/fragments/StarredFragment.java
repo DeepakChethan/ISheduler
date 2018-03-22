@@ -44,7 +44,7 @@ public class StarredFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_starred, container, false);
-        RecyclerView recyclerView = (RecyclerView) view;
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listStarred);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.starHidden);
         Context context = view.getContext();
         if (EventsManager.get(context).getEventItemsList().size() == 0){

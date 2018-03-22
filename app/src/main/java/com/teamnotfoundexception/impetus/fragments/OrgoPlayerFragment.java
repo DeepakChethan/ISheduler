@@ -43,7 +43,7 @@ public class OrgoPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list2, container, false);
         Context context = view.getContext();
-        RecyclerView recyclerView = (RecyclerView) view;
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.item_list2);
         if (EventsManager.get(context).getEventItemsList().size() == 0){
             recyclerView.setVisibility(View.GONE);
