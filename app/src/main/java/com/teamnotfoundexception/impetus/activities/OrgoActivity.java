@@ -2,6 +2,7 @@ package com.teamnotfoundexception.impetus.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
+import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.OrgoHomeFragment;
 import com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment;
@@ -38,10 +40,18 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
 
     private ViewPager mViewPager;
     private FloatingActionButton button;
+    private Handler handler;
+    private Runnable myRunnable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orgo);
+
+
+        StatusManagerForOrganizer.get(getApplicationContext()).initializeParticipantsList();
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,7 +79,10 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
                             public void onClick(DialogInterface dialog, int which) {
                                 String note = editText.getText().toString();
                                 Toast.makeText(getApplicationContext(),note+"",Toast.LENGTH_SHORT).show();
+
                                 // Push the notification
+
+
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -126,10 +139,12 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
 
         private ArrayList<Fragment> fragments;
         public SectionsPagerAdapter(FragmentManager fm) {
+
             super(fm);
             fragments = new ArrayList<>();
             fragments.add(new OrgoHomeFragment());
             fragments.add(new OrgoPlayerFragment());
+
         }
 
         @Override

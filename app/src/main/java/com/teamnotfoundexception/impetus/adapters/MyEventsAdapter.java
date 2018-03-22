@@ -66,9 +66,9 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             holder.mEventTypeHolder.setText(eventItem.getType());
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
             Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
-            if (holder.mItem.isStarred() == 1){
-                holder.mStar.setVisibility(View.VISIBLE);
-            }
+
+            holder.mStar.setVisibility(View.GONE);
+
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -83,24 +83,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
 
                 }
             });
-            holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
 
-                    if(eventItem.isStarred() == 0) {
-                        eventItem.setStarred(1);
-                        StatusManager.get(context).addToStarred(eventItem);
-                        holder.mStar.setVisibility(View.VISIBLE);
-                        updateData(StatusManager.get(context).getRegisteredEventsList());
-                    }else{
-                        eventItem.setStarred(0);
-                        StatusManager.get(context).removeFromStarred(eventItem);
-                        holder.mStar.setVisibility(View.INVISIBLE);
-                        updateData(StatusManager.get(context).getRegisteredEventsList());
-                    }
-                    return true;
-                }
-            });
 
 
     }

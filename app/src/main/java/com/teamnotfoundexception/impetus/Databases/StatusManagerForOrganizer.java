@@ -55,6 +55,12 @@ public class StatusManagerForOrganizer {
 
         mFirebaseHelper = new FirebaseHelper(mAppContext);
 
+        mEventOrganized = null;
+
+    }
+
+    public void setEventOrganized(EventItem mEventOrganized) {
+        this.mEventOrganized = mEventOrganized;
     }
 
     public static StatusManagerForOrganizer get(Context c) {
@@ -76,7 +82,7 @@ public class StatusManagerForOrganizer {
         try {
             mFirebaseHelper.fetchParticipantsList(mEventOrganized);
         } catch(Exception e) {
-            Log.i("hkkgja", "error fetching favs");
+            Log.i("hkkgja", "error fetching favs" + e.getMessage());
         }
     }
 
@@ -96,8 +102,9 @@ public class StatusManagerForOrganizer {
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
 
         this.mFirebaseDatabase = firebaseDatabase;
-        mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase, 0);
-
+        if(firebaseDatabase != null) {
+            mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase, 0);
+        }
     }
 
     public FirebaseAuth getAuth() {

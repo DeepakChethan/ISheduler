@@ -109,7 +109,7 @@ public class FirebaseHelper {
         Log.i("ini", "fetch registeerd list called");
 
         String emailId = getEmailStripped(user.getEmail());
-        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child("registered").child("event_ids");
+        DatabaseReference databaseReference = mDatabaseReference3.child(user.getUid()).child("registered").child("event_ids");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -257,6 +257,8 @@ public class FirebaseHelper {
                     StatusManagerForOrganizer.get(mAppContext).setParticipants(participants);
 
                     MainActivity.notifyMe();
+                } else {
+                    System.out.println("participants list iis null");
                 }
             }
 
