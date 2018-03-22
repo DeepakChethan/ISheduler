@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
     tools:context="com.teamnotfoundexception.impetus.fragments.TimerFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView

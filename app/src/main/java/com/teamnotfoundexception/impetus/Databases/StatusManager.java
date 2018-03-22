@@ -5,7 +5,11 @@ package com.teamnotfoundexception.impetus.Databases;
  */
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -88,7 +92,24 @@ public  class StatusManager {
     }
 
 
+    public void initializeNotifications(){
+        ArrayList<EventItem> mRegistered = getRegisteredEventsList();
+        for(int i = 0; i < mRegistered.size(); ++i){
+            EventItem item = mRegistered.get(i);
+            setupNotification(item);
+        }
+    }
 
+    public void setupNotification(EventItem item){
+
+        long time = (long) Integer.parseInt(item.getStartTime());
+        Intent intent = new Intent(mAppContext,BroadcastReceiver.class);
+        intent.putExtra("dope",item);
+        PendingIntent pi = PendingIntent.getBroadcast(mAppContext,0,intent,0);
+        AlarmManager alarmManager = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,time,pi);
+
+    }
 
     public void initializeStarredList() {
         try {
