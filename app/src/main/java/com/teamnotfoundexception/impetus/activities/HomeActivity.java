@@ -39,6 +39,7 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
     private SectionsPagerAdapterUser mSectionsPagerAdapterUser;
     private ViewPager mViewPager;
     private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

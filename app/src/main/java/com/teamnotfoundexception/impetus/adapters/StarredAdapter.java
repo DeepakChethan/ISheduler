@@ -43,34 +43,38 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
 
-        holder.mItem = mEventItems.get(position);
-        final EventItem eventItem = holder.mItem;
-        holder.mEventNameHolder.setText(eventItem.getName());
-        holder.mEventTypeHolder.setText(eventItem.getType());
-        holder.mEventCostHolder.setText(eventItem.getPrice()+"");
+        EventItem eventItems = mEventItems.get(position);
+        if(StatusManager.get(context).getStarredIdList().contains(eventItems.getId())) {
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    //StatusManager.get(context).addToRegistered(mEventItems.get(position));
+            holder.mItem = mEventItems.get(position);
+            final EventItem eventItem = holder.mItem;
+            holder.mEventNameHolder.setText(eventItem.getName());
+            holder.mEventTypeHolder.setText(eventItem.getType());
+            holder.mEventCostHolder.setText(eventItem.getPrice() + "");
 
-                    mListener.onListFragmentInteraction(holder.mItem);
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (null != mListener) {
+                        //StatusManager.get(context).addToRegistered(mEventItems.get(position));
+
+                        mListener.onListFragmentInteraction(holder.mItem);
+                    }
+                    Intent intent = new Intent(context, DescriptionActivity.class);
+                    intent.putExtra("msg", eventItem);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
                 }
-                Intent intent = new Intent(context, DescriptionActivity.class);
-                intent.putExtra("msg",eventItem);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-
-            }
-        });
-        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                StatusManager.get(context).addEventToStarred(eventItem);
-                return true;
-            }
-        });
+            });
+            holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    StatusManager.get(context).addEventToStarred(eventItem);
+                    return true;
+                }
+            });
+        }
     }
     @Override
     public int getItemCount() {

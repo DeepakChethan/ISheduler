@@ -24,6 +24,8 @@ public class MyEventsFragment extends Fragment {
 
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
+    private  static MyEventsAdapter myEventsAdapter;
+
     public MyEventsFragment() {
         // Required empty public constructor
     }
@@ -61,12 +63,22 @@ public class MyEventsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-
-            recyclerView.setAdapter(new MyEventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext()));
+            myEventsAdapter = new MyEventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext());
+            recyclerView.setAdapter(myEventsAdapter);
 
         }
 
         return view;
+    }
+
+    public static void notifyMe() {
+        myEventsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override
