@@ -48,12 +48,12 @@ public class MyEventsFragment extends Fragment {
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.myEventsHidden);
         if (EventsManager.get(context).getEventItemsList().size() == 0){
             recyclerView.setVisibility(View.GONE);
-            relativeLayout.setVisibility(View.VISIBLE);
+          relativeLayout.setVisibility(View.VISIBLE);
         }else {
             recyclerView.setVisibility(View.VISIBLE);
             relativeLayout.setVisibility(View.GONE);
         }
-        // Set the adapter
+         //Set the adapter
         if (view instanceof RecyclerView) {
 
             if (mColumnCount <= 1) {

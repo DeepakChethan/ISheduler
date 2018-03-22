@@ -18,10 +18,12 @@
     app:layoutManager="LinearLayoutManager"
     tools:context="com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment"
     tools:listitem="@layout/fragment_item2" />
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
-
         android:visibility="gone"
         android:id="@+id/item_list2"
         android:layout_height="match_parent">
