@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     Button btn;
     EventItem eventItem;
     TextView mEventNameRegister;
-
+    LinearLayout mNotRegistered;
+    RelativeLayout mRegisteredAlready;
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -49,6 +52,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getContext(), "Something is wrong with your phone!", Toast.LENGTH_SHORT).show();
             return view;
         }
+        mNotRegistered =  view.findViewById(R.id.notRegistered);
+        mRegisteredAlready = view.findViewById(R.id.registeredAlready);
 
         mTeam = (EditText) view.findViewById(R.id.regTeamName);
         eventItem = (EventItem) bundle.getSerializable("dope");
@@ -59,6 +64,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         mEventNameRegister = (TextView) view.findViewById(R.id.eventNameRegister);
         mEventNameRegister.setText(eventItem.getName());
         if(eventItem.isRegistered == 1) {
+            mNotRegistered.setVisibility(View.GONE);
+            mRegisteredAlready.setVisibility(View.VISIBLE);
             btn.setEnabled(false);
             btn.setText("You have registered already");
             mTeam.setEnabled(false);
@@ -66,6 +73,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             mCollege.setEnabled(false);
             mPhone.setEnabled(false);
             return view;
+        }else{
+            mNotRegistered.setVisibility(View.VISIBLE);
+            mRegisteredAlready.setVisibility(View.GONE);
         }
         btn.setOnClickListener(this);
         return view;
@@ -78,15 +88,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
 
         if(mTeam.getText().toString().isEmpty() ||
-
            mCollege.getText().toString().isEmpty() ||
-
            mCollege.getText().toString().isEmpty() )  {
-
             Toast.makeText(getActivity().getApplicationContext(), "fill up everything", Toast.LENGTH_SHORT).show();
-
             btn.setEnabled(true);
-
             return ;
         }
 
@@ -109,7 +114,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         mTeamMembers.setEnabled(false);
         mCollege.setEnabled(false);
         mPhone.setEnabled(false);
+
+        // StatusManager.get(getContext()).setupNotification(eventItem);
+
         EventsFragment.notifyMe();
+
         return ;
     }
 

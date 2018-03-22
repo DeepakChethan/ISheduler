@@ -38,13 +38,8 @@
             android:label="@string/title_activity_description"
             android:theme="@style/AppTheme" />
         <activity android:name=".LogSign.OrganizerLoginActivity" />
-
-        <service
-            android:name=".services.MyService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <activity android:name=".activities.SearchActivity"></activity>
+        <activity android:name=".activities.SearchActivity" />
+        <receiver android:name=".services.Notifier"/>
     </application>
 
 </manifest>

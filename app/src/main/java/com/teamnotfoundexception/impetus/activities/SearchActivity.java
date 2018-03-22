@@ -74,7 +74,7 @@ public class SearchActivity extends AppCompatActivity {
                     if (name.contains(newText)  || type.contains(newText)) {
                         newList.add(eventItem);
                     }
-                    mAdapter.dataChaged(newList);
+                    mAdapter.updateData(newList);
                 }
 
                 return true;

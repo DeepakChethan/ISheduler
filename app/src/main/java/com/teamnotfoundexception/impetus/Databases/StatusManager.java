@@ -5,7 +5,11 @@ package com.teamnotfoundexception.impetus.Databases;
  */
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,7 +20,14 @@ import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
+
+import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
+import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
+import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
+import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
+
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
+
 
 
 import java.util.ArrayList;
@@ -29,9 +40,7 @@ public  class StatusManager {
     private FirebaseAuth mAuth = null;
 
     private FirebaseUser mUser = null;
-
     private static FirebaseDatabase mFirebaseDatabase = null;
-
     private static FirebaseHelper mFirebaseHelper = null;
 
 
@@ -51,6 +60,9 @@ public  class StatusManager {
 
     private static StatusManager mStatusManager = null;
 
+    private EventsAdapter mEventsAdapter = null;
+    private MyEventsAdapter mMyEventsAdapter = null;
+    private StarredAdapter mStarredAdapter = null;
 
     private StatusManager(Context context) {
 
@@ -89,7 +101,46 @@ public  class StatusManager {
     }
 
 
+    public void setEventsAdapter(EventsAdapter eventsAdapter){
+        mEventsAdapter = eventsAdapter;
+    }
+    public void setStarredAdapter(StarredAdapter eventsAdapter){
+        mStarredAdapter = eventsAdapter;
+    }
+    public void setMyEventsAdapter(MyEventsAdapter eventsAdapter){
+        mMyEventsAdapter = eventsAdapter;
+    }
 
+    public EventsAdapter getmEventsAdapter() {
+        return mEventsAdapter;
+    }
+
+    public MyEventsAdapter getmMyEventsAdapter() {
+        return mMyEventsAdapter;
+    }
+
+    public StarredAdapter getmStarredAdapter() {
+        return mStarredAdapter;
+    }
+
+    public void initializeNotifications(){
+        ArrayList<EventItem> mRegistered = getRegisteredEventsList();
+        for(int i = 0; i < mRegistered.size(); ++i){
+            EventItem item = mRegistered.get(i);
+            setupNotification(item);
+        }
+    }
+
+    public void setupNotification(EventItem item){
+
+        long time = Long.parseLong(item.getStartTime());
+        Intent intent = new Intent(mAppContext,BroadcastReceiver.class);
+        intent.putExtra("dope",item);
+        PendingIntent pi = PendingIntent.getBroadcast(mAppContext,0,intent,0);
+        AlarmManager alarmManager = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,time,pi);
+
+    }
 
     public void initializeStarredList() {
         try {
@@ -215,6 +266,12 @@ public  class StatusManager {
         this.mFirebaseDatabase = firebaseDatabase;
         mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase, 0);
 
+    }
+
+    public void updateUI(){
+        mStarredAdapter.updateData(mStarredEventsList);
+        mEventsAdapter.updateData(EventsManager.get(mAppContext).getEventItemsList());
+        mMyEventsAdapter.updateData(mRegisteredEventsList);
     }
 
     public FirebaseAuth getAuth() {

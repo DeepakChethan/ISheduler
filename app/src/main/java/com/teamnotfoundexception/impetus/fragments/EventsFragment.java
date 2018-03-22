@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
@@ -22,6 +23,7 @@ public class EventsFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
+    private EventsAdapter mEventsAdapter;
 
     private static EventsAdapter mEventsAdapter;
 
@@ -36,6 +38,12 @@ public class EventsFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mEventsAdapter.updateData(EventsManager.get(getContext()).getEventItemsList());
     }
 
     @Override
@@ -57,9 +65,11 @@ public class EventsFragment extends Fragment {
 
             }
 
+
             mEventsAdapter =
             new EventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext());
             recyclerView.setAdapter(mEventsAdapter);
+
 
 
         }
