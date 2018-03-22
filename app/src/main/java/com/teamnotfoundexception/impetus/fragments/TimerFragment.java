@@ -72,10 +72,14 @@ public class TimerFragment extends Fragment {
                 @Override
                 public void run() {
                     timeToEvent--;
-                    if(timeToEvent > 0) {
-                        Time time = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(timeToEvent);
-                        mTimeContainer.setText("starts in " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() );
-                        handler.postDelayed(this, 1000);
+                    if(timeToEvent > 0 && handler != null) {
+                        if(getActivity() != null) {
+                            Time time = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(timeToEvent);
+                            mTimeContainer.setText("starts in " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+                            handler.postDelayed(this, 1000);
+                        } else {
+                            handler = null;
+                        }
                     } else {
                         handler = null;
                     }
@@ -99,8 +103,15 @@ public class TimerFragment extends Fragment {
     public void onDestroy() {
         handler.removeCallbacks(myRunnable);
         super.onDestroy();
-        
+
     }
 
 
+    @Override
+    public void onDetach() {
+        if(handler != null) {
+            handler.removeCallbacks(myRunnable);
+        }
+        super.onDetach();
+    }
 }
