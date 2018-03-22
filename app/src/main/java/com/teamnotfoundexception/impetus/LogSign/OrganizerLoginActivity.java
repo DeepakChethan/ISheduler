@@ -36,13 +36,17 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizer_login);
+
         String[] events = getResources().getStringArray(R.array.event_list);
+
         mAuth = FirebaseAuth.getInstance();
         mEmail = (EditText) findViewById(R.id.orgEmail);
         mPass = (EditText) findViewById(R.id.orgPass);
         button = (Button) findViewById(R.id.orgSignIn);
+        button.setOnClickListener(this);
         mEvent = (Spinner) findViewById(R.id.orgEvent);
         valids = new ArrayList<>();
+       
         valids.add(new Valid("stealjobs@orgo.com","orgopass",events[0]));
         valids.add(new Valid("itwiz@orgo.com","orgopass",events[1]));
         valids.add(new Valid("techcharads@orgo.com","orgopass",events[2]));
@@ -68,9 +72,11 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
+
+
         email = mEmail.getText().toString();
         pass = mPass.getText().toString();
-        event = mEvent.getSelectedItem().toString().toLowerCase();
+        event = mEvent.getSelectedItem().toString();
         button.setEnabled(false);
 
         if (email.isEmpty() || pass.isEmpty()){
@@ -78,7 +84,7 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
             mPass.setError("Can't be empty");
             button.setEnabled(true);
             return;
-        }else{
+        } else {
 
             if (validate(email,pass,event)){
 
@@ -97,6 +103,8 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
                                             Toast.LENGTH_SHORT).show();
 
                                     button.setEnabled(true);
+                                    Log.i("e", "successful");
+
                                 } else {
                                     Intent intent = new Intent(getApplicationContext(), OrgoActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -107,7 +115,7 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
                             }
                         });
 
-            }else {
+            } else {
                 button.setEnabled(true);
                 Toast.makeText(getApplicationContext(),"Are you an organizer ?",Toast.LENGTH_SHORT).show();
 
@@ -139,11 +147,11 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
         return false;
     }
 
-    class Valid{
+    class Valid {
         String email,pass,event;
 
         public boolean equale(Valid obj) {
-            if (this.email.equals(obj.email) && this.event.equals(obj.event) && this.event.equals(obj.pass)) return true;
+            if (this.email.equals(obj.email) && this.event.equals(obj.event) && this.pass.equals(obj.pass)) return true;
             return false;
         }
 

@@ -27,13 +27,13 @@
 
             <EditText
                 android:id="@+id/orgEmail"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                />
+                android:text="stealjobs@orgo.com"
+                android:textColor="@color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -42,17 +42,18 @@
             android:layout_marginTop="8dp"
             android:textColorHint="@color/white"
             android:layout_marginBottom = "8dp" >
+
             <EditText
                 android:id="@+id/orgPass"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logEmail"
+                android:backgroundTint="@color/white"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:textColorHint="@color/white"
-                />
+                android:text="orgopass"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <Spinner
