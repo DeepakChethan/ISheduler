@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
     tools:context="com.teamnotfoundexception.impetus.fragments.TimerFragment">
 
     <RelativeLayout
@@ -15,11 +14,12 @@
         android:layout_height="wrap_content"
         android:elevation="3dp"
         android:id="@+id/really"
-        android:layout_margin="7dp"
+        app:cardMaxElevation="7dp"
+        android:layout_margin="11dp"
         app:cardBackgroundColor="@color/white"
         android:layout_gravity="top"
         android:padding="20dp"
-        app:cardElevation="3dp"
+        app:cardElevation="6dp"
         >
 
         <LinearLayout
@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="EventName"
+
                 android:textAlignment="center"
                 android:id="@+id/foEventNameHolder"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
@@ -43,7 +43,7 @@
                 android:textSize="30sp"
                 android:id="@+id/foClock"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="TIMER" />
+                android:text="Loading..." />
             <View
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
@@ -61,7 +61,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:text="Team Count"/>
+                    android:text="Ticket Cost"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -71,7 +71,7 @@
                     android:id="@+id/teamCountContainer"
                     android:layout_gravity="end"
                     android:layout_height="match_parent"
-                    android:text="Some detail"/>
+                    android:text="Team Size"/>
 
             </LinearLayout>
 
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/teamCountHolder"
+                    android:id="@+id/ticketCostContainer"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -94,6 +94,7 @@
                     android:layout_weight="1"
                     android:textAlignment="viewEnd"
                     android:layout_gravity="end"
+                    android:id="@+id/maxTeamMemberContainer"
                     android:layout_height="match_parent"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:text="some"/>
@@ -112,7 +113,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_margin="20dp"
+            android:layout_margin="9dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
@@ -138,7 +139,7 @@
         </LinearLayout>
 
         <LinearLayout
-        android:layout_margin="20dp"
+        android:layout_margin="9dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="2"
@@ -163,59 +164,9 @@
             />
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                style="@style/textStyle"
-                android:layout_height="wrap_content"
-                android:text="Team members :"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="2"
-                style="@style/textStyle"
-                android:textAlignment="viewEnd"
-                android:layout_gravity="end"
-                android:gravity="end"
-                android:id="@+id/maxTeamMemberContainer"
-                />
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                style="@style/textStyle"
-                android:layout_height="wrap_content"
-                android:text="Ticket Cost :"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="20"
-                style="@style/textStyle"
-                android:textAlignment="viewEnd"
-                android:layout_gravity="end"
-                android:gravity="end"
-                android:id="@+id/ticketCostContainer"
-                />
-
-        </LinearLayout>
 
 
     </LinearLayout>
