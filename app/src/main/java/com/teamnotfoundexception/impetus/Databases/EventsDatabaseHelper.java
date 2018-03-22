@@ -13,6 +13,7 @@ import android.util.Log;
 
 
 
+
 public class EventsDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "impetus.sqlite";
@@ -45,6 +46,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
                 "name varchar(1000), " +
                 "type varchar(1000), " +
                 "uuid int, " +
+                "location string," +
                 "description varchar(10000), " +
                 "entry_price int," +
                 " image_path varchar(2000), " +
@@ -84,9 +86,12 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_EVENT_START_TIME, eventItem.getStartTime());
         cv.put(COLUMN_EVENT_END_TIME, eventItem.getEndTime());
         cv.put(COLUMN_EVENT_LOCATION,eventItem.getLocation());
+
         cv.put(COLUMN_EVENT_MAX_SIZE, eventItem.getMaxTeamSize());
         cv.put(COLUMN_EVENT_IS_REGISTERED, eventItem.isRegistered());
         cv.put(COLUMN_EVENT_IS_STARRED, eventItem.isStarred());
+
+
         Log.i("inserted", "inserted mate");
         return getReadableDatabase().insert(TABLE_EVENTS, null, cv);
 

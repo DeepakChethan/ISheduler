@@ -93,8 +93,8 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
             super(fm);
             fragments = new ArrayList<>();
             fragments.add(new MyEventsFragment());
-            fragments.add(new MyEventsFragment());
-            fragments.add(new MyEventsFragment());
+            fragments.add(new StarredFragment());
+            fragments.add(new EventsFragment());
         }
 
         @Override
