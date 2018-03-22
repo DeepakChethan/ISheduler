@@ -62,6 +62,8 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
         mSectionsPagerAdapterUser.notifyDataSetChanged();
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -78,6 +80,7 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        mViewPager.setCurrentItem(1);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -153,7 +156,8 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
 
 
         private Context mContext;
-        private ArrayList<Fragment> fragments;
+        public ArrayList<Fragment> fragments;
+
 
         public SectionsPagerAdapterUser(FragmentManager fm,Context context) {
             super(fm);
@@ -164,6 +168,7 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
             fragments.add(new StarredFragment());
 
         }
+
 
         @Override
         public Fragment getItem(int position) {

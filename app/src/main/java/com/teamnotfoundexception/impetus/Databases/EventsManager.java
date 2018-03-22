@@ -128,6 +128,7 @@ public class EventsManager {
         return mEventItemsList;
     }
 
+    public void setEventItemsList(ArrayList<EventItem> list) {mEventItemsList = list;}
 
     public Time convertSecondsToTime(long seconds) {
         int day = (int) TimeUnit.SECONDS.toDays(seconds);
