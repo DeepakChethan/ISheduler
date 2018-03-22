@@ -2,6 +2,7 @@ package com.teamnotfoundexception.impetus.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
@@ -104,21 +108,49 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         String collegeName = mCollege.getText().toString();
 
-        FirebaseHelper.Participant participant = new FirebaseHelper.Participant(teamName, collegeName, teamMembers);
+        final FirebaseHelper.Participant participant = new FirebaseHelper.Participant(teamName, collegeName, teamMembers);
+
+        EventItem temp = StatusManager.get(getContext()).checkForClash(eventItem);
+        if (temp != null){
+            new MaterialStyledDialog.Builder(getContext())
+                    .setTitle("Oops!")
+                    .setDescription("Looks like you will have a clash with "+temp.getName())
+                    .setPositiveText("Proceed?")
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
+                            ArrayList<EventItem> items = EventsManager.get(getActivity().getApplicationContext()).getEventItemsList();
+                            items.remove(eventItem);
+                            eventItem.setRegistered(1);
+                            items.add(eventItem);
+                            EventsManager.get(getActivity().getApplicationContext()).setEventItemsList(items);
+                            btn.setText("REGISTERED SUCCESSFULLY");
+                            StatusManager.get(getActivity().getApplicationContext()).setupNotification(eventItem);
+                            btn.setEnabled(false);
+                            mTeam.setEnabled(false);
+                            mTeamMembers.setEnabled(false);
+                            mCollege.setEnabled(false);
+                            mPhone.setEnabled(false);
+                        }
+                    })
+                    .setNegativeText("Cancel")
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(R.drawable.ic_whatshot_white_24dp)
+                    .show();
+        }
 
 
-        StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
-        ArrayList<EventItem> items = EventsManager.get(getActivity().getApplicationContext()).getEventItemsList();
-        items.remove(eventItem);
-        eventItem.setRegistered(1);
-        items.add(eventItem);
-        EventsManager.get(getActivity().getApplicationContext()).setEventItemsList(items);
-        btn.setText("REGISTERED SUCCESSFULLY");
-        btn.setEnabled(false);
-        mTeam.setEnabled(false);
-        mTeamMembers.setEnabled(false);
-        mCollege.setEnabled(false);
-        mPhone.setEnabled(false);
+
+
+
+
+
 
         // StatusManager.get(getContext()).setupNotification(eventItem);
 

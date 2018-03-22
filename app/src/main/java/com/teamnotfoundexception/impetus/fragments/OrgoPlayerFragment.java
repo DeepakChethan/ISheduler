@@ -54,7 +54,7 @@ public class OrgoPlayerFragment extends Fragment {
         }
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (recyclerView instanceof RecyclerView) {
 
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));

@@ -1,12 +1,14 @@
 package com.teamnotfoundexception.impetus.Databases;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
  * Created by sagar on 3/21/18.
  */
 
-public class EventItem implements Serializable {
+public class EventItem implements Serializable, Comparable<EventItem> {
 
     public int mId;
     public String mName;
@@ -170,6 +172,10 @@ public class EventItem implements Serializable {
     }
 
 
-
-
+    @Override
+    public int compareTo(@NonNull EventItem o) {
+        Long compareQuantity = Long.parseLong(o.getStartTime());
+        Long dope = Long.parseLong(this.getStartTime());
+        return (int)(dope - compareQuantity);
+    }
 }
