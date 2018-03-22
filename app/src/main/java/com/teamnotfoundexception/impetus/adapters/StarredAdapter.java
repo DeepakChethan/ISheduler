@@ -44,7 +44,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
 
 
         EventItem eventItems = mEventItems.get(position);
-        if(StatusManager.get(context).getStarredIdList().contains(eventItems.getId())) {
+       // if(StatusManager.get(context).getStarredIdList().contains(eventItems.getId())) {
 
             holder.mItem = mEventItems.get(position);
             final EventItem eventItem = holder.mItem;
@@ -74,7 +74,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
                     return true;
                 }
             });
-        }
+     //   }
     }
     @Override
     public int getItemCount() {

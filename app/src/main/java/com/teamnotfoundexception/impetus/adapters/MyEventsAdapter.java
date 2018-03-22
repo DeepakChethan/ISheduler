@@ -15,6 +15,8 @@ import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment.OnListFragmentInteractionListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHolder> {
@@ -45,6 +47,13 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         EventItem eventItemm = mEventItems.get(position);
+
+        ArrayList<Integer> registeredlist = StatusManager.get(context).getRegisteredIdList();
+
+        System.out.println("in bind view"  + registeredlist.size());
+        for(int i = 0; i < registeredlist.size(); i++) {
+            System.out.println("dama dama" + registeredlist.get(i));
+        }
 
         if(StatusManager.get(context).getRegisteredIdList().contains(eventItemm.getId())) {
             eventItemm.setRegistered(1);

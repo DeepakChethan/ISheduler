@@ -24,7 +24,7 @@ public class MyEventsFragment extends Fragment {
 
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
-    private  static MyEventsAdapter myEventsAdapter;
+    private   MyEventsAdapter myEventsAdapter;
 
     public MyEventsFragment() {
         // Required empty public constructor
@@ -72,7 +72,7 @@ public class MyEventsFragment extends Fragment {
     }
 
     public static void notifyMe() {
-        myEventsAdapter.notifyDataSetChanged();
+      //  myEventsAdapter.notifyDataSetChanged();
     }
 
     @Override
