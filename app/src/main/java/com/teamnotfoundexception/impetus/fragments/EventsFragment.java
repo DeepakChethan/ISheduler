@@ -25,6 +25,7 @@ public class EventsFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private EventsAdapter mEventsAdapter;
 
+
     public EventsFragment() {
 
     }
@@ -90,8 +91,8 @@ public class EventsFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
         mListener = null;
+        super.onDetach();
     }
 
 
