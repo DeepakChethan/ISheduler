@@ -18,7 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
 import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
+import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 import com.teamnotfoundexception.impetus.fragments.MyEventsFragment;
+import com.teamnotfoundexception.impetus.fragments.StarredFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -118,8 +120,21 @@ public class FirebaseHelper {
                 ArrayList<Integer> registeredListIds = (ArrayList<Integer>) dataSnapshot.getValue(t);
                 if (registeredListIds != null) {
                     StatusManager.get(mAppContext).setRegisteredIdList(new ArrayList<Integer>(registeredListIds));
+
                     ArrayList<Integer> rea = StatusManager.get(mAppContext).getRegisteredIdList();
+
                     System.out.println("done, fetching, the size  of registered is " + rea.size());
+
+                    ArrayList<EventItem> registeredevents = StatusManager.get(mAppContext).getRegisteredEventsList();
+                    ArrayList<EventItem> allEvents = EventsManager.get(mAppContext).getEventItemsList();
+                    for(int i = 0; i < allEvents.size(); i++) {
+                        if(rea.contains(allEvents.get(i).getId())) {
+                            allEvents.get(i).setRegistered(1);
+
+                            registeredevents.add(allEvents.get(i));
+                        }
+                    }
+                    System.out.println("The size of registered list is" + registeredevents.size());
                     MyEventsFragment.notifyMe();
                 } else {
                     Log.i("ini", "not fetched registred lst");
@@ -140,9 +155,9 @@ public class FirebaseHelper {
 
     public void fetchStarredList(FirebaseUser user) {
 
-
+        System.out.println("In fetch starred list");
         String emailId = getEmailStripped(user.getEmail());
-        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child("starred").child("event_ids");
+        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child("starred");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -153,8 +168,26 @@ public class FirebaseHelper {
                 if (starredListIds != null) {
                  StatusManager.get(mAppContext).setStarredIdList(new ArrayList<Integer>(starredListIds));
                     System.out.println("done, fetching, the size of starred is " + starredListIds.size());
-                  //  MainActivity.notifyMe();
+
+
+                    ArrayList<Integer> starredlistids = StatusManager.get(mAppContext).getStarredIdList();
+
+                    System.out.println("done, fetching, the size  of starred is " + starredlistids.size());
+
+                    ArrayList<EventItem> starredevents = StatusManager.get(mAppContext).getStarredEventsList();
+                    ArrayList<EventItem> allEvents = EventsManager.get(mAppContext).getEventItemsList();
+                    for(int i = 0; i < allEvents.size(); i++) {
+                        if(starredListIds.contains(allEvents.get(i).getId())) {
+                            allEvents.get(i).setStarred(1);
+                            starredevents.add(allEvents.get(i));
+
+                        }
+                    }
+
+                    StarredFragment.notifyMe();
+
                 } else {
+                    StarredFragment.notifyMe();
                     System.out.println("done, fetching, the size of starred is zero no starred");
                 }
 

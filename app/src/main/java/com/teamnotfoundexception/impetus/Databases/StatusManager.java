@@ -111,6 +111,8 @@ public  class StatusManager {
 
         try {
             StatusManager.get(mAppContext).getStarredIdList().add(item.getId());
+            StatusManager.get(mAppContext).getStarredEventsList().add(item);
+            item.setStarred(1);
             mFirebaseHelper.updateStarredList(mStarredEventsIds, mUser);
             MainActivity.notifyMe();
         } catch(Exception e) {
@@ -122,12 +124,15 @@ public  class StatusManager {
     public void addToRegistered(EventItem item, FirebaseHelper.Participant participant) {
 
         try {
+            if(item.isRegistered == 0) {
+                StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
+                getRegisteredEventsList().add(item);
+                mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
 
-            StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
-
-            mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
-
-            DescriptionActivity.notifyMe();
+                DescriptionActivity.notifyMe();
+            } else {
+                Log.i("update", "already registered");
+            }
 
         } catch(Exception e) {
 

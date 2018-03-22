@@ -55,12 +55,6 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
         ArrayList<Integer> registeredlist = StatusManager.get(context).getRegisteredIdList();
         System.out.println("i am here");
         System.out.println("in bind view" + registeredlist.size());
-        for (int i = 0; i < registeredlist.size(); i++) {
-            System.out.println("dama dama" + registeredlist.get(i));
-        }
-
-
-            eventItemm.setRegistered(1);
 
             holder.mItem = mEventItems.get(position);
             final EventItem eventItem = holder.mItem;
@@ -85,13 +79,11 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if(eventItem.isStarred()==0){
-                        StatusManager.get(context).addEventToStarred(eventItem);
-                        Toast.makeText(context,eventItem.getName()+" Added to starred",Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        StatusManager.get(context).removeFromStarred(eventItem);
-                        Toast.makeText(context,eventItem.getName()+" removed from starred",Toast.LENGTH_SHORT).show();
+
+                    if(eventItem.isStarred() == 0) {
+                        StatusManager.get(context).addToStarred(eventItem);
+                    } else {
+
                     }
                     return true;
                 }

@@ -65,9 +65,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         holder.mEventCostHolder.setText(eventItem.getPrice()+"");
         Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
         //Log.i("dope","I am being called from events adapter");
-        Log.i("dope","The length of event items is "+StatusManager.get(context).getRegisteredIdList().size());
+       // Log.i("dope","The length of event items is "+StatusManager.get(context).getRegisteredIdList().size());
 
-        Log.i("dope","The length of event items in events adapter is "+mEventItems.size());
+       // Log.i("dope","The length of event items in events adapter is "+mEventItems.size());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +88,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(eventItem.isStarred()==0){
-                    StatusManager.get(context).addEventToStarred(eventItem);
-                    Toast.makeText(context,eventItem.getName()+" Added to starred",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    StatusManager.get(context).removeFromStarred(eventItem);
-                    Toast.makeText(context,eventItem.getName()+" removed from starred",Toast.LENGTH_SHORT).show();
+
+                if(eventItem.isStarred() == 0) {
+                    StatusManager.get(context).addToStarred(eventItem);
+                } else {
+                    Log.i("i", "starred already");
+
                 }
                 return true;
             }

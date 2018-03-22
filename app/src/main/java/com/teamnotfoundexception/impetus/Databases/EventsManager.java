@@ -77,17 +77,7 @@ public class EventsManager {
             mDatabaseHelper.insertEventItem((new EventItem(1021,"Laser Tag", "Fun",30, mAppContext.getResources().getString(R.string.lasertag).toString(),"http://www.impetus18.com/img/event-img/IIMG8.jpg", "1521876600","1521876600", "Quadrangle",5,0,0)));
 
 
-            mDatabaseHelper.insertEventItem((new EventItem(1002,"It wiz", "Quiz",30, "mannu","http://www.impetus18.com/img/event-img/IMG2.jpg", "1521876600","1521876600", "Main Stage",2,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1003,"Tech Charads", "Charads",30,"mannu " ,"http://www.impetus18.com/img/event-img/IMG3.jpg", "1521876600","1521876600", "Seminar Hall",3,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1004,"Vaaksamara", "Debate",30,"idli" ,"http://www.impetus18.com/img/event-img/IMG4.jpg", "1521876600","1521876600","Lecture Complex",1,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1005,"Tech Mark", "Quiz",30,"vady" ,"http://www.impetus18.com/img/event-img/IMG5.jpg", "1521876600","1521876600", "Lecuture Hall 3",4,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1006,"Automania", "Mech",30,  "sambar","http://www.impetus18.com/img/event-img/IMG6.jpg", "1521876600","1521876600", "Centenary Hall",3,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1007,"Electrophilia", "Fun",30,  "chatni","http://www.impetus18.com/img/event-img/IMG7.jpg", "1521876600","1521876600", "Lecture Hall 3",2,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1008,"Spektrom", "Quiz",30,  "palya","http://www.impetus18.com/img/event-img/IMG8.jpg", "1521876600","1521876600", "Centenary Seminar Hall",3,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1009,"So you think it is over?", "TreasureHunt",30,  "","http://www.impetus18.com/img/event-img/IMG9.jpg", "1521876600","1521876600","Entire College",2,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1010,"Appathon", "Android",00,  "kharabath","http://www.impetus18.com/img/event-img/IMG10.jpg", "1521876600","1521876600","Seminal Hall",2,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1011,"Sumo Wars", "Fighting",30, "mosaravade","http://www.impetus18.com/img/event-img/IMG11.jpg", "1521876600","1521876600", "Multiple Locations",1,0,0)));
-            mDatabaseHelper.insertEventItem((new EventItem(1012,"Ucypher", "Gaming",30, "masalapuri","http://www.impetus18.com/img/event-img/IMG12.jpg", "1521876600","1521876600", "Minchu",1,0,0)));
+
 
 
 

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class StarredFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 2;
-    public StarredAdapter starredAdapter;
+    public static StarredAdapter starredAdapter;
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
     public StarredFragment() {
@@ -73,7 +74,7 @@ public class StarredFragment extends Fragment {
 
             }
 
-            starredAdapter = new StarredAdapter(EventsManager.get(context).getEventItemsList(),mListener,getActivity().getApplicationContext());
+            starredAdapter = new StarredAdapter(StatusManager.get(context).getStarredEventsList(),mListener,getActivity().getApplicationContext());
 
             recyclerView.setAdapter(starredAdapter);
 
@@ -81,6 +82,13 @@ public class StarredFragment extends Fragment {
 
         return view;
     }
+
+    public static void notifyMe() {
+        Log.i("update", "notifying starred adapter");
+        starredAdapter.notifyDataSetChanged();
+
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -94,11 +102,7 @@ public class StarredFragment extends Fragment {
     }
 
 
-    public static void notifyMe() {
 
-    //    starredAdapter.notifyDataSetChanged();
-
-    }
 
     @Override
     public void onDetach() {

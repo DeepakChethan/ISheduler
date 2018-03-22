@@ -24,9 +24,11 @@ import java.util.ArrayList;
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private static final String  TAG = "REGISTERFRAGMENT";
+
     EditText mTeamMembers,mCollege,mPhone,mTeam;
     Button btn;
     EventItem eventItem;
+
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -43,12 +45,22 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getContext(), "Something is wrong with your phone!", Toast.LENGTH_SHORT).show();
             return view;
         }
+
         mTeam = (EditText) view.findViewById(R.id.regTeamName);
         eventItem = (EventItem) bundle.getSerializable("dope");
         mTeamMembers = (EditText) view.findViewById(R.id.regTeamMem);
         mCollege = (EditText) view.findViewById(R.id.regCollege);
         mPhone = (EditText) view.findViewById(R.id.regPhone);
         btn = (Button) view.findViewById(R.id.regRegister);
+        if(eventItem.isRegistered == 1) {
+            btn.setEnabled(false);
+            btn.setText("You have registered already");
+            mTeam.setEnabled(false);
+            mTeamMembers.setEnabled(false);
+            mCollege.setEnabled(false);
+            mPhone.setEnabled(false);
+            return view;
+        }
         btn.setOnClickListener(this);
         return view;
     }
@@ -81,6 +93,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         String collegeName = mCollege.getText().toString();
 
         FirebaseHelper.Participant participant = new FirebaseHelper.Participant(teamName, collegeName, teamMembers);
+
 
         StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
 
