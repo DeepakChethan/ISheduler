@@ -68,9 +68,9 @@ public class SearchActivity extends AppCompatActivity {
                 ArrayList<EventItem> eventItems = EventsManager.get(getApplicationContext()).getEventItemsList();
                 for (int i = 0; i < eventItems.size(); ++i) {
                     EventItem eventItem = eventItems.get(i);
-                    String name = eventItem.getName();
+                    String name = eventItem.getName().toLowerCase();
                    // String loc = eventItem.getLocation();
-                    String type = eventItem.getType();
+                    String type = eventItem.getType().toLowerCase();
                     if (name.contains(newText)  || type.contains(newText)) {
                         newList.add(eventItem);
                     }

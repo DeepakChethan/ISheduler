@@ -3,6 +3,7 @@ package com.teamnotfoundexception.impetus.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         holder.mEventNameHolder.setText(eventItem.getName());
         holder.mEventTypeHolder.setText(eventItem.getType());
         holder.mEventCostHolder.setText(eventItem.getPrice()+"");
+        //Log.i("dope","I am being called from events adapter");
+        Log.i("dope","The length of event items is "+StatusManager.get(context).getRegisteredIdList().size());
+
+        Log.i("dope","The length of event items in events adapter is "+mEventItems.size());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

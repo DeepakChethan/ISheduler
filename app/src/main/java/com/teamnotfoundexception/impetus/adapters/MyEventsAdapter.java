@@ -3,6 +3,7 @@ package com.teamnotfoundexception.impetus.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +47,8 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
 
         EventItem eventItemm = mEventItems.get(position);
 
-        if(StatusManager.get(context).getRegisteredIdList().contains(eventItemm.getId())) {
-            eventItemm.setRegistered(1);
+        //if(StatusManager.get(context).getRegisteredIdList().contains(eventItemm.getId())) {
+           // eventItemm.setRegistered(1);
             holder.mItem = mEventItems.get(position);
             final EventItem eventItem = holder.mItem;
             holder.mEventNameHolder.setText(eventItem.getName());
@@ -59,7 +60,6 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
                 public void onClick(View v) {
                     if (null != mListener) {
                         //StatusManager.get(context).addToRegistered(mEventItems.get(position));
-
                         mListener.onListFragmentInteraction(holder.mItem);
                     }
                     Intent intent = new Intent(context, DescriptionActivity.class);
@@ -76,7 +76,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
                     return true;
                 }
             });
-        }
+        //}
     }
     @Override
     public int getItemCount() {
