@@ -53,12 +53,6 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
         ArrayList<Integer> registeredlist = StatusManager.get(context).getRegisteredIdList();
         System.out.println("i am here");
         System.out.println("in bind view" + registeredlist.size());
-        for (int i = 0; i < registeredlist.size(); i++) {
-            System.out.println("dama dama" + registeredlist.get(i));
-        }
-
-
-            eventItemm.setRegistered(1);
 
             holder.mItem = mEventItems.get(position);
             final EventItem eventItem = holder.mItem;

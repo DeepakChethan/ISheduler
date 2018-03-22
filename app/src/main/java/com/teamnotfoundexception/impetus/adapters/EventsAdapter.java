@@ -62,9 +62,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         holder.mEventTypeHolder.setText(eventItem.getType());
         holder.mEventCostHolder.setText(eventItem.getPrice()+"");
         //Log.i("dope","I am being called from events adapter");
-        Log.i("dope","The length of event items is "+StatusManager.get(context).getRegisteredIdList().size());
+       // Log.i("dope","The length of event items is "+StatusManager.get(context).getRegisteredIdList().size());
 
-        Log.i("dope","The length of event items in events adapter is "+mEventItems.size());
+       // Log.i("dope","The length of event items in events adapter is "+mEventItems.size());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

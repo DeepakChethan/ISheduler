@@ -67,7 +67,7 @@ public class MyEventsFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            myEventsAdapter = new MyEventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext());
+            myEventsAdapter = new MyEventsAdapter(StatusManager.get(context).getRegisteredEventsList(), mListener, getActivity().getApplicationContext());
             recyclerView.setAdapter(myEventsAdapter);
 
         }

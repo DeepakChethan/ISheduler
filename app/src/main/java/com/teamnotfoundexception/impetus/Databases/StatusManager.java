@@ -111,6 +111,7 @@ public  class StatusManager {
 
         try {
             StatusManager.get(mAppContext).getStarredIdList().add(item.getId());
+            StatusManager.get(mAppContext).getStarredEventsList().add(item);
             mFirebaseHelper.updateStarredList(mStarredEventsIds, mUser);
             MainActivity.notifyMe();
         } catch(Exception e) {
@@ -124,7 +125,7 @@ public  class StatusManager {
         try {
 
             StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
-
+            getRegisteredEventsList().add(item);
             mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
 
             DescriptionActivity.notifyMe();
