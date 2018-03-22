@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
@@ -107,7 +108,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
 
         StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
-
+        ArrayList<EventItem> items = EventsManager.get(getActivity().getApplicationContext()).getEventItemsList();
+        items.remove(eventItem);
+        eventItem.setRegistered(1);
+        items.add(eventItem);
+        EventsManager.get(getActivity().getApplicationContext()).setEventItemsList(items);
         btn.setText("REGISTERED SUCCESSFULLY");
         btn.setEnabled(false);
         mTeam.setEnabled(false);

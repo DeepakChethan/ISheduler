@@ -4,6 +4,7 @@ package com.teamnotfoundexception.impetus.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,8 @@ public class MyEventsFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     private int mColumnCount = 2;
+
+    CountDownTimer countDownTimer;
 
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
@@ -87,7 +90,18 @@ public class MyEventsFragment extends Fragment {
             recyclerView.setAdapter(myEventsAdapter);
 
         }
+        countDownTimer = new CountDownTimer(10000,2000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                myEventsAdapter.updateData(StatusManager.get(getContext()).getRegisteredEventsList());
+            }
 
+            @Override
+            public void onFinish() {
+                myEventsAdapter.updateData(StatusManager.get(getContext()).getRegisteredEventsList());
+                Log.i("dope", "onFinish: hoo");
+            }
+        }.start();
         return view;
     }
 
