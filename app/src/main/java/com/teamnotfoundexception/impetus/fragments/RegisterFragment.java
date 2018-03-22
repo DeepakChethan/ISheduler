@@ -96,8 +96,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
 
         StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
-
-
+        btn.setText("REGISTERED SUCCESSFULLY");
+        btn.setEnabled(false);
+        mTeam.setEnabled(false);
+        mTeamMembers.setEnabled(false);
+        mCollege.setEnabled(false);
+        mPhone.setEnabled(false);
+        return ;
     }
 
 

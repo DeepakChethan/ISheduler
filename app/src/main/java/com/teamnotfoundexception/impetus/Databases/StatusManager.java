@@ -127,6 +127,7 @@ public  class StatusManager {
             if(item.isRegistered == 0) {
                 StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
                 getRegisteredEventsList().add(item);
+                item.setRegistered(1);
                 mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
 
                 DescriptionActivity.notifyMe();
