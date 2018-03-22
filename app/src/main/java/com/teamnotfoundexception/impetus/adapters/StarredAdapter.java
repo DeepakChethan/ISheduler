@@ -69,9 +69,9 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-
-                   // StatusManager.get(context).addEventToStarred(eventItem);
-
+                    if(eventItem.isStarred() == 0) {
+                        StatusManager.get(context).addEventToStarred(eventItem);
+                    }
                     return true;
                 }
             });
