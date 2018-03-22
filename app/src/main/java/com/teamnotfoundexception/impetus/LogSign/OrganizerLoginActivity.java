@@ -18,6 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
 import com.teamnotfoundexception.impetus.activities.OrgoActivity;
@@ -41,6 +42,7 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
         mEmail = (EditText) findViewById(R.id.orgEmail);
         mPass = (EditText) findViewById(R.id.orgPass);
         button = (Button) findViewById(R.id.orgSignIn);
+        button.setOnClickListener(this);
         mEvent = (Spinner) findViewById(R.id.orgEvent);
         valids = new ArrayList<>();
         valids.add(new Valid("stealjobs@orgo.com","orgopass",events[0]));
@@ -82,6 +84,7 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
 
             if (validate(email,pass,event)){
 
+                Log.d("dope", "onClick: Validated");
                 if (!isNetworkAvailableAndConnected()) {
                     Toast.makeText(getApplicationContext(), "Network not available", Toast.LENGTH_SHORT).show();
                     button.setEnabled(true);
@@ -99,6 +102,7 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
                                     button.setEnabled(true);
                                 } else {
                                     Intent intent = new Intent(getApplicationContext(), OrgoActivity.class);
+
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finishActivity(900);
@@ -108,14 +112,11 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
                         });
 
             }else {
+                Log.d("dope", "onClick: InValidated");
                 button.setEnabled(true);
                 Toast.makeText(getApplicationContext(),"Are you an organizer ?",Toast.LENGTH_SHORT).show();
 
             }
-
-
-
-
 
         }
 
@@ -143,14 +144,17 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
         String email,pass,event;
 
         public boolean equale(Valid obj) {
-            if (this.email.equals(obj.email) && this.event.equals(obj.event) && this.event.equals(obj.pass)) return true;
+
+            Log.i("dope", "equale: "+this.email+" "+obj.email+" "+this.event+" "+obj.event+ " "+this.pass+" "+obj.pass);
+            Log.i("dope",this.email.equals(obj.email)+" "+this.event.equals(obj.event)+" "+this.event.equals(obj.pass));
+            if (this.email.equals(obj.email) && this.event.equals(obj.event) && this.pass.equals(obj.pass)) return true;
             return false;
         }
 
         public Valid(String email, String pass, String event) {
-            this.email = email;
-            this.pass = pass;
-            this.event = event;
+            this.email = email.toLowerCase();
+            this.pass = pass.toLowerCase();
+            this.event = event.toLowerCase();
         }
 
     }

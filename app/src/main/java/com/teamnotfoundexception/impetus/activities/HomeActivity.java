@@ -86,13 +86,13 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
 
             @Override
             public void onPageSelected(int position) {
-                //mSectionsPagerAdapterUser.notifyDataSetChanged();
+                mSectionsPagerAdapterUser.notifyDataSetChanged();
 
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                //mSectionsPagerAdapterUser.notifyDataSetChanged();
+                mSectionsPagerAdapterUser.notifyDataSetChanged();
             }
         });
 
@@ -151,45 +151,23 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
 
     public class SectionsPagerAdapterUser extends FragmentPagerAdapter {
 
-        private Map<Integer,String> mFragmentTags;
-        private FragmentManager mFragmentManager;
-        private Context mContext;
 
-        ArrayList<Fragment> fragments;
+        private Context mContext;
+        private ArrayList<Fragment> fragments;
+
         public SectionsPagerAdapterUser(FragmentManager fm,Context context) {
             super(fm);
-            mFragmentManager = fm;
             mContext = context;
-            mFragmentTags = new HashMap<>();
-        }
+            fragments= new ArrayList<>();
+            fragments.add(new EventsFragment());
+            fragments.add(new MyEventsFragment());
+            fragments.add(new StarredFragment());
 
-        @NonNull
-        @Override
-        public Object instantiateItem(@NonNull View container, int position) {
-            Object obj = super.instantiateItem(container,position);
-            if (obj instanceof Fragment){
-                Fragment fragment = (Fragment) obj;
-                String tag = fragment.getTag();
-                mFragmentTags.put(position,tag);
-            }
-            return obj;
         }
 
         @Override
         public Fragment getItem(int position) {
-
-            switch (position){
-                case 0: return (new MyEventsFragment());
-                case 1: return (new StarredFragment());
-                case 2: return (new EventsFragment());
-            }
-            return null;
-        }
-
-        public Fragment getFragment(int pos){
-            String tag = mFragmentTags.get(pos);
-            if (tag == null) return null;
-            return mFragmentManager.findFragmentByTag(tag);
+            return fragments.get(position);
         }
 
         @Override

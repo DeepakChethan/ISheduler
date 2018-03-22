@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
@@ -29,15 +30,29 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
     public Context context;
 
     public StarredAdapter(List<EventItem> items, EventsFragment.OnListFragmentInteractionListener listener, Context c) {
-        mStarredEvents = items;
+        ArrayList<EventItem> temp =new ArrayList<>();
+        for (int i = 0; i < items.size(); ++i){
+            EventItem item = items.get(i);
+            if (item.isStarred()==1){
+                temp.add(item);
+            }
+        }
+        mStarredEvents = temp;
         mListener = listener;
         context = c;
 
     }
 
-    public void updateData(List<EventItem> eventItems){
+    public void updateData(List<EventItem> items){
         mStarredEvents = new ArrayList<>();
-        mStarredEvents.addAll(eventItems);
+        ArrayList<EventItem> temp =new ArrayList<>();
+        for (int i = 0; i < items.size(); ++i){
+            EventItem item = items.get(i);
+            if (item.isStarred()==1){
+                temp.add(item);
+            }
+        }
+        mStarredEvents.addAll(temp);
         notifyDataSetChanged();
 
     }
