@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
@@ -54,7 +56,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             holder.mEventNameHolder.setText(eventItem.getName());
             holder.mEventTypeHolder.setText(eventItem.getType());
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
-
+            Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,7 +74,14 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    StatusManager.get(context).addToStarred(eventItem);
+                    if(eventItem.isStarred()==0){
+                        StatusManager.get(context).addEventToStarred(eventItem);
+                        Toast.makeText(context,eventItem.getName()+" Added to starred",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        StatusManager.get(context).removeFromStarred(eventItem);
+                        Toast.makeText(context,eventItem.getName()+" removed from starred",Toast.LENGTH_SHORT).show();
+                    }
                     return true;
                 }
             });

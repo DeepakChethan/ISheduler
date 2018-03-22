@@ -51,7 +51,7 @@ public class MyEventsFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listMyEvents);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.myEventsHidden);
-        if (StatusManager.get(context).getRegisteredIdList().size() == 0){
+        if (EventsManager.get(context).getEventItemsList().size() == 0){
             recyclerView.setVisibility(View.GONE);
           relativeLayout.setVisibility(View.VISIBLE);
         }else {

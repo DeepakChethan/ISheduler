@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
@@ -45,6 +47,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
 
 
         EventItem eventItems = mEventItems.get(position);
+
         if(StatusManager.get(context).getStarredIdList().contains(eventItems.getId())) {
 
             holder.mItem = mEventItems.get(position);
@@ -52,6 +55,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             holder.mEventNameHolder.setText(eventItem.getName());
             holder.mEventTypeHolder.setText(eventItem.getType());
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
+            Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
             Log.i("dope","The length of starred items is "+mEventItems.size());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +76,16 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    StatusManager.get(context).addEventToStarred(eventItem);
+
+                    if(eventItem.isStarred()==0){
+                        StatusManager.get(context).addEventToStarred(eventItem);
+                        Toast.makeText(context,eventItem.getName()+" Added to starred",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        StatusManager.get(context).removeFromStarred(eventItem);
+                        Toast.makeText(context,eventItem.getName()+" removed from starred",Toast.LENGTH_SHORT).show();
+                    }
+
                     return true;
                 }
             });
