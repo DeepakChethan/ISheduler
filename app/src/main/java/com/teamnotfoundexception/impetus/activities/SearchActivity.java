@@ -38,10 +38,17 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
-        MenuItem menuItem = menu.findItem(R.id.search);
+        getMenuInflater().inflate(R.menu.menuone,menu);
+        MenuItem menuItem = menu.findItem(R.id.searcher);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setIconified(false);
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                onBackPressed();
+                return true;
+            }
+        });
         searchView.setQueryHint("Search events");
         // TODO goback when the user is done searching
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
