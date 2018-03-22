@@ -2,6 +2,7 @@ package com.teamnotfoundexception.impetus.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment.OnListFragmentInteractionListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHolder> {
@@ -43,14 +46,22 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+
+
     @Override
-
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         EventItem eventItemm = mEventItems.get(position);
 
-        //if(StatusManager.get(context).getRegisteredIdList().contains(eventItemm.getId())) {
-           // eventItemm.setRegistered(1);
+        ArrayList<Integer> registeredlist = StatusManager.get(context).getRegisteredIdList();
+        System.out.println("i am here");
+        System.out.println("in bind view" + registeredlist.size());
+        for (int i = 0; i < registeredlist.size(); i++) {
+            System.out.println("dama dama" + registeredlist.get(i));
+        }
+
+
+            eventItemm.setRegistered(1);
+
             holder.mItem = mEventItems.get(position);
             final EventItem eventItem = holder.mItem;
             holder.mEventNameHolder.setText(eventItem.getName());
@@ -85,8 +96,10 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
                     return true;
                 }
             });
-        //}
+
+
     }
+
     @Override
     public int getItemCount() {
         return mEventItems.size();
@@ -97,6 +110,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
         public final TextView mEventNameHolder,mEventCostHolder;
         public final TextView mEventTypeHolder;
         public final ImageView mEventImageHolder;
+        public final ImageView mStarHolder;
         public EventItem mItem;
 
         public ViewHolder(View view) {
@@ -106,6 +120,8 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
+            mStarHolder= (ImageView) view.findViewById(R.id.startContainer);
+
         }
 
     }

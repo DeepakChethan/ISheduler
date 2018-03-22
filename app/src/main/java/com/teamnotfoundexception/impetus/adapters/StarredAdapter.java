@@ -76,7 +76,6 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-
                     if(eventItem.isStarred()==0){
                         StatusManager.get(context).addEventToStarred(eventItem);
                         Toast.makeText(context,eventItem.getName()+" Added to starred",Toast.LENGTH_SHORT).show();
@@ -85,7 +84,6 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
                         StatusManager.get(context).removeFromStarred(eventItem);
                         Toast.makeText(context,eventItem.getName()+" removed from starred",Toast.LENGTH_SHORT).show();
                     }
-
                     return true;
                 }
             });
@@ -93,14 +91,14 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
     }
     @Override
     public int getItemCount() {
-        return mEventItems.size();
-    }
+        return mEventItems.size(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mEventNameHolder,mEventCostHolder;
         public final TextView mEventTypeHolder;
         public final ImageView mEventImageHolder;
+        public final ImageView mStarHolder;
         public EventItem mItem;
 
         public ViewHolder(View view) {
@@ -110,6 +108,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
+            mStarHolder = (ImageView) view.findViewById(R.id.startContainer);
         }
 
     }

@@ -51,7 +51,9 @@ public class MyEventsFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listMyEvents);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.myEventsHidden);
+
         if (EventsManager.get(context).getEventItemsList().size() == 0){
+
             recyclerView.setVisibility(View.GONE);
           relativeLayout.setVisibility(View.VISIBLE);
         }else {
@@ -66,6 +68,7 @@ public class MyEventsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
             myEventsAdapter = new MyEventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext());
             recyclerView.setAdapter(myEventsAdapter);
 
@@ -75,7 +78,8 @@ public class MyEventsFragment extends Fragment {
     }
 
     public static void notifyMe() {
-        myEventsAdapter.notifyDataSetChanged();
+      myEventsAdapter.notifyDataSetChanged();
+      Log.i("updated", "notifying data set changed");
     }
 
     @Override

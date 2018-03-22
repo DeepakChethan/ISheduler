@@ -21,19 +21,21 @@
             android:src="@mipmap/ic_launcher"
             android:scaleType="fitXY"
             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="9dp"
-            android:orientation="vertical">
+            android:weightSum="10"
+            android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="7"
             android:layout_height="wrap_content"
-            android:layout_weight="5">
+            >
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Event Title"
                 android:textStyle="bold"
@@ -41,39 +43,56 @@
                 android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="10sp"
+                android:layout_weight="10"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:id="@+id/eventTypeHolder"
+                android:text="Event Type"/>
+
+            </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_gravity="right"
-                android:gravity="right"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="20"
-                    android:id="@+id/eventPriceHolder"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rs"
-                    android:textSize="12sp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    />
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:layout_height="40dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20"
+                        android:id="@+id/eventPriceHolder"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rs"
+                        android:textSize="12sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        />
+
             </LinearLayout>
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:id="@+id/eventTypeHolder"
-            android:text="Event Type"/>
-
-
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:id="@+id/startContainer"
+                    android:src="@drawable/ic_star_border_red_24dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

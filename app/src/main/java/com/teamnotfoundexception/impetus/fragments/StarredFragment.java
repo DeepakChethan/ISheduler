@@ -27,7 +27,7 @@ public class StarredFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 2;
-    public static StarredAdapter starredAdapter;
+    public StarredAdapter starredAdapter;
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
     public StarredFragment() {
@@ -96,7 +96,7 @@ public class StarredFragment extends Fragment {
 
     public static void notifyMe() {
 
-        starredAdapter.notifyDataSetChanged();
+    //    starredAdapter.notifyDataSetChanged();
 
     }
 

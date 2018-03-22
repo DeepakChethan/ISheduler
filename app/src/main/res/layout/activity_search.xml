@@ -22,9 +22,6 @@
         android:id="@+id/slist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:padding="20dp"
-        android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.teamnotfoundexception.impetus.activities.SearchActivity"
         tools:listitem="@layout/fragment_item" />
