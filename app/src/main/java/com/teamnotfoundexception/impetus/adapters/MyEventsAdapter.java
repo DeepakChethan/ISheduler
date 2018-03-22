@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHolder> {
 
-    private final List<EventItem> mEventItems;
+    private List<EventItem> mEventItems;
     private final OnListFragmentInteractionListener mListener;
 
     public Context context;
@@ -46,12 +46,16 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
         return new ViewHolder(view);
     }
 
-
+    public void updateData(ArrayList<EventItem> items){
+        mEventItems = new ArrayList<>();
+        mEventItems.addAll(items);
+        notifyDataSetChanged();
+    }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         EventItem eventItemm = mEventItems.get(position);
-
+        holder.setIsRecyclable(false);
         ArrayList<Integer> registeredlist = StatusManager.get(context).getRegisteredIdList();
         System.out.println("i am here");
         System.out.println("in bind view" + registeredlist.size());
@@ -62,6 +66,9 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             holder.mEventTypeHolder.setText(eventItem.getType());
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
             Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
+            if (holder.mItem.isStarred() == 1){
+                holder.mStar.setVisibility(View.VISIBLE);
+            }
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,9 +88,15 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
                 public boolean onLongClick(View v) {
 
                     if(eventItem.isStarred() == 0) {
+                        eventItem.setStarred(1);
                         StatusManager.get(context).addToStarred(eventItem);
-                    } else {
-
+                        holder.mStar.setVisibility(View.VISIBLE);
+                        updateData(StatusManager.get(context).getRegisteredEventsList());
+                    }else{
+                        eventItem.setStarred(0);
+                        StatusManager.get(context).removeFromStarred(eventItem);
+                        holder.mStar.setVisibility(View.INVISIBLE);
+                        updateData(StatusManager.get(context).getRegisteredEventsList());
                     }
                     return true;
                 }
@@ -102,7 +115,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
         public final TextView mEventNameHolder,mEventCostHolder;
         public final TextView mEventTypeHolder;
         public final ImageView mEventImageHolder;
-        public final ImageView mStarHolder;
+        public final ImageView mStar;
         public EventItem mItem;
 
         public ViewHolder(View view) {
@@ -112,7 +125,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
-            mStarHolder= (ImageView) view.findViewById(R.id.startContainer);
+            mStar= (ImageView) view.findViewById(R.id.startContainer);
 
         }
 

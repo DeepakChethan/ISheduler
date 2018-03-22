@@ -91,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:id="@+id/startContainer"
+                    android:visibility="gone"
                     android:src="@drawable/ic_star_border_red_24dp"/>
             </LinearLayout>
         </LinearLayout>

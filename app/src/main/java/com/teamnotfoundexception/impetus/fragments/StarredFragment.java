@@ -21,18 +21,21 @@ import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StarredFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 2;
-    public static StarredAdapter starredAdapter;
+    public StarredAdapter starredAdapter;
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
     public StarredFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        starredAdapter.updateData(StatusManager.get(getContext()).getStarredEventsList());
     }
 
 
@@ -74,7 +77,7 @@ public class StarredFragment extends Fragment {
 
             }
 
-            starredAdapter = new StarredAdapter(StatusManager.get(context).getStarredEventsList(),mListener,getActivity().getApplicationContext());
+            starredAdapter = new StarredAdapter(StatusManager.get(context).getStarredEventsList(),mListener,context);
 
             recyclerView.setAdapter(starredAdapter);
 
@@ -85,7 +88,7 @@ public class StarredFragment extends Fragment {
 
     public static void notifyMe() {
         Log.i("update", "notifying starred adapter");
-        starredAdapter.notifyDataSetChanged();
+        //starredAdapter.notifyDataSetChanged();
 
     }
 

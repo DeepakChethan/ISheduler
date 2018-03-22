@@ -38,6 +38,7 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
         holder.participant = mParticipants.get(position);
         holder.mTeamName.setText(holder.participant.teamName);
         //holder.mParticipants.setText(holder.participant.teamMembers);

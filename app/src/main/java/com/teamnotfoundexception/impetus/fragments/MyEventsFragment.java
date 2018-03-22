@@ -2,6 +2,7 @@ package com.teamnotfoundexception.impetus.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,6 +34,17 @@ public class MyEventsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        myEventsAdapter.updateData(StatusManager.get(getContext()).getRegisteredEventsList());
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,8 @@ public class MyEventsFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,11 +96,7 @@ public class MyEventsFragment extends Fragment {
       Log.i("updated", "notifying data set changed");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-    }
 
     @Override
     public void onAttach(Context context) {

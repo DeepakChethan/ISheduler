@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
@@ -40,7 +41,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     }
 
-    public void dataChaged(ArrayList<EventItem> items){
+    public void updateData(ArrayList<EventItem> items){
         mEventItems = new ArrayList<>();
         mEventItems.addAll(items);
         notifyDataSetChanged();
@@ -55,15 +56,21 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     @Override
 
+
+
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
 
         holder.mItem = mEventItems.get(position);
+        holder.setIsRecyclable(false);
         final EventItem eventItem = holder.mItem;
         holder.mEventNameHolder.setText(eventItem.getName());
         holder.mEventTypeHolder.setText(eventItem.getType());
         holder.mEventCostHolder.setText(eventItem.getPrice()+"");
         Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
+        if (holder.mItem.isStarred() == 1){
+            holder.mStar.setVisibility(View.VISIBLE);
+        }
         //Log.i("dope","I am being called from events adapter");
        // Log.i("dope","The length of event items is "+StatusManager.get(context).getRegisteredIdList().size());
 
@@ -90,10 +97,16 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             public boolean onLongClick(View v) {
 
                 if(eventItem.isStarred() == 0) {
+                    eventItem.setStarred(1);
                     StatusManager.get(context).addToStarred(eventItem);
-                } else {
-                    Log.i("i", "starred already");
-
+                    holder.mStar.setVisibility(View.VISIBLE);
+                    updateData(EventsManager.get(context).getEventItemsList());
+                }else{
+                    eventItem.setStarred(0);
+                    StatusManager.get(context).removeFromStarred(eventItem);
+                    holder.mStar.setVisibility(View.INVISIBLE);
+                    updateData(EventsManager.get(context).getEventItemsList());
+                    Log.d("dope ", "onLongClick: "+StatusManager.get(context).getStarredIdList().size());
                 }
                 return true;
             }
@@ -109,7 +122,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         public final View mView;
         public final TextView mEventNameHolder,mEventCostHolder;
         public final TextView mEventTypeHolder;
-        public final ImageView mEventImageHolder;
+        public final ImageView mEventImageHolder,mStar;
         public EventItem mItem;
 
         public ViewHolder(View view) {
@@ -119,6 +132,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
+            mStar = (ImageView) view.findViewById(R.id.startContainer);
         }
 
     }

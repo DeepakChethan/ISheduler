@@ -18,11 +18,12 @@ import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHolder> {
 
-    private final List<EventItem> mStarredEvents;
+    private List<EventItem> mStarredEvents;
     private final EventsFragment.OnListFragmentInteractionListener mListener;
 
     public Context context;
@@ -33,6 +34,15 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
         context = c;
 
     }
+
+    public void updateData(List<EventItem> eventItems){
+        mStarredEvents = new ArrayList<>();
+        mStarredEvents.addAll(eventItems);
+        notifyDataSetChanged();
+
+    }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,14 +55,17 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
 
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-            holder.mItem = mStarredEvents.get(position);
 
+            holder.mItem = mStarredEvents.get(position);
+            holder.setIsRecyclable(false);
             final EventItem eventItem = holder.mItem;
             holder.mEventNameHolder.setText(eventItem.getName());
             holder.mEventTypeHolder.setText(eventItem.getType());
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
             Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
-
+            if (holder.mItem.isStarred() == 1){
+                holder.mStar.setVisibility(View.VISIBLE);
+            }
 
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -74,9 +87,21 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
                 public boolean onLongClick(View v) {
 
                     if(eventItem.isStarred() == 0) {
-                        StatusManager.get(context).addEventToStarred(eventItem);
+                        eventItem.setStarred(1);
+                        StatusManager.get(context).addToStarred(eventItem);
+                        holder.mStar.setVisibility(View.VISIBLE);
+                        updateData(StatusManager.get(context).getStarredEventsList());
 
+                    }else{
+                        eventItem.setStarred(0);
+                        StatusManager.get(context).removeFromStarred(eventItem);
+                        StatusManager.get(context).removeDishFromStarred(eventItem);
+                        holder.mStar.setVisibility(View.INVISIBLE);
+                        updateData(StatusManager.get(context).getStarredEventsList());
+
+                        Log.d("dope ", "onLongClick: "+StatusManager.get(context).getStarredIdList().size());
                     }
+
                     return true;
                 }
             });
@@ -94,7 +119,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
         public final TextView mEventNameHolder,mEventCostHolder;
         public final TextView mEventTypeHolder;
         public final ImageView mEventImageHolder;
-        public final ImageView mStarHolder;
+        public final ImageView mStar;
         public EventItem mItem;
 
         public ViewHolder(View view) {
@@ -104,7 +129,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
-            mStarHolder = (ImageView) view.findViewById(R.id.startContainer);
+            mStar = (ImageView) view.findViewById(R.id.startContainer);
         }
 
     }
