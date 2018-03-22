@@ -2,6 +2,7 @@ package com.teamnotfoundexception.impetus.Databases;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper.Participant;
 
 import android.content.Context;
+import android.provider.Telephony;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,13 +49,19 @@ public class StatusManagerForOrganizer {
 
         if (mUser != null) Log.i("i", mUser.getEmail());
 
-        mParticipants = new ArrayList<>();
+        mParticipants = new ArrayList<Participant>();
         mParticipantsEmailIds = new ArrayList<>();
 
         mFirebaseDatabase = null;
 
         mFirebaseHelper = new FirebaseHelper(mAppContext);
 
+        mEventOrganized = null;
+
+    }
+
+    public void setEventOrganized(EventItem mEventOrganized) {
+        this.mEventOrganized = mEventOrganized;
     }
 
     public static StatusManagerForOrganizer get(Context c) {
@@ -63,6 +70,15 @@ public class StatusManagerForOrganizer {
             mStatusManagerForOrganizer = new StatusManagerForOrganizer(c);
         }
         return mStatusManagerForOrganizer;
+    }
+
+
+    public ArrayList<Participant> getParticipants() {
+        return mParticipants;
+    }
+
+    public void setmParticipants(ArrayList<Participant> mParticipants) {
+        this.mParticipants = mParticipants;
     }
 
     public void setAllTonull() {
@@ -76,7 +92,7 @@ public class StatusManagerForOrganizer {
         try {
             mFirebaseHelper.fetchParticipantsList(mEventOrganized);
         } catch(Exception e) {
-            Log.i("hkkgja", "error fetching favs");
+            Log.i("participants", "error fetching participants" + e.getMessage());
         }
     }
 
@@ -96,8 +112,9 @@ public class StatusManagerForOrganizer {
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
 
         this.mFirebaseDatabase = firebaseDatabase;
-        mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase, 0);
-
+        if(firebaseDatabase != null) {
+            mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase, 0);
+        }
     }
 
     public FirebaseAuth getAuth() {

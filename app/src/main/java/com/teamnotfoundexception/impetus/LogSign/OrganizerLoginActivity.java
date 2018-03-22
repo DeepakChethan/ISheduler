@@ -16,8 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
@@ -33,11 +37,14 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
     FirebaseAuth mAuth;
     public ArrayList<Valid> valids;
     Spinner mEvent;
+    private StatusManagerForOrganizer mStatusManagerForOrganizer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizer_login);
+
         String[] events = getResources().getStringArray(R.array.event_list);
+        mStatusManagerForOrganizer = StatusManagerForOrganizer.get(getApplicationContext());
         mAuth = FirebaseAuth.getInstance();
         mEmail = (EditText) findViewById(R.id.orgEmail);
         mPass = (EditText) findViewById(R.id.orgPass);
@@ -45,6 +52,7 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
         button.setOnClickListener(this);
         mEvent = (Spinner) findViewById(R.id.orgEvent);
         valids = new ArrayList<>();
+       
         valids.add(new Valid("stealjobs@orgo.com","orgopass",events[0]));
         valids.add(new Valid("itwiz@orgo.com","orgopass",events[1]));
         valids.add(new Valid("techcharads@orgo.com","orgopass",events[2]));
@@ -70,9 +78,11 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
+
+
         email = mEmail.getText().toString();
         pass = mPass.getText().toString();
-        event = mEvent.getSelectedItem().toString().toLowerCase();
+        event = mEvent.getSelectedItem().toString();
         button.setEnabled(false);
 
         if (email.isEmpty() || pass.isEmpty()){
@@ -80,7 +90,7 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
             mPass.setError("Can't be empty");
             button.setEnabled(true);
             return;
-        }else{
+        } else {
 
             if (validate(email,pass,event)){
 
@@ -100,9 +110,30 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
                                             Toast.LENGTH_SHORT).show();
 
                                     button.setEnabled(true);
-                                } else {
-                                    Intent intent = new Intent(getApplicationContext(), OrgoActivity.class);
+                                    Log.i("e", "successful");
 
+                                } else {
+                                    EventsManager.get(getApplicationContext()).insertAllEventItems();
+                                    EventsManager.get(getApplicationContext()).initializeEventItemsList();
+                                    ArrayList<EventItem> allevents = EventsManager.get(getApplicationContext()).getEventItemsList();
+                                    EventItem organizedItem = null;
+                                    System.out.println("size of allevents" + allevents.size());
+                                    for(int i = 0; i < allevents.size(); i++) {
+                                        System.out.println(event + " " + allevents.get(i).getName());
+                                        if(allevents.get(i).getName().toLowerCase().contains(event.toLowerCase())) {
+                                            organizedItem = allevents.get(i);
+                                        }
+                                    }
+
+                                    System.out.println("organized event is" + organizedItem.getName());
+
+
+                                    mStatusManagerForOrganizer.setEventOrganized(organizedItem);
+                                    mStatusManagerForOrganizer.setAuth(FirebaseAuth.getInstance());
+                                    mStatusManagerForOrganizer.setUser(FirebaseAuth.getInstance().getCurrentUser());
+                                    mStatusManagerForOrganizer.setFirebaseDatabase(FirebaseDatabase.getInstance());
+
+                                    Intent intent = new Intent(getApplicationContext(), OrgoActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finishActivity(900);
@@ -111,8 +142,10 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
                             }
                         });
 
-            }else {
+
+            } else {
                 Log.d("dope", "onClick: InValidated");
+
                 button.setEnabled(true);
                 Toast.makeText(getApplicationContext(),"Are you an organizer ?",Toast.LENGTH_SHORT).show();
 
@@ -140,10 +173,11 @@ public class OrganizerLoginActivity extends AppCompatActivity implements View.On
         return false;
     }
 
-    class Valid{
+    class Valid {
         String email,pass,event;
 
         public boolean equale(Valid obj) {
+
 
             Log.i("dope", "equale: "+this.email+" "+obj.email+" "+this.event+" "+obj.event+ " "+this.pass+" "+obj.pass);
             Log.i("dope",this.email.equals(obj.email)+" "+this.event.equals(obj.event)+" "+this.event.equals(obj.pass));

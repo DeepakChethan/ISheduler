@@ -58,15 +58,15 @@ A perfect platform for you to showcase your creative ideas and presentation skil
     <string name="robo_soccer">We give you robots, you  make them play soccer and win the game to get a prize</string>
     <string name="enigma">Do you think you know more about UVCE than anyone else ? Then get ready to untangle some of the enigmatic puzzles about your college when you sign up for this app based treasure hunt where you will use your smartphone with our app to  locate answers for the tasks.</string>
     <array name="event_list">
-        <item>Steal Jobs</item>
-        <item>It Wiz</item>
-        <item>Tech Charades</item>
+        <item>STEALJOBS</item>
+        <item>ItWiz</item>
+        <item>TechCharades</item>
         <item>Vaaksamara</item>
-        <item>Tech Mark</item>
+        <item>TechMark</item>
         <item>Automania</item>
         <item>Electrophilia</item>
         <item>Spektrom</item>
-        <item>So you think its over</item>
+        <item>Soyouthinkitsover</item>
         <item>Appathon</item>
         <item>Sumo Wars</item>
         <item>Gaming</item>
@@ -76,9 +76,9 @@ A perfect platform for you to showcase your creative ideas and presentation skil
         <item>Code Storm</item>
         <item>Enigma</item>
         <item>Marvel Mania</item>
-        <item>Robo Soccer</item>
-        <item>Mech or Break</item>
-        <item>Laser Tag</item>
+        <item>RoboSoccer</item>
+        <item>MechorBreak</item>
+        <item>LaserTag</item>
     </array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

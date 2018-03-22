@@ -34,7 +34,7 @@ public class FirebaseHelper {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference1, mDatabaseReference2, mDatabaseReference3;
     private Context mAppContext;
-
+    public static int FETCHING_PARTICIPANTS = 0;
     private Participant p;
 
     public FirebaseHelper(Context c) {
@@ -44,11 +44,12 @@ public class FirebaseHelper {
 
     public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase, int type) {
         mFirebaseDatabase = firebaseDatabase;
-        if (firebaseDatabase != null)
-                mDatabaseReference1 = mFirebaseDatabase.getReference("users_private/");
-                mDatabaseReference2 = mFirebaseDatabase.getReference("users_public/");
-                mDatabaseReference3
-                        = mFirebaseDatabase.getReference("events");
+        if (firebaseDatabase != null){
+            mDatabaseReference1 = mFirebaseDatabase.getReference("users_private/");
+        mDatabaseReference2 = mFirebaseDatabase.getReference("users_public/");
+        mDatabaseReference3
+                = mFirebaseDatabase.getReference("events");
+    }
 
     }
 
@@ -109,7 +110,7 @@ public class FirebaseHelper {
         Log.i("ini", "fetch registeerd list called");
 
         String emailId = getEmailStripped(user.getEmail());
-        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child("registered").child("event_ids");
+        DatabaseReference databaseReference = mDatabaseReference3.child(user.getUid()).child("registered").child("event_ids");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -219,7 +220,7 @@ public class FirebaseHelper {
 
     public void fetchParticipantsList(EventItem eventOrganized) {
 
-        DatabaseReference databaseReference = mDatabaseReference1.child(eventOrganized.getName().toUpperCase());
+        DatabaseReference databaseReference = mDatabaseReference3.child(eventOrganized.getName().toUpperCase());
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -243,21 +244,26 @@ public class FirebaseHelper {
                  */
 
 
-                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {
+                GenericTypeIndicator<Map<String, Participant>> t = new GenericTypeIndicator<Map<String, Participant>>() {
                 };
-                ArrayList<String> participantsEmailsList = (ArrayList<String>) dataSnapshot.getValue(t);
-                if (participantsEmailsList != null) {
 
-                    //fetch the email_ids
-                    StatusManagerForOrganizer.get(mAppContext).setParticipantsEmailIds(new ArrayList<String>(participantsEmailsList));
+                System.out.println(dataSnapshot.getValue());
 
-                    //fetch the data associated with email_ids
-                    ArrayList<Participant> participants =  fetchParticipants(participantsEmailsList);
+               Map<String, Participant> participantsEmailsList = (HashMap<String, Participant>) dataSnapshot.getValue(t);
 
-                    StatusManagerForOrganizer.get(mAppContext).setParticipants(participants);
+               ArrayList<Participant> participants  = StatusManagerForOrganizer.get(mAppContext).getParticipants();
 
-                    MainActivity.notifyMe();
-                }
+               if(participantsEmailsList != null) {
+
+                   for (String k : participantsEmailsList.keySet()) {
+                       participants.add(participantsEmailsList.get(k));
+                   }
+               }
+
+             //  StatusManagerForOrganizer.get(mAppContext).setParticipants(participants);
+               System.out.println("size of participatns list after fetching" + StatusManagerForOrganizer.get(mAppContext).getParticipants().size());
+               FETCHING_PARTICIPANTS = 1;
+
             }
 
             @Override
@@ -268,23 +274,7 @@ public class FirebaseHelper {
         });
     }
 
-    public ArrayList<Participant> fetchParticipants(ArrayList<String> participantsEmailIds) {
 
-
-        ArrayList<Participant> participants = new ArrayList<>();
-
-        for(int i = 0; i < participantsEmailIds.size(); i++) {
-
-            String emailId = participantsEmailIds.get(i);
-
-            Participant participant = fetchUsersDataByEmail(emailId);
-
-            participants.add(participant);
-
-        }
-
-        return participants;
-    }
 
     public Participant fetchUsersDataByEmail(String emailId) {
 

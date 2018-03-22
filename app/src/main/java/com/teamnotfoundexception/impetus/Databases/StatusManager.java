@@ -195,7 +195,7 @@ public  class StatusManager {
 
         } catch(Exception e) {
 
-            Log.i("error", "cannot update favorite list");
+            Log.i("error", "cannot update favorite list" + e.getMessage());
 
         }
     }

@@ -91,7 +91,6 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_EVENT_IS_REGISTERED, eventItem.isRegistered());
         cv.put(COLUMN_EVENT_IS_STARRED, eventItem.isStarred());
 
-        eventItem.printt();
         Log.i("inserted", "inserted mate");
         return getReadableDatabase().insert(TABLE_EVENTS, null, cv);
 
@@ -129,7 +128,7 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             eventItem.setStarred(isStarred);
 
             System.out.println("creating new event from database");
-            eventItem.printt();
+          //  eventItem.printt();
 
             return eventItem;
 

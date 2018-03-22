@@ -11,6 +11,7 @@ import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment.OnListFragmentInteractionListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +23,7 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
     private final OnListFragmentInteractionListener mListener;
     public Context context;
 
-    public PlayerListAdapter(List<FirebaseHelper.Participant> participants, OnListFragmentInteractionListener listener, Context c) {
+    public PlayerListAdapter(ArrayList<FirebaseHelper.Participant> participants, OnListFragmentInteractionListener listener, Context c) {
 
         mParticipants = participants;
         mListener = listener;
