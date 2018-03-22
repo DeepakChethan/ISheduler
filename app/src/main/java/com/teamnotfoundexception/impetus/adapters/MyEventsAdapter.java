@@ -2,7 +2,9 @@ package com.teamnotfoundexception.impetus.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,21 +44,22 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+
+
     @Override
-
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         EventItem eventItemm = mEventItems.get(position);
 
         ArrayList<Integer> registeredlist = StatusManager.get(context).getRegisteredIdList();
-
-        System.out.println("in bind view"  + registeredlist.size());
-        for(int i = 0; i < registeredlist.size(); i++) {
+        System.out.println("i am here");
+        System.out.println("in bind view" + registeredlist.size());
+        for (int i = 0; i < registeredlist.size(); i++) {
             System.out.println("dama dama" + registeredlist.get(i));
         }
 
-        if(StatusManager.get(context).getRegisteredIdList().contains(eventItemm.getId())) {
+
             eventItemm.setRegistered(1);
+
             holder.mItem = mEventItems.get(position);
             final EventItem eventItem = holder.mItem;
             holder.mEventNameHolder.setText(eventItem.getName());
@@ -68,7 +71,6 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
                 public void onClick(View v) {
                     if (null != mListener) {
                         //StatusManager.get(context).addToRegistered(mEventItems.get(position));
-
                         mListener.onListFragmentInteraction(holder.mItem);
                     }
                     Intent intent = new Intent(context, DescriptionActivity.class);
@@ -85,8 +87,10 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
                     return true;
                 }
             });
-        }
+            //}
+
     }
+
     @Override
     public int getItemCount() {
         return mEventItems.size();
@@ -106,6 +110,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
             mEventNameHolder = (TextView) view.findViewById(R.id.eventNameHolder);
             mEventTypeHolder = (TextView) view.findViewById(R.id.eventTypeHolder);
             mEventImageHolder = (ImageView) view.findViewById(R.id.eventImageSquare);
+
         }
 
     }

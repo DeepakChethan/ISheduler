@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
+import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 
@@ -52,15 +53,15 @@ public class StarredFragment extends Fragment {
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.starHidden);
         Context context = view.getContext();
 
-        if (EventsManager.get(context).getEventItemsList().size() == 0){
-            recyclerView.setVisibility(View.GONE);
-            relativeLayout.setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            relativeLayout.setVisibility(View.GONE);
-        }
+//        if (StatusManager.get(context).getStarredIdList().size() == 0){
+//            recyclerView.setVisibility(View.GONE);
+//            relativeLayout.setVisibility(View.VISIBLE);
+//        } else {
+//            recyclerView.setVisibility(View.VISIBLE);
+//            relativeLayout.setVisibility(View.GONE);
+//        }
 
-        if (view instanceof RecyclerView) {
+        if (recyclerView instanceof RecyclerView) {
 
             if (mColumnCount <= 1) {
 

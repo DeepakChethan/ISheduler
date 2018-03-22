@@ -3,6 +3,7 @@ package com.teamnotfoundexception.impetus.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             holder.mEventNameHolder.setText(eventItem.getName());
             holder.mEventTypeHolder.setText(eventItem.getType());
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
+            Log.i("dope","The length of starred items is "+mEventItems.size());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

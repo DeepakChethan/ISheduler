@@ -7,13 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
+import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
 
 public class MyEventsFragment extends Fragment {
@@ -24,7 +27,7 @@ public class MyEventsFragment extends Fragment {
 
     private EventsFragment.OnListFragmentInteractionListener mListener;
 
-    private   MyEventsAdapter myEventsAdapter;
+    private  static MyEventsAdapter myEventsAdapter;
 
     public MyEventsFragment() {
         // Required empty public constructor
@@ -48,21 +51,22 @@ public class MyEventsFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listMyEvents);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.myEventsHidden);
-        if (EventsManager.get(context).getEventItemsList().size() == 0){
+    /*    if (StatusManager.get(context).getRegisteredIdList().size() == 0){
             recyclerView.setVisibility(View.GONE);
           relativeLayout.setVisibility(View.VISIBLE);
         }else {
             recyclerView.setVisibility(View.VISIBLE);
             relativeLayout.setVisibility(View.GONE);
-        }
+        }*/
          //Set the adapter
-        if (view instanceof RecyclerView) {
+        if (recyclerView instanceof RecyclerView) {
 
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
             myEventsAdapter = new MyEventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext());
             recyclerView.setAdapter(myEventsAdapter);
 
@@ -72,7 +76,8 @@ public class MyEventsFragment extends Fragment {
     }
 
     public static void notifyMe() {
-      //  myEventsAdapter.notifyDataSetChanged();
+      myEventsAdapter.notifyDataSetChanged();
+      Log.i("updated", "notifying data set changed");
     }
 
     @Override

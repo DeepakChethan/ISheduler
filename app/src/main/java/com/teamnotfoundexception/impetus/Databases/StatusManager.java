@@ -172,7 +172,7 @@ public  class StatusManager {
     }
 
     public void setRegisteredIdList(ArrayList<Integer> registeredIdList) {
-        this.mStarredEventsIds = registeredIdList;
+        this.mRegisteredEventsIds = registeredIdList;
     }
 
     /*public void setRegisteredEventsList(ArrayList<Integer> registeredEventsList) {

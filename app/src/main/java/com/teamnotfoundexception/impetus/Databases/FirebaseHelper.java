@@ -17,6 +17,9 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
+import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
+import com.teamnotfoundexception.impetus.fragments.MyEventsFragment;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -115,8 +118,9 @@ public class FirebaseHelper {
                 ArrayList<Integer> registeredListIds = (ArrayList<Integer>) dataSnapshot.getValue(t);
                 if (registeredListIds != null) {
                     StatusManager.get(mAppContext).setRegisteredIdList(new ArrayList<Integer>(registeredListIds));
-                    System.out.println("done, fetching, the size  of registered is " + registeredListIds.size());
-                 //   MainActivity.notifyMe();
+                    ArrayList<Integer> rea = StatusManager.get(mAppContext).getRegisteredIdList();
+                    System.out.println("done, fetching, the size  of registered is " + rea.size());
+                    MyEventsFragment.notifyMe();
                 } else {
                     Log.i("ini", "not fetched registred lst");
                 }
