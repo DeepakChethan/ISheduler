@@ -2,6 +2,7 @@ package com.teamnotfoundexception.impetus.Databases;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper.Participant;
 
 import android.content.Context;
+import android.provider.Telephony;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +49,7 @@ public class StatusManagerForOrganizer {
 
         if (mUser != null) Log.i("i", mUser.getEmail());
 
-        mParticipants = new ArrayList<>();
+        mParticipants = new ArrayList<Participant>();
         mParticipantsEmailIds = new ArrayList<>();
 
         mFirebaseDatabase = null;
@@ -71,6 +72,15 @@ public class StatusManagerForOrganizer {
         return mStatusManagerForOrganizer;
     }
 
+
+    public ArrayList<Participant> getParticipants() {
+        return mParticipants;
+    }
+
+    public void setmParticipants(ArrayList<Participant> mParticipants) {
+        this.mParticipants = mParticipants;
+    }
+
     public void setAllTonull() {
         mStatusManagerForOrganizer = null ;
         mAuth = null;
@@ -82,7 +92,7 @@ public class StatusManagerForOrganizer {
         try {
             mFirebaseHelper.fetchParticipantsList(mEventOrganized);
         } catch(Exception e) {
-            Log.i("hkkgja", "error fetching favs" + e.getMessage());
+            Log.i("participants", "error fetching participants" + e.getMessage());
         }
     }
 

@@ -2,6 +2,8 @@ package com.teamnotfoundexception.impetus.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +25,9 @@ public class OrgoPlayerFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-
+    private PlayerListAdapter mPlayerListAdapter;
+    public Handler handler;
+    public Runnable myRunnable;
     public OrgoPlayerFragment() {
     }
 
@@ -36,6 +40,8 @@ public class OrgoPlayerFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+
     }
 
     @Override
@@ -45,16 +51,9 @@ public class OrgoPlayerFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.item_list2);
-        if (EventsManager.get(context).getEventItemsList().size() == 0){
-            recyclerView.setVisibility(View.GONE);
-            relativeLayout.setVisibility(View.VISIBLE);
-        }else {
-            recyclerView.setVisibility(View.VISIBLE);
-            relativeLayout.setVisibility(View.GONE);
-        }
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (recyclerView instanceof RecyclerView) {
 
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -62,14 +61,44 @@ public class OrgoPlayerFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
+            mPlayerListAdapter =
+            new PlayerListAdapter(StatusManagerForOrganizer.get(getActivity().getApplicationContext()).getParticipants(), mListener, getActivity().getApplicationContext());
 
-            recyclerView.setAdapter(new PlayerListAdapter(StatusManagerForOrganizer.get(getActivity().getApplicationContext()).mParticipants, mListener, getActivity().getApplicationContext()));
-
+            recyclerView.setAdapter(mPlayerListAdapter);
 
         }
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler = new Handler();
+        myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if(FirebaseHelper.FETCHING_PARTICIPANTS == 0) {
+                    handler.postDelayed(this, 1000);
+                    System.out.println("0)))");
+                } else {
+                    handler = null ;
+                    mPlayerListAdapter.notifyDataSetChanged();
+                    System.out.println("notifying player list");
+                    System.out.println(StatusManagerForOrganizer.get(getActivity().getApplicationContext()).getParticipants().size());
+                }
+
+            }
+        };
+        handler.post(myRunnable);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -84,9 +113,15 @@ public class OrgoPlayerFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        if(handler != null) {
+            handler.removeCallbacks(myRunnable);
+            handler = null;
+        }
         super.onDetach();
         mListener = null;
     }
+
+
 
 
     public interface OnListFragmentInteractionListener {
