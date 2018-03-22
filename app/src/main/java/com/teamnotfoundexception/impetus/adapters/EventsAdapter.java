@@ -29,6 +29,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     public Context context;
 
+
+
     public EventsAdapter(ArrayList<EventItem> items, EventsFragment.OnListFragmentInteractionListener listener, Context c) {
         mEventItems = items;
         mListener = listener;
@@ -46,6 +48,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         mEventItems.addAll(items);
         notifyDataSetChanged();
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -68,13 +71,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         holder.mEventTypeHolder.setText(eventItem.getType());
         holder.mEventCostHolder.setText(eventItem.getPrice()+"");
         Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
+
         if (holder.mItem.isStarred() == 1){
             holder.mStar.setVisibility(View.VISIBLE);
         }
-        //Log.i("dope","I am being called from events adapter");
-       // Log.i("dope","The length of event items is "+StatusManager.get(context).getRegisteredIdList().size());
-
-       // Log.i("dope","The length of event items in events adapter is "+mEventItems.size());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +87,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                 Intent intent = new Intent(context, DescriptionActivity.class);
                 intent.putExtra("msg",eventItem);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent);
 
             }

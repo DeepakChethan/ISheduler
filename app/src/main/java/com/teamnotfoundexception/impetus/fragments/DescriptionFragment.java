@@ -19,10 +19,10 @@ public class DescriptionFragment extends Fragment {
 
 
     TextView mDescription;
+
     public DescriptionFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

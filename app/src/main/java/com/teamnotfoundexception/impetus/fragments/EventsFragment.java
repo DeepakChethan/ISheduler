@@ -25,6 +25,8 @@ public class EventsFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private EventsAdapter mEventsAdapter;
 
+    private static EventsAdapter mEventsAdapter;
+
     public EventsFragment() {
 
     }
@@ -63,8 +65,13 @@ public class EventsFragment extends Fragment {
 
             }
 
-            mEventsAdapter = new EventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext());
+
+            mEventsAdapter =
+            new EventsAdapter(EventsManager.get(context).getEventItemsList(), mListener, getActivity().getApplicationContext());
             recyclerView.setAdapter(mEventsAdapter);
+
+
+
         }
         return view;
     }
@@ -81,6 +88,8 @@ public class EventsFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -90,5 +99,20 @@ public class EventsFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(EventItem item);
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mEventsAdapter.notifyDataSetChanged();
+    }
+
+    public static void notifyMe() {
+        mEventsAdapter.notifyDataSetChanged();
+    }
+
+
+
+
 }

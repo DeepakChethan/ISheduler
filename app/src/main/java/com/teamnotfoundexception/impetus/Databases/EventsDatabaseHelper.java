@@ -49,9 +49,9 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
                 "location string," +
                 "description varchar(10000), " +
                 "entry_price int," +
-                " image_path varchar(2000), " +
+                "image_path varchar(2000), " +
                 "start_time varchar(2000), " +
-                "end_time varchar(2000), color varchar(2000)," +
+                "end_time varchar(2000), " +
                 "is_registered int, is_starred int, max_team_size int)");
 
     }
@@ -85,13 +85,13 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_EVENT_IMAGE_PATH, eventItem.getImagePath());
         cv.put(COLUMN_EVENT_START_TIME, eventItem.getStartTime());
         cv.put(COLUMN_EVENT_END_TIME, eventItem.getEndTime());
-        cv.put(COLUMN_EVENT_LOCATION,eventItem.getLocation());
+        cv.put(COLUMN_EVENT_LOCATION, eventItem.getLocation());
 
         cv.put(COLUMN_EVENT_MAX_SIZE, eventItem.getMaxTeamSize());
         cv.put(COLUMN_EVENT_IS_REGISTERED, eventItem.isRegistered());
         cv.put(COLUMN_EVENT_IS_STARRED, eventItem.isStarred());
 
-
+        eventItem.printt();
         Log.i("inserted", "inserted mate");
         return getReadableDatabase().insert(TABLE_EVENTS, null, cv);
 
@@ -127,6 +127,9 @@ public class EventsDatabaseHelper extends SQLiteOpenHelper {
             eventItem.setMaxTeamSize(maxTeamSize);
             eventItem.setRegistered(isRegistered);
             eventItem.setStarred(isStarred);
+
+            System.out.println("creating new event from database");
+            eventItem.printt();
 
             return eventItem;
 

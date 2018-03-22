@@ -44,15 +44,12 @@ public class DescriptionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         EventItem eventItem = (EventItem) getIntent().getSerializableExtra("msg");
+
         if (eventItem == null)
         {
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
             return;
         }
-
-
-
-
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),eventItem);
 
@@ -100,6 +97,7 @@ public class DescriptionActivity extends AppCompatActivity {
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         ArrayList<Fragment> fragments;
+
         public SectionsPagerAdapter(FragmentManager fm,EventItem eventItem) {
             super(fm);
             Bundle bundle = new Bundle();
@@ -135,6 +133,12 @@ public class DescriptionActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     public static void notifyMe() {
