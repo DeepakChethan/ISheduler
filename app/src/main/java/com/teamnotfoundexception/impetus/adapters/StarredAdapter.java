@@ -53,7 +53,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
 
             Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
-            Log.i("dope","The length of starred items is "+mEventItems.size());
+
 
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +83,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
                 }
             });
         }
-    }
+    
     @Override
     public int getItemCount() {
 
