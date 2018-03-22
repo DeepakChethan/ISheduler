@@ -117,7 +117,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         // StatusManager.get(getContext()).setupNotification(eventItem);
 
-        EventsFragment.notifyMe();
+        //EventsFragment.notifyMe();
 
         return ;
     }

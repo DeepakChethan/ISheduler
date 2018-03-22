@@ -19,10 +19,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeActivity extends AppCompatActivity implements EventsFragment.OnListFragmentInteractionListener{
+public class HomeActivity extends AppCompatActivity implements EventsFragment.OnListFragmentInteractionListener, View.OnTouchListener{
 
 
     private static final String TAG = "dc";
@@ -43,6 +45,18 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
     private SectionsPagerAdapterUser mSectionsPagerAdapterUser;
     private ViewPager mViewPager;
     private Activity activity;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSectionsPagerAdapterUser.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mSectionsPagerAdapterUser.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,32 +74,24 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Fragment fragment = ((SectionsPagerAdapterUser)mViewPager.getAdapter()).getFragment(position);
-                if (fragment != null){
-                    fragment.onResume();
-                }
+                //  mSectionsPagerAdapterUser.notifyDataSetChanged();
             }
 
             @Override
             public void onPageSelected(int position) {
-
-                Fragment fragment = ((SectionsPagerAdapterUser)mViewPager.getAdapter()).getFragment(position);
-                if (fragment != null){
-                    fragment.onResume();
-                }
-
+                //mSectionsPagerAdapterUser.notifyDataSetChanged();
 
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                //mSectionsPagerAdapterUser.notifyDataSetChanged();
             }
         });
+
 
     }
 
@@ -96,6 +102,7 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
 
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -117,6 +124,13 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
 
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Toast.makeText(getApplicationContext(),"Dont touch me",Toast.LENGTH_SHORT).show();
+        mSectionsPagerAdapterUser.notifyDataSetChanged();
+
+        return true;
+    }
 
 
     public class SectionsPagerAdapterUser extends FragmentPagerAdapter {
