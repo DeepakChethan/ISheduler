@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 
 import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
@@ -40,11 +42,20 @@ public class OrgoPlayerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list2, container, false);
+        Context context = view.getContext();
+        RecyclerView recyclerView = (RecyclerView) view;
+        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.item_list2);
+        if (EventsManager.get(context).getEventItemsList().size() == 0){
+            recyclerView.setVisibility(View.GONE);
+            relativeLayout.setVisibility(View.VISIBLE);
+        }else {
+            recyclerView.setVisibility(View.VISIBLE);
+            relativeLayout.setVisibility(View.GONE);
+        }
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

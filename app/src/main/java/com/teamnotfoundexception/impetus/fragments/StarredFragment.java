@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
@@ -47,11 +48,19 @@ public class StarredFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_starred, container, false);
 
+        RecyclerView recyclerView = (RecyclerView) view;
+        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.starHidden);
+        Context context = view.getContext();
+
+        if (EventsManager.get(context).getEventItemsList().size() == 0){
+            recyclerView.setVisibility(View.GONE);
+            relativeLayout.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            relativeLayout.setVisibility(View.GONE);
+        }
+
         if (view instanceof RecyclerView) {
-
-            Context context = view.getContext();
-
-            RecyclerView recyclerView = (RecyclerView) view;
 
             if (mColumnCount <= 1) {
 
@@ -62,7 +71,8 @@ public class StarredFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 
             }
-            starredAdapter = new StarredAdapter(StatusManager.get(context).getStarredEventsList(),mListener,getActivity().getApplicationContext());
+
+            starredAdapter = new StarredAdapter(EventsManager.get(context).getEventItemsList(),mListener,getActivity().getApplicationContext());
 
             recyclerView.setAdapter(starredAdapter);
 
