@@ -51,7 +51,6 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
             holder.mEventNameHolder.setText(eventItem.getName());
             holder.mEventTypeHolder.setText(eventItem.getType());
             holder.mEventCostHolder.setText(eventItem.getPrice() + "");
-
             Glide.with(context).load(eventItem.getImagePath()).into(holder.mEventImageHolder);
 
 
@@ -61,7 +60,6 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
                 public void onClick(View v) {
                     if (null != mListener) {
                         //StatusManager.get(context).addToRegistered(mEventItems.get(position));
-
                         mListener.onListFragmentInteraction(holder.mItem);
                     }
                     Intent intent = new Intent(context, DescriptionActivity.class);
@@ -83,7 +81,7 @@ public class StarredAdapter extends RecyclerView.Adapter<StarredAdapter.ViewHold
                 }
             });
         }
-    
+
     @Override
     public int getItemCount() {
 
