@@ -65,6 +65,12 @@ public class StatusManagerForOrganizer {
         return mStatusManagerForOrganizer;
     }
 
+    public void setAllTonull() {
+        mStatusManagerForOrganizer = null ;
+        mAuth = null;
+        mFirebaseDatabase = null;
+        mFirebaseHelper = null;
+    }
 
     public void initializeParticipantsList() {
         try {

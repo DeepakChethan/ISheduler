@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
@@ -180,6 +182,7 @@ public  class StatusManager {
                 StatusManager.get(mAppContext).getRegisteredIdList().add(item.getId());
                 getRegisteredEventsList().add(item);
                 item.setRegistered(1);
+                FirebaseMessaging.getInstance().subscribeToTopic(item.getName().toUpperCase());
                 mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
 
                 EventsFragment.notifyMe();
@@ -253,6 +256,13 @@ public  class StatusManager {
 
     public void  setUser(FirebaseUser user) {
         this.mUser = user;
+    }
+
+    public void setAllTonull() {
+        mRegisteredEventsIds = null;
+        mStatusManager = null ;
+        mFirebaseDatabase = null;
+        mFirebaseHelper = null;
     }
 
 

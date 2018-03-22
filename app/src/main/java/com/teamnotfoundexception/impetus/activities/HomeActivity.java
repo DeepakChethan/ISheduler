@@ -24,8 +24,12 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
+import com.teamnotfoundexception.impetus.Databases.StatusManager;
+import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
+import com.teamnotfoundexception.impetus.LogSign.LoginActivity;
 import com.teamnotfoundexception.impetus.R;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 import com.teamnotfoundexception.impetus.fragments.MyEventsFragment;
@@ -107,9 +111,21 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
             startActivity(new Intent(HomeActivity.this,OrgoActivity.class));
         }
         if (item.getItemId() == R.id.logout){
-            //TODO logout of the app
+
+            FirebaseAuth.getInstance().signOut();
+            StatusManager.get(getApplicationContext()).setAuth(null);
+            StatusManager.get(getApplicationContext()).setUser(null);
+            StatusManager.get(getApplicationContext()).setAllTonull();
+
+            StatusManagerForOrganizer.get(getApplicationContext()).setAllTonull();
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         }
-        return super.onOptionsItemSelected(item);
+            return super.onOptionsItemSelected(item);
+        
     }
 
     @Override

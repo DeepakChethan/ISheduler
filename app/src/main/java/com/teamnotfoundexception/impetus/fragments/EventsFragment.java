@@ -25,7 +25,7 @@ public class EventsFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private EventsAdapter mEventsAdapter;
 
-    private static EventsAdapter mEventsAdapter;
+    //private static EventsAdapter mEventsAdapter;
 
     public EventsFragment() {
 
@@ -92,8 +92,8 @@ public class EventsFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
         mListener = null;
+        super.onDetach();
     }
 
 
@@ -102,14 +102,9 @@ public class EventsFragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mEventsAdapter.notifyDataSetChanged();
-    }
 
     public static void notifyMe() {
-        mEventsAdapter.notifyDataSetChanged();
+        //mEventsAdapter.notifyDataSetChanged();
     }
 
 
