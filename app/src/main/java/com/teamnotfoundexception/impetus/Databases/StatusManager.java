@@ -16,6 +16,7 @@ import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.activities.DescriptionActivity;
 import com.teamnotfoundexception.impetus.activities.MainActivity;
+import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 
 
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public  class StatusManager {
                 item.setRegistered(1);
                 mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
 
-                DescriptionActivity.notifyMe();
+                EventsFragment.notifyMe();
             } else {
                 Log.i("update", "already registered");
             }

@@ -15,15 +15,17 @@ import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
+import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
-    private static final String  TAG = "REGISTERFRAGMENT";
+    private static final String  TAG = "REGISTER FRAGMENT";
 
     EditText mTeamMembers,mCollege,mPhone,mTeam;
     Button btn;
@@ -96,12 +98,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
 
         StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
+
         btn.setText("REGISTERED SUCCESSFULLY");
         btn.setEnabled(false);
         mTeam.setEnabled(false);
         mTeamMembers.setEnabled(false);
         mCollege.setEnabled(false);
         mPhone.setEnabled(false);
+        EventsFragment.notifyMe();
         return ;
     }
 

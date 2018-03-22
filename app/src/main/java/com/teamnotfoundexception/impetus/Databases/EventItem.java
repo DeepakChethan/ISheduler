@@ -60,6 +60,22 @@ public class EventItem implements Serializable {
         this.isStarred = isStarred;
         this.mMaxTeamSize = maxTeam;
     }
+
+
+    public void printt() {
+        System.out.println(mId);
+        System.out.println(mName);
+        System.out.println(mType);
+        System.out.println(mPrice);
+        System.out.println(mDescription);
+        System.out.println(mImagePath);
+        System.out.println(mStartTime);
+        System.out.println(mEndTime);
+        System.out.println(mLocation);
+        System.out.println(isRegistered);
+        System.out.println(mMaxTeamSize);
+
+    }
     public int getMaxTeamSize() { return mMaxTeamSize; }
 
     public void setMaxTeamSize(int maxTeam) {mMaxTeamSize = maxTeam;}
@@ -93,7 +109,7 @@ public class EventItem implements Serializable {
     }
 
     public void setStartTime(String StartTime) {
-        this.mStartTime = mStartTime;
+        this.mStartTime = StartTime;
     }
 
     public String getEndTime() {
@@ -152,5 +168,8 @@ public class EventItem implements Serializable {
     public void setDescription(String mDescription) {
         this.mDescription = mDescription;
     }
+
+
+
 
 }

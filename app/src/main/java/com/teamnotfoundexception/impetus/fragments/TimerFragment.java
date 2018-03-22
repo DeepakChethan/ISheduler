@@ -2,7 +2,9 @@ package com.teamnotfoundexception.impetus.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamnotfoundexception.impetus.Databases.EventItem;
+import com.teamnotfoundexception.impetus.Databases.EventsManager;
+import com.teamnotfoundexception.impetus.Databases.Time;
 import com.teamnotfoundexception.impetus.R;
 
 /**
@@ -17,7 +21,8 @@ import com.teamnotfoundexception.impetus.R;
  */
 public class TimerFragment extends Fragment {
 
-    private TextView mTimeContainer,mTeamCount,mEventLocation,mEventTeamMax,mEventPrice,mEventType;
+    private TextView mTimeContainer,mTeamCount,mEventLocation,mEventTeamMax,mEventPrice,mEventType, mEventName;
+    private long timeToEvent;
 
     public TimerFragment() {
         // Required empty public constructor
@@ -36,12 +41,48 @@ public class TimerFragment extends Fragment {
         mEventTeamMax = (TextView) view.findViewById(R.id.maxTeamMemberContainer);
         mEventPrice = (TextView) view.findViewById(R.id.ticketCostContainer);
         mEventLocation = (TextView) view.findViewById(R.id.eventLocationContainer);
+        mTimeContainer = (TextView) view.findViewById(R.id.foClock);
+        mEventName = (TextView) view.findViewById(R.id.foEventNameHolder) ;
         Bundle bundle = getArguments();
         if (bundle==null) {
             Toast.makeText(getContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
             return view;
         }
+
         EventItem item = (EventItem) bundle.getSerializable("dope");
+
+
+        long unixTime = System.currentTimeMillis() / 1000L;
+        long timeofevent = Long.parseLong(item.getStartTime());
+         timeToEvent = timeofevent - unixTime;
+        if(timeToEvent < 0) {
+            mTimeContainer.setText("EVENT STARTED");
+            timeToEvent = 0;
+        } else {
+
+            Time time = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(timeToEvent);
+
+
+
+
+            final Handler handler = new Handler();
+
+            Runnable myRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    timeToEvent--;
+                    if(timeToEvent > 0) {
+                        Time time = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(timeToEvent);
+                        mTimeContainer.setText("starts in " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() );
+                        handler.postDelayed(this, 1000);
+                    }
+                }
+            };
+            handler.postDelayed(myRunnable, 1000);
+        }
+
+
+        mEventName.setText(item.getName());
         mTeamCount.setText("Change Me");
         mEventType.setText(item.getType());
         mEventTeamMax.setText(item.getMaxTeamSize()+"");
