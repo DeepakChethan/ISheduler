@@ -144,6 +144,7 @@ public  class StatusManager {
         PendingIntent pi = PendingIntent.getBroadcast(mAppContext,0,intent,0);
         AlarmManager alarmManager = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,time,pi);
+        Log.i("dope","Setup up alarmed");
 
     }
 
@@ -279,9 +280,12 @@ public  class StatusManager {
             EventItem eventItem = mTempRegisteredEvents.get(i);
             Long itemStartTime = Long.parseLong(eventItem.getStartTime());
             Long itemEndTime = Long.parseLong(eventItem.getEndTime());
-            if (itemStartTime <= eventStartTime && itemEndTime >= eventStartTime){
+            Log.i("dope", "checkForClash: "+itemStartTime+" "+eventStartTime+" "+itemEndTime);
+            if (eventStartTime >= itemStartTime && eventStartTime <= itemEndTime){
+                Log.i("dope", "checkForClash: its true");
                 return eventItem;
             }
+
         }
         return null;
     }
@@ -297,11 +301,7 @@ public  class StatusManager {
 
     }
 
-    public void updateUI(){
-        mStarredAdapter.updateData(mStarredEventsList);
-        mEventsAdapter.updateData(EventsManager.get(mAppContext).getEventItemsList());
-        mMyEventsAdapter.updateData(mRegisteredEventsList);
-    }
+
 
     public FirebaseAuth getAuth() {
         return mAuth;
