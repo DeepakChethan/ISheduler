@@ -61,18 +61,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         signIn.setEnabled(false);
+        signUp.setEnabled(false);
         email = emailET.getText().toString();
         password = passET.getText().toString();
         progressBar.setVisibility(View.VISIBLE);
         if (email.isEmpty()) {
             emailET.setError("Email can't be empty");
             signIn.setEnabled(true);
+            signUp.setEnabled(true);
             progressBar.setVisibility(View.INVISIBLE);
             return;
         }
         if (password.isEmpty()) {
             passET.setError("Password cant be empty");
             signIn.setEnabled(true);
+            signUp.setEnabled(true);
             progressBar.setVisibility(View.INVISIBLE);
             return;
         }
@@ -80,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(getApplicationContext(), "Network not available", Toast.LENGTH_SHORT).show();
             signIn.setEnabled(true);
+            signUp.setEnabled(true);
             return;
         }
 
@@ -92,12 +96,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.INVISIBLE);
                             signIn.setEnabled(true);
+                            signUp.setEnabled(true);
                         } else {
                           //  FirebaseMessaging.getInstance().subscribeToTopic("ENIGMA");
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             signIn.setEnabled(true);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+
                             Log.i("i", "logging in");
                             progressBar.setVisibility(View.INVISIBLE);
                             finish();

@@ -104,7 +104,7 @@ public class EventsFragment extends Fragment {
 
 
     public static void notifyMe() {
-        //mEventsAdapter.notifyDataSetChanged();
+        /*mEventsAdapter.notifyDataSetChanged();*/
     }
 
 

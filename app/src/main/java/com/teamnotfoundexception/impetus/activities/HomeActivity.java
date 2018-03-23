@@ -26,6 +26,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
@@ -62,7 +65,30 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
         mSectionsPagerAdapterUser.notifyDataSetChanged();
     }
 
+    @Override
+    public void onBackPressed() {
 
+        new MaterialStyledDialog.Builder(HomeActivity.this)
+                .setIcon(R.drawable.ic_whatshot_white_24dp)
+                .setTitle("Want to quit?")
+                .setDescription("Are you sure you want to quit?")
+                .setPositiveText("Yes")
+                .setCancelable(true)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        finish();
+                    }
+                })
+                .setNegativeText("No")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

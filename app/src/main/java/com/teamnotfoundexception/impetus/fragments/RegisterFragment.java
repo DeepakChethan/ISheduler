@@ -160,6 +160,22 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     })
                     .setIcon(R.drawable.ic_whatshot_white_24dp)
                     .show();
+        }else{
+
+            StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
+            ArrayList<EventItem> items = EventsManager.get(getActivity().getApplicationContext()).getEventItemsList();
+            items.remove(eventItem);
+            eventItem.setRegistered(1);
+            items.add(eventItem);
+            EventsManager.get(getActivity().getApplicationContext()).setEventItemsList(items);
+            btn.setText("REGISTERED SUCCESSFULLY");
+            StatusManager.get(getActivity().getApplicationContext()).setupNotification(eventItem);
+            btn.setEnabled(false);
+            mTeam.setEnabled(false);
+            mTeamMembers.setEnabled(false);
+            mCollege.setEnabled(false);
+            mPhone.setEnabled(false);
+
         }
 
 

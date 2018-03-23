@@ -50,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         searchView.setQueryHint("Search events");
-        // TODO goback when the user is done searching
+        // TODO go back when the user is done searching
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

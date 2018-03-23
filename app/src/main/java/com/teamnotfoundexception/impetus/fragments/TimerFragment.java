@@ -21,7 +21,7 @@ import com.teamnotfoundexception.impetus.R;
  */
 public class TimerFragment extends Fragment {
 
-    private TextView mTimeContainer,mTeamCount,mEventLocation,mEventTeamMax,mEventPrice,mEventType, mEventName;
+    private TextView mTimeContainer,mEventStartTime,mEventEndTime,mEventLocation,mEventTeamMax,mEventPrice,mEventType, mEventName;
     private long timeToEvent;
     private Handler handler;
     private Runnable myRunnable;
@@ -37,13 +37,15 @@ public class TimerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_timer, container, false);
 
         mTimeContainer = (TextView) view.findViewById(R.id.foClock);
-        //mTeamCount = (TextView) view.findViewById(R.id.teamCountHolder);
         mEventType = (TextView) view.findViewById(R.id.eventTypeContainer);
         mEventTeamMax = (TextView) view.findViewById(R.id.maxTeamMemberContainer);
         mEventPrice = (TextView) view.findViewById(R.id.ticketCostContainer);
         mEventLocation = (TextView) view.findViewById(R.id.eventLocationContainer);
         mTimeContainer = (TextView) view.findViewById(R.id.foClock);
         mEventName = (TextView) view.findViewById(R.id.foEventNameHolder) ;
+        //mEventStartTime = (TextView) view.findViewById(R.id.eventStartTimeContainer);
+        //mEventEndTime = (TextView) view.findViewById(R.id.eventEndTimeContainer);
+
         Bundle bundle = getArguments();
         if (bundle==null) {
             Toast.makeText(getContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
@@ -75,7 +77,7 @@ public class TimerFragment extends Fragment {
                     if(timeToEvent > 0 && handler != null) {
                         if(getActivity() != null) {
                             Time time = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(timeToEvent);
-                            mTimeContainer.setText("starts in " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+                            mTimeContainer.setText(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
                             handler.postDelayed(this, 1000);
                         } else {
                             handler = null;
@@ -90,8 +92,12 @@ public class TimerFragment extends Fragment {
 
 
         mEventName.setText(item.getName());
-      //  mTeamCount.setText("Change Me");
+
         mEventType.setText(item.getType());
+        Time startTime = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(Long.parseLong(item.getStartTime()));
+        Time endTime = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(Long.parseLong(item.getEndTime()));
+       // mEventStartTime.setText(startTime.getHours()+":"+startTime.getMinutes());
+       // mEventEndTime.setText(endTime.getHours()+":"+endTime.getMinutes());
         mEventTeamMax.setText(item.getMaxTeamSize()+"");
         mEventPrice.setText(item.getPrice()+"");
         mEventLocation.setText(item.getLocation());

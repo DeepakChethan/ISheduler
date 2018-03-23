@@ -29,6 +29,7 @@ import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
 import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
+import com.teamnotfoundexception.impetus.services.Notifier;
 
 
 import java.lang.reflect.Array;
@@ -139,11 +140,12 @@ public  class StatusManager {
     public void setupNotification(EventItem item){
 
         long time = Long.parseLong(item.getStartTime());
-        Intent intent = new Intent(mAppContext,BroadcastReceiver.class);
-        intent.putExtra("dope",item);
+        Intent intent = new Intent(mAppContext, Notifier.class);
+        intent.putExtra("dope", item);
         PendingIntent pi = PendingIntent.getBroadcast(mAppContext,0,intent,0);
         AlarmManager alarmManager = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,time,pi);
+        Log.i("dope","Setup up alarm at "+item.getStartTime()+" "+item.getName());
 
     }
 
@@ -285,9 +287,12 @@ public  class StatusManager {
             EventItem eventItem = mTempRegisteredEvents.get(i);
             Long itemStartTime = Long.parseLong(eventItem.getStartTime());
             Long itemEndTime = Long.parseLong(eventItem.getEndTime());
-            if (itemStartTime <= eventStartTime && itemEndTime >= eventStartTime){
+            Log.i("dope", "checkForClash: "+itemStartTime+" "+eventStartTime+" "+itemEndTime);
+            if (eventStartTime >= itemStartTime && eventStartTime <= itemEndTime){
+                Log.i("dope", "checkForClash: its true");
                 return eventItem;
             }
+
         }
         return null;
     }
@@ -303,11 +308,7 @@ public  class StatusManager {
 
     }
 
-    public void updateUI(){
-        mStarredAdapter.updateData(mStarredEventsList);
-        mEventsAdapter.updateData(EventsManager.get(mAppContext).getEventItemsList());
-        mMyEventsAdapter.updateData(mRegisteredEventsList);
-    }
+
 
     public FirebaseAuth getAuth() {
         return mAuth;

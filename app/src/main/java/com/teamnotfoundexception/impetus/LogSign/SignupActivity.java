@@ -106,6 +106,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             //progressBar.setVisibility(View.INVISIBLE);
                             signUp.setEnabled(true);
                             finishActivity(900);
+
                         }
                     }
                 });

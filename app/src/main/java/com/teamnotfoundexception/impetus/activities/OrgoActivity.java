@@ -3,6 +3,7 @@ package com.teamnotfoundexception.impetus.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,11 +27,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
@@ -52,6 +59,30 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
     private FloatingActionButton button;
     private Handler handler;
     private Runnable myRunnable;
+
+    @Override
+    public void onBackPressed() {
+        new MaterialStyledDialog.Builder(OrgoActivity.this)
+                .setIcon(R.drawable.ic_whatshot_white_24dp)
+                .setTitle("Want to quit?")
+                .setDescription("Are you sure you want to quit?")
+                .setPositiveText("Yes")
+                .setCancelable(true)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        finish();
+                    }
+                })
+                .setNegativeText("No")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
