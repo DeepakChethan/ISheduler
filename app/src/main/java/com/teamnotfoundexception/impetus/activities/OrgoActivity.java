@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,9 +27,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.Databases.StatusManagerForOrganizer;
 import com.teamnotfoundexception.impetus.R;
@@ -36,7 +45,11 @@ import com.teamnotfoundexception.impetus.fragments.OrgoHomeFragment;
 import com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment;
 
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragment.OnListFragmentInteractionListener {
 
@@ -78,6 +91,8 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
 
 
         StatusManagerForOrganizer.get(getApplicationContext()).initializeParticipantsList();
+        StatusManagerForOrganizer.get(getApplicationContext()).setListenerForParticipants();
+
 
 
 
@@ -108,7 +123,7 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
                                 String note = editText.getText().toString();
                                 Toast.makeText(getApplicationContext(),note+"",Toast.LENGTH_SHORT).show();
 
-                                // Push the notification
+                                sendNotification(note);
 
 
                             }
@@ -126,6 +141,58 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+
+    }
+
+    public void sendNotification(String notes) {
+
+        String url= "https://fcm.googleapis.com/fcm/send";
+        JSONObject postparams=new JSONObject();
+        try {
+            postparams.put("to", "/topics/" + StatusManagerForOrganizer.get(getApplicationContext()).mEventOrganized.getName().toUpperCase());
+            JSONObject extraInformation = new JSONObject();
+            extraInformation.put("extra_information", notes);
+
+            postparams.put("data", extraInformation);
+            JSONObject titleAndText = new JSONObject();
+            titleAndText.put("title", notes);
+            titleAndText.put("text", notes);
+            postparams.put("notification", titleAndText);
+
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                    url, postparams,
+                    new Response.Listener() {
+
+                        @Override
+                        public void onResponse(Object response) {
+                            System.out.println("got a reponse" + response.toString());
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            //Failure Callback
+                            System.out.println("got a reponse" + error.toString());
+
+                        }
+                    }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", "key=AAAAZq9yKM0:APA91bFeIzylkRFLLH40hpiElvdqVXXhG3YANyAdS7-0d4XrH5E4hdt5d5XiTRvOgTmDEdsfjzXEzTBXfaEkPLPCUTwmX3hH7mQyt22L8STnOiUzhX4uCck-bP5V7vdip453LgXVsUbp");
+                    return headers;
+
+                }
+            };
+            jsonObjReq.setTag("postRequest");
+            StatusManagerForOrganizer.get(getApplicationContext()).getRequestQueue().add(jsonObjReq);
+        } catch(Exception e) {
+
+        }
+
 
 
     }
@@ -186,4 +253,20 @@ public class OrgoActivity extends AppCompatActivity implements OrgoPlayerFragmen
             return 2;
         }
     }
+
 }
+
+
+/*
+//{   https://fcm.googleapis.com/fcm/send
+        "to": "/topics/STEALJOBS",
+        "data": {
+        "extra_information": "This is message"
+        },
+        "notification": {
+        "title": "your event starts soon enigma boys",
+        "text": "This is the notification"
+        }
+        }*/
+
+//key=AAAAZq9yKM0:APA91bFeIzylkRFLLH40hpiElvdqVXXhG3YANyAdS7-0d4XrH5E4hdt5d5XiTRvOgTmDEdsfjzXEzTBXfaEkPLPCUTwmX3hH7mQyt22L8STnOiUzhX4uCck-bP5V7vdip453LgXVsUbp

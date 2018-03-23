@@ -25,9 +25,10 @@ public class OrgoPlayerFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    private PlayerListAdapter mPlayerListAdapter;
+    private static PlayerListAdapter mPlayerListAdapter;
     public Handler handler;
     public Runnable myRunnable;
+
     public OrgoPlayerFragment() {
     }
 
@@ -121,7 +122,9 @@ public class OrgoPlayerFragment extends Fragment {
         mListener = null;
     }
 
-
+    public static void notifyMe() {
+        mPlayerListAdapter.notifyDataSetChanged();
+    }
 
 
     public interface OnListFragmentInteractionListener {

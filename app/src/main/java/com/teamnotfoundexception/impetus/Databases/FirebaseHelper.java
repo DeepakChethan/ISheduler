@@ -9,6 +9,7 @@ import android.provider.Telephony;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +21,7 @@ import com.teamnotfoundexception.impetus.activities.MainActivity;
 import com.teamnotfoundexception.impetus.adapters.MyEventsAdapter;
 import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 import com.teamnotfoundexception.impetus.fragments.MyEventsFragment;
+import com.teamnotfoundexception.impetus.fragments.OrgoPlayerFragment;
 import com.teamnotfoundexception.impetus.fragments.StarredFragment;
 
 import java.util.ArrayList;
@@ -110,7 +112,7 @@ public class FirebaseHelper {
         Log.i("ini", "fetch registeerd list called");
 
         String emailId = getEmailStripped(user.getEmail());
-        DatabaseReference databaseReference = mDatabaseReference3.child(user.getUid()).child("registered").child("event_ids");
+        DatabaseReference databaseReference = mDatabaseReference1.child(user.getUid()).child("registered").child("event_ids");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -276,32 +278,7 @@ public class FirebaseHelper {
 
 
 
-    public Participant fetchUsersDataByEmail(String emailId) {
 
-        final DatabaseReference databaseReference = mFirebaseDatabase.getReference("users_public").child(emailId);
-
-
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<Participant> t = new GenericTypeIndicator<Participant>() {
-                };
-
-                 FirebaseHelper.this.p = dataSnapshot.getValue(t);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-
-        });
-
-
-        return FirebaseHelper.this.p;
-
-    }
 
 
 
@@ -329,6 +306,41 @@ public class FirebaseHelper {
 
     }
 
+
+    public void addListenerForParticipants(EventItem eventItem) {
+        System.out.println("inside add listerner for participants");
+        DatabaseReference ref = mDatabaseReference3.child(eventItem.getName().toUpperCase());
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                GenericTypeIndicator<Map<String, Participant>> t = new GenericTypeIndicator<Map<String, Participant>>() {
+                };
+
+                Participant participant = dataSnapshot.getValue(Participant.class);
+
+                StatusManagerForOrganizer.get(mAppContext).getParticipants().add(participant);
+
+                OrgoPlayerFragment.notifyMe();
+               // System.out.println("hey new participant registered" + participantNew.keySet());
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+    }
 
     class FavoriteObject {
         public int itemId;

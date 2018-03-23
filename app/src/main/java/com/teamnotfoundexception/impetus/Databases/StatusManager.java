@@ -187,6 +187,7 @@ public  class StatusManager {
                 getRegisteredEventsList().add(item);
                 item.setRegistered(1);
                 FirebaseMessaging.getInstance().subscribeToTopic(item.getName().toUpperCase());
+                Log.i("i", "subscribed to " + item.getName().toUpperCase());
                 mFirebaseHelper.updateRegisteredList(mRegisteredEventsIds, mUser, item, participant);
 
                 EventsFragment.notifyMe();
