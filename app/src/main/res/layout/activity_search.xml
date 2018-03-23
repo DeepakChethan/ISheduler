@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tools"
-        app:title="Kachori"
+        app:title="Search"
+        app:subtitleTextColor="@color/white"
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/white"
         ></android.support.v7.widget.Toolbar>

@@ -15,15 +15,4 @@
         android:title="Logout"
         />
 
-    <item
-        app:showAsAction="always"
-        android:icon="@drawable/ic_whatshot_white_24dp"
-        android:title="organizer"
-        android:id="@+id/org"
-        />
-
-
-
-
-
 </menu>

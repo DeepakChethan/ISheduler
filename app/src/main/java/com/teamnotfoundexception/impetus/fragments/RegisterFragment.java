@@ -4,7 +4,6 @@ package com.teamnotfoundexception.impetus.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
 import com.teamnotfoundexception.impetus.R;
-import com.teamnotfoundexception.impetus.adapters.EventsAdapter;
 
 import java.util.ArrayList;
 
@@ -158,7 +156,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                             dialog.dismiss();
                         }
                     })
-                    .setIcon(R.drawable.ic_whatshot_white_24dp)
+                    .setIcon(R.drawable.ic_launcher)
                     .show();
         }else{
 

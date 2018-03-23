@@ -26,7 +26,7 @@ Waiting for a chance to showcase your talent in the same?!
 Speak technology Not words
 A mash of crossword,tech quiz and tech charades.
 Buckle up tech savvies for Tech Charades.</string>
-    
+
     <string name="sepktrom">Someone said god hides things by putting them all around us!!!
 Sometimes we forget to observe the things that are inevitable in our daily lives... Wat are dey r made of?? Wat shapes dey have?! Scratch ur head to get answers nd have an opportunity to discover the things hidden in our clg!</string>
 
@@ -83,4 +83,5 @@ A perfect platform for you to showcase your creative ideas and presentation skil
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_orgo">OrgoActivity</string>
+    <string name="title_activity_tutorial">TutorialActivity</string>
 </resources>
