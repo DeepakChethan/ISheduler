@@ -30,6 +30,7 @@ public class OrgoPlayerFragment extends Fragment {
     public Runnable myRunnable;
 
     public OrgoPlayerFragment() {
+
     }
 
 

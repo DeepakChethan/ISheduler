@@ -31,10 +31,11 @@ public class Notifier extends BroadcastReceiver {
         mBuilder.setSmallIcon(R.drawable.ic_whatshot_white_24dp)
                 .setLargeIcon(icon)
                 .setContentTitle("Event start alert!")
-                .setContentText((eventItem != null ? eventItem.getName() : "Event") +" is about to start !");
+                .setContentText((eventItem != null ? eventItem.getName() : "Event") +" is about to start !")
+                .setChannelId("123").build();
         NotificationManager mNotification = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        mNotification.notify(eventItem.getId()+(new Random()).nextInt(2000),mBuilder.build());
+        mNotification.notify(1 + (new Random()).nextInt(2000),mBuilder.build());
 
         Toast.makeText(context,"hey your event will begin soon" , Toast.LENGTH_SHORT).show();
         Log.i("dope", "onReceive: lololoolo");
