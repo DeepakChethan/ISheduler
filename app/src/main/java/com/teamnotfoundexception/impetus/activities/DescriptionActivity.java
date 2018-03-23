@@ -139,10 +139,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(DescriptionActivity.this,HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        super.onBackPressed();
     }
 
     public static void notifyMe() {

@@ -80,9 +80,9 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.ViewHo
                     intent.putExtra("msg", eventItem);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
-
                 }
             });
+
 
 
 
