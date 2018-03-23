@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.teamnotfoundexception.impetus.Databases.EventItem;
 import com.teamnotfoundexception.impetus.R;
 
+import java.util.Random;
+
 
 public class Notifier extends BroadcastReceiver {
     @Override
@@ -23,14 +25,18 @@ public class Notifier extends BroadcastReceiver {
         Log.i("recevie", "received");
         EventItem eventItem = (EventItem) intent.getSerializableExtra("dope");
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),R.drawable.whatshotone);
+
         mBuilder.setSmallIcon(R.drawable.ic_whatshot_white_24dp)
                 .setLargeIcon(icon)
                 .setContentTitle("Event start alert!")
-                .setContentText(eventItem != null ? eventItem.getName() : "something wrong" +" is about to start !");
+                .setContentText((eventItem != null ? eventItem.getName() : "Event") +" is about to start !");
         NotificationManager mNotification = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotification.notify(2,mBuilder.build());
-        Toast.makeText(context,"hey your event will begin soon" , Toast.LENGTH_SHORT).show();
 
+        mNotification.notify(eventItem.getId()+(new Random()).nextInt(2000),mBuilder.build());
+
+        Toast.makeText(context,"hey your event will begin soon" , Toast.LENGTH_SHORT).show();
+        Log.i("dope", "onReceive: lololoolo");
     }
 }
