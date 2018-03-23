@@ -111,6 +111,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         final FirebaseHelper.Participant participant = new FirebaseHelper.Participant(teamName, collegeName, teamMembers);
 
         EventItem temp = StatusManager.get(getContext()).checkForClash(eventItem);
+
         if (temp != null){
             new MaterialStyledDialog.Builder(getContext())
                     .setTitle("Oops!")
@@ -121,9 +122,25 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             StatusManager.get(getActivity().getApplicationContext()).addToRegistered(eventItem, participant);
                             ArrayList<EventItem> items = EventsManager.get(getActivity().getApplicationContext()).getEventItemsList();
-                            items.remove(eventItem);
+
+                            int index = -1;
+
+                            for(int i = 0; i < items.size(); i++) {
+
+                                if(items.get(i).getId() == eventItem.getId()) {
+                                    System.out.println("item before size" + items.size());
+                                    items.remove(i);
+                                    index = i;
+                                    System.out.println("item removed" + items.size());
+                                }
+
+                            }
+
                             eventItem.setRegistered(1);
-                            items.add(eventItem);
+                            System.out.println("item before size" + items.size());
+                            items.add(index, eventItem);
+                            System.out.println("item added size" + items.size());
+
                             EventsManager.get(getActivity().getApplicationContext()).setEventItemsList(items);
                             btn.setText("REGISTERED SUCCESSFULLY");
                             StatusManager.get(getActivity().getApplicationContext()).setupNotification(eventItem);
