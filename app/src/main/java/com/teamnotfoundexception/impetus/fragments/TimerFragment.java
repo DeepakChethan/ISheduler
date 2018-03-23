@@ -37,7 +37,6 @@ public class TimerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_timer, container, false);
 
         mTimeContainer = (TextView) view.findViewById(R.id.foClock);
-        mTeamCount = (TextView) view.findViewById(R.id.teamCountHolder);
         mEventType = (TextView) view.findViewById(R.id.eventTypeContainer);
         mEventTeamMax = (TextView) view.findViewById(R.id.maxTeamMemberContainer);
         mEventPrice = (TextView) view.findViewById(R.id.ticketCostContainer);
@@ -90,7 +89,6 @@ public class TimerFragment extends Fragment {
 
 
         mEventName.setText(item.getName());
-        mTeamCount.setText("Change Me");
         mEventType.setText(item.getType());
         mEventTeamMax.setText(item.getMaxTeamSize()+"");
         mEventPrice.setText(item.getPrice()+"");

@@ -11,17 +11,19 @@
         android:roundIcon="@drawable/whatshot"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".LogSign.SignupActivity" />
-        <activity android:name=".activities.HomeActivity" />
-        <activity
-            android:name=".LogSign.LoginActivity"
-            android:theme="@style/AppTheme">
+        <activity android:name=".activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".LogSign.SignupActivity" />
+        <activity android:name=".activities.HomeActivity" />
+        <activity
+            android:name=".LogSign.LoginActivity"
+            android:theme="@style/AppTheme">
+
         </activity>
         <activity
             android:name=".activities.OrgoActivity"

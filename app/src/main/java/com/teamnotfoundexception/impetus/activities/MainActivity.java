@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.teamnotfoundexception.impetus.Databases.EventsManager;
 import com.teamnotfoundexception.impetus.Databases.StatusManager;
+import com.teamnotfoundexception.impetus.LogSign.LoginActivity;
 import com.teamnotfoundexception.impetus.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,24 +19,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(MainActivity.this, Notification.class);
-        startService(intent);
 
 
         StatusManager.get(getApplicationContext()).setAuth(FirebaseAuth.getInstance());
         StatusManager.get(getApplicationContext()).setUser(FirebaseAuth.getInstance().getCurrentUser());
         StatusManager.get(getApplicationContext()).setFirebaseDatabase(FirebaseDatabase.getInstance());
 
+        if (FirebaseAuth.getInstance().getCurrentUser()==null){
+            Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent1);
+            finish();
+        }else{
+            Intent intent1 = new Intent(this, HomeActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent1);
+            finish();
+        }
+
         EventsManager.get(getApplicationContext()).insertAllEventItems();
         EventsManager.get(getApplicationContext()).initializeEventItemsList();
-
         StatusManager.get(getApplicationContext()).initializeRegisteredList();
-
         StatusManager.get(getApplicationContext()).initializeStarredList();
 
 
-        startActivity(new Intent(this, HomeActivity.class));
-        finish();
+
     }
 
 
