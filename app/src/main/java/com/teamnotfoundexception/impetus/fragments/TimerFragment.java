@@ -92,6 +92,7 @@ public class TimerFragment extends Fragment {
 
 
         mEventName.setText(item.getName());
+
         mEventType.setText(item.getType());
         Time startTime = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(Long.parseLong(item.getStartTime()));
         Time endTime = EventsManager.get(getActivity().getApplicationContext()).convertSecondsToTime(Long.parseLong(item.getEndTime()));
