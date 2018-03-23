@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             progressBar.setVisibility(View.INVISIBLE);
                             signIn.setEnabled(true);
                         } else {
-                            FirebaseMessaging.getInstance().subscribeToTopic("ENIGMA");
+                          //  FirebaseMessaging.getInstance().subscribeToTopic("ENIGMA");
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

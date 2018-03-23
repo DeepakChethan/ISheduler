@@ -1,4 +1,6 @@
 package com.teamnotfoundexception.impetus.Databases;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.teamnotfoundexception.impetus.Databases.FirebaseHelper.Participant;
 
 import android.content.Context;
@@ -19,12 +21,15 @@ import java.util.ArrayList;
 
 public class StatusManagerForOrganizer {
 
+
     public static final String TAG = "StatusManagerForOrganizer";
 
     public ArrayList<Participant> mParticipants;
     public ArrayList<String> mParticipantsEmailIds;
 
     public EventItem mEventOrganized;
+
+    private RequestQueue requestQueue;
 
     private FirebaseAuth mAuth = null;
 
@@ -51,7 +56,7 @@ public class StatusManagerForOrganizer {
 
         mParticipants = new ArrayList<Participant>();
         mParticipantsEmailIds = new ArrayList<>();
-
+        requestQueue = Volley.newRequestQueue(mAppContext);
         mFirebaseDatabase = null;
 
         mFirebaseHelper = new FirebaseHelper(mAppContext);
@@ -97,6 +102,10 @@ public class StatusManagerForOrganizer {
     }
 
 
+    public RequestQueue getRequestQueue() {
+        return requestQueue;
+    }
+
     public void setParticipantsEmailIds(ArrayList<String> participantsEmailIds) {
         this.mParticipantsEmailIds = participantsEmailIds ;
     }
@@ -116,6 +125,12 @@ public class StatusManagerForOrganizer {
             mFirebaseHelper.setFirebaseDatabase(mFirebaseDatabase, 0);
         }
     }
+
+    public void setListenerForParticipants() {
+        mFirebaseHelper.addListenerForParticipants(mEventOrganized);
+    }
+
+
 
     public FirebaseAuth getAuth() {
         return mAuth;
