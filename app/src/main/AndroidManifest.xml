@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/whatshot"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/whatshot"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity" />
@@ -16,7 +16,6 @@
         <activity android:name=".activities.HomeActivity" />
         <activity
             android:name=".LogSign.LoginActivity"
-            android:label="@string/title_activity_home"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +25,6 @@
         </activity>
         <activity
             android:name=".activities.OrgoActivity"
-            android:label="@string/title_activity_orgo"
             android:parentActivityName=".activities.HomeActivity"
             android:theme="@style/AppTheme">
             <meta-data

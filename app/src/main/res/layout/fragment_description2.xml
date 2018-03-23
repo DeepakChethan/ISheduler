@@ -6,12 +6,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_margin="25dp"
+        android:layout_margin="9dp"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="12dp"
+            android:layout_alignParentTop="true"
+            android:id="@+id/posterContainer"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/temp"
+            android:layout_below="@id/posterContainer"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textAlignment="center"
             android:text="What to expect ?"/>
@@ -22,7 +32,8 @@
             android:id="@+id/eventDescription"
             android:layout_below="@id/temp"
             android:layout_marginTop="30dp"
-            style="@style/textStyle"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+
             android:text="Our event is done, you must be in it mate! It is so dope that even dope is dope doper!"
             />
     </RelativeLayout>

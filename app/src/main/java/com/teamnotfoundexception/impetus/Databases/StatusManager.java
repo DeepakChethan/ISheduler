@@ -31,8 +31,10 @@ import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
 
 
-
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 
 public  class StatusManager {
@@ -132,6 +134,7 @@ public  class StatusManager {
             setupNotification(item);
         }
     }
+
 
     public void setupNotification(EventItem item){
 
@@ -267,6 +270,22 @@ public  class StatusManager {
     }
 
 
+    public EventItem checkForClash(EventItem item){
+
+        ArrayList<EventItem> mTempRegisteredEvents = new ArrayList<>();
+        mTempRegisteredEvents.addAll(mRegisteredEventsList);
+        Collections.sort(mTempRegisteredEvents);
+        Long eventStartTime = Long.parseLong(item.getStartTime());
+        for (int i = 0; i < mTempRegisteredEvents.size(); ++i){
+            EventItem eventItem = mTempRegisteredEvents.get(i);
+            Long itemStartTime = Long.parseLong(eventItem.getStartTime());
+            Long itemEndTime = Long.parseLong(eventItem.getEndTime());
+            if (itemStartTime <= eventStartTime && itemEndTime >= eventStartTime){
+                return eventItem;
+            }
+        }
+        return null;
+    }
 
     public void setAuth(FirebaseAuth auth) {
         this.mAuth = auth;
