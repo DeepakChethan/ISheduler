@@ -143,9 +143,7 @@ public class HomeActivity extends AppCompatActivity implements EventsFragment.On
         if (R.id.search == item.getItemId()){
             startActivity(new Intent(HomeActivity.this,SearchActivity.class));
         }
-        if (R.id.org == item.getItemId()){
-            startActivity(new Intent(HomeActivity.this,OrgoActivity.class));
-        }
+        
         if (item.getItemId() == R.id.logout){
 
             FirebaseAuth.getInstance().signOut();
