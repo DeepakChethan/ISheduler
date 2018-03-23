@@ -139,6 +139,7 @@ public class FirebaseHelper {
                     }
                     System.out.println("The size of registered list is" + registeredevents.size());
                     MyEventsFragment.notifyMe();
+                    StatusManager.get(mAppContext).initializeNotifications();
                 } else {
                     Log.i("ini", "not fetched registred lst");
                 }
