@@ -29,6 +29,7 @@ import com.teamnotfoundexception.impetus.adapters.PlayerListAdapter;
 import com.teamnotfoundexception.impetus.adapters.StarredAdapter;
 
 import com.teamnotfoundexception.impetus.fragments.EventsFragment;
+import com.teamnotfoundexception.impetus.services.Notifier;
 
 
 import java.lang.reflect.Array;
@@ -139,12 +140,12 @@ public  class StatusManager {
     public void setupNotification(EventItem item){
 
         long time = Long.parseLong(item.getStartTime());
-        Intent intent = new Intent(mAppContext,BroadcastReceiver.class);
+        Intent intent = new Intent(mAppContext, Notifier.class);
         intent.putExtra("dope",item);
         PendingIntent pi = PendingIntent.getBroadcast(mAppContext,0,intent,0);
         AlarmManager alarmManager = (AlarmManager) mAppContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,time,pi);
-        Log.i("dope","Setup up alarmed");
+        Log.i("dope","Setup up alarm at "+item.getStartTime()+" "+item.getName());
 
     }
 

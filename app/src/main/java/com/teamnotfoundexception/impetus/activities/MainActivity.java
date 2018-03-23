@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         StatusManager.get(getApplicationContext()).setAuth(FirebaseAuth.getInstance());
         StatusManager.get(getApplicationContext()).setUser(FirebaseAuth.getInstance().getCurrentUser());
         StatusManager.get(getApplicationContext()).setFirebaseDatabase(FirebaseDatabase.getInstance());
-        new Date().getTime()
-        EventItem item = new EventItem(101,"DopeGame","Happy",20,"Happy meals","","1521759300","1521759300","Hebba",2,0,0);
+        long time = (System.currentTimeMillis())+(5*1000);
+        EventItem item = new EventItem(101,"DopeGame","Happy",20,"Happy meals","",time+"","1521759300","Hebba",2,0,0);
         StatusManager.get(getApplicationContext()).setupNotification(item);
 
 
