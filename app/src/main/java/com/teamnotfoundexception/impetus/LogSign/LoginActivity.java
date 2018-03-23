@@ -95,11 +95,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         } else {
                           //  FirebaseMessaging.getInstance().subscribeToTopic("ENIGMA");
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            signIn.setEnabled(true);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             Log.i("i", "logging in");
                             progressBar.setVisibility(View.INVISIBLE);
-                            finishActivity(900);
+                            finish();
                             System.out.println("token is " + FirebaseInstanceId.getInstance().getToken());
                         }
                     }
